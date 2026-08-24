@@ -29,7 +29,7 @@ Cada notebook aprofundado deve:
 | # | Base | Notebook | Estado |
 |---|------|----------|--------|
 | 1 | IBGE | `IBGE/populacao-denominadores-e-piramides.ipynb` | **pronto** — 16 células, validado |
-| 2 | SIM | `SIM/mortalidade-prematura-por-dcnt.ipynb` | a fazer |
+| 2 | SIM | `SIM/mortalidade-prematura-por-dcnt.ipynb` | **pronto** — 18 células, validado |
 | 3 | SINASC | `SINASC/nascimentos-prematuridade-e-pre-natal.ipynb` | a fazer |
 | 4 | SIH | `SIH/internacoes-sensiveis-a-atencao-primaria.ipynb` | a fazer |
 | 5 | CNES | `CNES/rede-assistencial-e-leitos-por-habitante.ipynb` | a fazer |

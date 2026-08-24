@@ -40,7 +40,9 @@ def limpar_saidas(saidas: list[dict]) -> list[dict]:
             if linha.strip() and not any(marca in linha for marca in RUIDO)
         ).strip()
         if sobra:
-            saida = dict(saida, text=sobra + "\n")
+            # altera no lugar: o nbformat espera seus próprios objetos, e
+            # trocá-los por dicionários comuns quebra a gravação do .ipynb.
+            saida["text"] = sobra + "\n"
             limpas.append(saida)
     return limpas
 
