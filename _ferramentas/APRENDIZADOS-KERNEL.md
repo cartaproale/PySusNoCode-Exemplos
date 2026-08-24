@@ -41,6 +41,11 @@ Estado: **pendente** = descoberto, ainda não aplicado; **v1.x.y** = já embarca
 | 26 | As datas do SINAN vêm como **texto**: `strftime` e `date_diff` falham. Usar `TRY_CAST(col AS DATE)` | lição | pendente |
 | 27 | O código de descarte do `CLASSI_FIN` **muda de agravo para agravo**: 8 na dengue, 5 na chikungunya, 2 no zika. Uma regra única conta descartados como casos e infla a chikungunya em 60%. O jeito de achar o código sem a tabela: é aquele em que ninguém morre | lição | pendente |
 | 28 | Campos numéricos do SINAN têm strings vazias: `CAST` quebra a consulta inteira, `TRY_CAST` não | lição | pendente |
+| 29 | Em base com competência mensal, **contar os meses antes de somar o ano**: o PNI de 2019 tem 4 meses e a cobertura despenca de 87% para 30% — um ano incompleto é idêntico a uma catástrofe de saúde pública | prompt | pendente |
+| 30 | No SIA, a atenção básica aparece com valor aprovado **zero**: ela é paga por bloco de financiamento, não por procedimento. Concluir que a atenção primária é barata é erro de leitura | lição | pendente |
+| 31 | O código do procedimento do SIGTAP é estruturado (2 dígitos = grupo, 4 = subgrupo). Dá para classificar milhões de linhas sem tabela auxiliar | lição | pendente |
+| 32 | Campo pronto nem sempre é confiável: o `COBERT` do PNI vem fora de escala no nível municipal. Quando os ingredientes estão no arquivo (doses e população), recalcular | prompt | pendente |
+
 
 
 
