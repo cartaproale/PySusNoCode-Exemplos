@@ -33,8 +33,12 @@ estado e o ano, execute.
 
 | Notebook | Pergunta que responde | Base |
 |---|---|---|
+| [`indicadores/mortalidade-infantil.ipynb`](indicadores/mortalidade-infantil.ipynb) | Quantas crianças morrem antes de 1 ano, e do quê? | SIM + SINASC |
 | [`CNES/leitos-por-municipio.ipynb`](CNES/leitos-por-municipio.ipynb) | Quais municípios têm mais leitos e quantos são do SUS? | CNES |
+| [`CNES/profissionais-de-saude.ipynb`](CNES/profissionais-de-saude.ipynb) | Quantos profissionais, de quais ocupações e onde? | CNES |
 | [`SINAN/dengue-por-estado-e-mes.ipynb`](SINAN/dengue-por-estado-e-mes.ipynb) | Como a dengue se distribuiu entre estados e meses? | SINAN |
+| [`SINAN/serie-historica-tuberculose.ipynb`](SINAN/serie-historica-tuberculose.ipynb) | Como as notificações evoluíram ao longo dos anos? | SINAN |
+| [`SIH/internacoes-por-causa.ipynb`](SIH/internacoes-por-causa.ipynb) | Por que se interna pelo SUS, por quanto tempo e a que custo? | SIH |
 | [`SIM/causas-de-obito.ipynb`](SIM/causas-de-obito.ipynb) | Quais as principais causas de óbito no estado? | SIM |
 | [`SINASC/perfil-dos-nascimentos.ipynb`](SINASC/perfil-dos-nascimentos.ipynb) | Cesáreas, peso ao nascer e pré-natal | SINASC |
 
@@ -62,6 +66,16 @@ dados reais do DATASUS.** A validação é feita por
 [`_ferramentas/validar_todos.py`](_ferramentas/validar_todos.py), que roda cada
 célula e falha se qualquer uma der erro. O resultado fica registrado em
 [`VALIDACAO.md`](VALIDACAO.md), com a data.
+
+Além disso, uma [rotina automática](.github/workflows/validar.yml) reexecuta
+todos os notebooks **todo mês**. Se a biblioteca mudar e algum exemplo parar de
+funcionar, abre-se uma issue automaticamente — antes que alguém trave na
+primeira célula.
+
+Os resultados também são conferidos contra a realidade, não apenas contra a
+ausência de erro: a taxa de mortalidade infantil calculada aqui (10,3 por mil
+no Paraná em 2022) coincide com a estatística oficial, e a série de tuberculose
+mostra a queda de 2020 pela subnotificação da pandemia.
 
 Isso existe porque o contrário é fácil de acontecer: a biblioteca muda, os
 exemplos param de funcionar e ninguém percebe até um usuário travar na primeira
