@@ -65,6 +65,31 @@ ano, e a análise inteira se ajusta.
 
 ---
 
+## Análises aprofundadas
+
+Os exemplos acima são a porta de entrada. Estes respondem a **perguntas de
+pesquisa**, com indicadores reconhecidos internacionalmente, e servem de
+material de trabalho — não de demonstração.
+
+| Notebook | A pergunta que responde | Base |
+|---|---|---|
+| [`IBGE/populacao-denominadores-e-piramides.ipynb`](IBGE/populacao-denominadores-e-piramides.ipynb) | Como obter um denominador confiável e comparar lugares sem enganação (padronização por idade) | IBGE |
+| [`SIM/mortalidade-prematura-por-dcnt.ipynb`](SIM/mortalidade-prematura-por-dcnt.ipynb) | Qual a probabilidade de morrer entre 30 e 70 anos por doença crônica — a meta 3.4 da ONU | SIM |
+| [`SINASC/nascimentos-prematuridade-e-pre-natal.ipynb`](SINASC/nascimentos-prematuridade-e-pre-natal.ipynb) | Prematuridade, adequação do pré-natal e cesáreas pela classificação de Robson | SINASC |
+| [`SIH/internacoes-sensiveis-a-atencao-primaria.ipynb`](SIH/internacoes-sensiveis-a-atencao-primaria.ipynb) | Quantas internações a atenção primária poderia ter evitado, e quanto custam | SIH |
+| [`CNES/rede-assistencial-e-leitos-por-habitante.ipynb`](CNES/rede-assistencial-e-leitos-por-habitante.ipynb) | Leitos e médicos por habitante, por município e por região de saúde | CNES |
+| [`SINAN/arboviroses-dengue-chikungunya-zika.ipynb`](SINAN/arboviroses-dengue-chikungunya-zika.ipynb) | Como as três arboviroses diferem em sazonalidade, idade e gravidade | SINAN |
+| [`PNI/cobertura-vacinal-e-anos-incompletos.ipynb`](PNI/cobertura-vacinal-e-anos-incompletos.ipynb) | Quanto da queda de cobertura vacinal é real e quanto é arquivo incompleto | PNI |
+| [`SIA/alta-complexidade-oncologia-e-dialise.ipynb`](SIA/alta-complexidade-oncologia-e-dialise.ipynb) | Para onde vai o dinheiro do ambulatório, e quanto se anda para se tratar | SIA |
+| [`CIHA/o-que-o-ciha-acrescenta-ao-sih.ipynb`](CIHA/o-que-o-ciha-acrescenta-ao-sih.ipynb) | O que existe além do SUS — e por que essa base exige cautela | CIHA + SIH |
+| [`cruzamentos/mortalidade-infantil-e-numeros-pequenos.ipynb`](cruzamentos/mortalidade-infantil-e-numeros-pequenos.ipynb) | Quando a criança morre, e por que taxas municipais anuais quase sempre são ruído | SIM + SINASC |
+| [`cruzamentos/painel-do-municipio.ipynb`](cruzamentos/painel-do-municipio.ipynb) | Como está a saúde da minha cidade, comparada com o estado | Seis bases |
+
+Cada um deles termina com uma seção **"o que vale levar"**: as funções
+reaproveitáveis e as armadilhas que o notebook resolveu no caminho.
+
+---
+
 ## Como usar no Google Colab
 
 1. Clique no notebook desejado aqui no GitHub;
@@ -91,9 +116,19 @@ funcionar, abre-se uma issue automaticamente — antes que alguém trave na
 primeira célula.
 
 Os resultados também são conferidos contra a realidade, não apenas contra a
-ausência de erro: a taxa de mortalidade infantil calculada aqui (10,3 por mil
-no Paraná em 2022) coincide com a estatística oficial, e a série de tuberculose
-mostra a queda de 2020 pela subnotificação da pandemia.
+ausência de erro. Cada notebook aprofundado termina com uma seção de
+**verificações de sanidade**, e os números batem com as fontes oficiais:
+
+- mortalidade infantil de 10,3 por mil no Paraná em 2022;
+- 6.022.283 casos prováveis e 6.337 óbitos por dengue no Brasil em 2024, na
+  maior epidemia da série histórica;
+- 2,77 médicos por mil habitantes no Paraná, contra os 2,8 que o Conselho
+  Federal de Medicina apura;
+- população do Brasil de 212.583.750 em 2024, idêntica pelas duas fontes do
+  IBGE.
+
+Quando um resultado **não** confirmou o que estava escrito, o texto foi
+corrigido — não o resultado. Está registrado nos commits.
 
 Isso existe porque o contrário é fácil de acontecer: a biblioteca muda, os
 exemplos param de funcionar e ninguém percebe até um usuário travar na primeira
@@ -123,6 +158,24 @@ Foram descobertas testando, e nenhuma delas está documentada de forma óbvia:
    dessas bases leem apenas as colunas necessárias — e o
    [notebook avançado](avancado/arquivos-grandes-e-sql.ipynb) mostra como
    consultar com SQL sem carregar nada.
+5. **Arquivos que vêm incompletos, sem avisar.** A população municipal do IBGE
+   de 2022 traz **só o Paraná** e a de 2023 **só o Rio Grande do Norte**; o PNI
+   de 2019 tem quatro dos doze meses. Em cada caso, a conta roda normalmente e
+   entrega um resultado errado. Os notebooks conferem antes de dividir.
+6. **O mesmo campo muda de significado entre agravos.** No SINAN, o código de
+   "descartado" é 8 na dengue, 5 na chikungunya e 2 no zika. Usar um só nas três
+   infla a chikungunya em mais de 60%.
+7. **`sih()` devolve vários arquivos, e o primeiro é o errado.** O grupo SP tem
+   uma linha por ato médico; o RD, uma por internação. Quem pega o primeiro da
+   lista acha que tem um milhão de internações quando tem um milhão de
+   procedimentos.
+8. **Contar linhas não é contar pessoas.** O cadastro de profissionais do CNES
+   tem uma linha por vínculo: no Paraná, 351 mil vínculos para 226 mil pessoas.
+   O indicador "médicos por mil habitantes" sai 3,6 vezes maior se ninguém
+   perceber.
+
+A lista completa, com o que cada descoberta gerou no aplicativo, está em
+[`_ferramentas/APRENDIZADOS-KERNEL.md`](_ferramentas/APRENDIZADOS-KERNEL.md).
 
 ---
 

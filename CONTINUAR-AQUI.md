@@ -38,7 +38,14 @@ Cada notebook aprofundado deve:
 | 8 | SIA | `SIA/alta-complexidade-oncologia-e-dialise.ipynb` | **pronto** — 14 células, validado |
 | 9 | CIHA | `CIHA/o-que-o-ciha-acrescenta-ao-sih.ipynb` | **pronto** — 13 células, validado |
 | 10 | cruzamento | `cruzamentos/mortalidade-infantil-e-numeros-pequenos.ipynb` | **pronto** — 15 células, validado |
-| 11 | cruzamento | `cruzamentos/painel-do-municipio.ipynb` | em construção |
+| 11 | cruzamento | `cruzamentos/painel-do-municipio.ipynb` | **pronto** — 11 células, validado |
+
+**Etapa concluída.** As nove bases do PySUS têm exemplo aprofundado, mais dois
+cruzamentos. Próximos passos possíveis, se houver interesse:
+
+- notebooks temáticos (saúde da mulher, oncologia, saúde mental, saúde indígena);
+- aplicar ao aplicativo os aprendizados que ainda estão pendentes;
+- mapas, que exigiriam malhas geográficas fora do PySUS.
 
 ## Aprendizados para o aplicativo
 
