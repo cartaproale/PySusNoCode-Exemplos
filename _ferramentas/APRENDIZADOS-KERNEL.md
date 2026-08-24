@@ -37,6 +37,11 @@ Estado: **pendente** = descoberto, ainda não aplicado; **v1.x.y** = já embarca
 | 22 | O grupo PF do CNES tem uma linha por **vínculo**, não por pessoa: 351 mil vínculos para 226 mil profissionais no PR. Contar linhas infla "médicos por mil habitantes" em 3,6 vezes. Contar `DISTINCT CPF_PROF` | lição | pendente |
 | 23 | `REGSAUDE` do CNES vem escrito de várias formas para a mesma região (`2ª`, `02`, `002`). Sem normalizar, 22 regiões viram 40 | lição | pendente |
 | 24 | "Leito complementar" (`TP_LEITO=3`) não é sinônimo de UTI: inclui unidades intermediárias. Chamar de UTI infla o indicador | lição | pendente |
+| 25 | Os arquivos do SINAN **não têm as mesmas colunas** entre agravos (`HOSPITALIZ` existe na dengue e na chikungunya, não no zika; zika tem 38 colunas contra 121 da dengue). Perguntar ao arquivo antes de montar a consulta | lição | pendente |
+| 26 | As datas do SINAN vêm como **texto**: `strftime` e `date_diff` falham. Usar `TRY_CAST(col AS DATE)` | lição | pendente |
+| 27 | O código de descarte do `CLASSI_FIN` **muda de agravo para agravo**: 8 na dengue, 5 na chikungunya, 2 no zika. Uma regra única conta descartados como casos e infla a chikungunya em 60%. O jeito de achar o código sem a tabela: é aquele em que ninguém morre | lição | pendente |
+| 28 | Campos numéricos do SINAN têm strings vazias: `CAST` quebra a consulta inteira, `TRY_CAST` não | lição | pendente |
+
 
 
 

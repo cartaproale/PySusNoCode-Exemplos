@@ -33,7 +33,7 @@ Cada notebook aprofundado deve:
 | 3 | SINASC | `SINASC/nascimentos-prematuridade-e-pre-natal.ipynb` | **pronto** — 21 células, validado |
 | 4 | SIH | `SIH/internacoes-sensiveis-a-atencao-primaria.ipynb` | **pronto** — 19 células, validado |
 | 5 | CNES | `CNES/rede-assistencial-e-leitos-por-habitante.ipynb` | **pronto** — 18 células, validado |
-| 6 | SINAN | `SINAN/arboviroses-dengue-chikungunya-zika.ipynb` | a fazer |
+| 6 | SINAN | `SINAN/arboviroses-dengue-chikungunya-zika.ipynb` | **pronto** — 16 células, validado |
 | 7 | PNI | `PNI/cobertura-vacinal-por-coorte.ipynb` | a fazer |
 | 8 | SIA | `SIA/alta-complexidade-oncologia-e-dialise.ipynb` | a fazer |
 | 9 | CIHA | `CIHA/o-que-o-ciha-acrescenta-ao-sih.ipynb` | a fazer |
