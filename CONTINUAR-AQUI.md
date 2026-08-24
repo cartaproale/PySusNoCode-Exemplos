@@ -30,7 +30,7 @@ Cada notebook aprofundado deve:
 |---|------|----------|--------|
 | 1 | IBGE | `IBGE/populacao-denominadores-e-piramides.ipynb` | **pronto** — 16 células, validado |
 | 2 | SIM | `SIM/mortalidade-prematura-por-dcnt.ipynb` | **pronto** — 18 células, validado |
-| 3 | SINASC | `SINASC/nascimentos-prematuridade-e-pre-natal.ipynb` | a fazer |
+| 3 | SINASC | `SINASC/nascimentos-prematuridade-e-pre-natal.ipynb` | **pronto** — 21 células, validado |
 | 4 | SIH | `SIH/internacoes-sensiveis-a-atencao-primaria.ipynb` | a fazer |
 | 5 | CNES | `CNES/rede-assistencial-e-leitos-por-habitante.ipynb` | a fazer |
 | 6 | SINAN | `SINAN/arboviroses-dengue-chikungunya-zika.ipynb` | a fazer |
@@ -50,3 +50,4 @@ Ficam em `_ferramentas/APRENDIZADOS-KERNEL.md`, com o estado de cada um
 1. Ler este arquivo e `_ferramentas/APRENDIZADOS-KERNEL.md`.
 2. Ler `GUIA-DE-ESTILO.md`.
 3. Pegar a primeira linha "a fazer" da tabela e continuar.
+
