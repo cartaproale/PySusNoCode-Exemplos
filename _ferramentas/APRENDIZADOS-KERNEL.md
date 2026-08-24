@@ -33,5 +33,10 @@ Estado: **pendente** = descoberto, ainda não aplicado; **v1.x.y** = já embarca
 | 18 | A cobertura do RD do SIH no espelho do PySUS é esburacada: no Paraná há 1 ou 2 meses por ano recente, contra 12 do SP. Conferir no catálogo antes de prometer uma análise anual | lição | pendente |
 | 19 | O PNI no PySUS termina em 2019 (grupos CPNI e DPNI); pedir 2020 ou depois devolve lista vazia | lição | pendente |
 | 20 | Ao afirmar que um resultado "confirma" algo, verificar se confirma mesmo. O índice de Kotelchuck não ordena pelo número de consultas, e eu quase publiquei uma confirmação que a tabela contrariava | prompt | pendente |
+| 21 | A idade no SIH usa dois campos: `IDADE` e `COD_IDADE` (unidade). Um recém-nascido de 3 dias aparece como idade 3 | lição | pendente |
+| 22 | O grupo PF do CNES tem uma linha por **vínculo**, não por pessoa: 351 mil vínculos para 226 mil profissionais no PR. Contar linhas infla "médicos por mil habitantes" em 3,6 vezes. Contar `DISTINCT CPF_PROF` | lição | pendente |
+| 23 | `REGSAUDE` do CNES vem escrito de várias formas para a mesma região (`2ª`, `02`, `002`). Sem normalizar, 22 regiões viram 40 | lição | pendente |
+| 24 | "Leito complementar" (`TP_LEITO=3`) não é sinônimo de UTI: inclui unidades intermediárias. Chamar de UTI infla o indicador | lição | pendente |
+
 
 
