@@ -28,6 +28,21 @@ RELATORIO = RAIZ / "VALIDACAO.md"
 TEMPO_LIMITE = 1800
 
 
+def versao_pysus() -> str:
+    """Versão da PySUS contra a qual esta validação foi feita."""
+    try:
+        import pysus
+
+        return pysus.get_version()
+    except Exception:  # noqa: BLE001
+        try:
+            from importlib.metadata import version
+
+            return version("pysus")
+        except Exception:  # noqa: BLE001
+            return "não identificada"
+
+
 def executar(caminho: Path) -> dict:
     """Roda todas as células de código do notebook num kernel novo."""
     nb = json.loads(caminho.read_text(encoding="utf-8"))
@@ -96,7 +111,11 @@ def main() -> int:
         "é executado do início ao fim, baixando dados reais do DATASUS.",
         "",
         f"**Última validação:** {date.today():%d/%m/%Y}  ",
-        f"**Resultado:** {len(aprovados)} de {len(resultados)} notebooks funcionando",
+        f"**Resultado:** {len(aprovados)} de {len(resultados)} notebooks funcionando  ",
+        # A versão da biblioteca importa: um exemplo pode passar numa versão e
+        # falhar na seguinte, e sem esse registro não dá para saber contra o
+        # que o "funcionando" foi apurado.
+        f"**Versão da PySUS usada no teste:** {versao_pysus()}",
         "",
         "| Notebook | Células | Gráficos | Tempo | Situação |",
         "|---|---:|---:|---:|---|",
