@@ -1,0 +1,6 @@
+.ipynb_checkpoints/
+__pycache__/
+*.pyc
+# cache de downloads do DATASUS (fica no perfil do usuário, nunca no repositório)
+pysus/
+*.parquet
