@@ -28,19 +28,37 @@ estado e o ano, execute.
 |---|---|
 | [`_comece-aqui/01-primeiros-passos.ipynb`](_comece-aqui/01-primeiros-passos.ipynb) | Instalar, baixar o primeiro conjunto de dados e fazer uma primeira conta |
 | [`_comece-aqui/02-descobrir-dados-disponiveis.ipynb`](_comece-aqui/02-descobrir-dados-disponiveis.ipynb) | Descobrir que bases, estados e períodos existem antes de baixar |
+| [`_comece-aqui/03-mapa-completo-das-bases.ipynb`](_comece-aqui/03-mapa-completo-das-bases.ipynb) | **Referência:** tudo o que a biblioteca oferece, base por base e grupo por grupo |
 
-## Análises prontas
+## Uma análise para cada base
+
+Todas as nove bases da biblioteca estão cobertas:
 
 | Notebook | Pergunta que responde | Base |
 |---|---|---|
-| [`indicadores/mortalidade-infantil.ipynb`](indicadores/mortalidade-infantil.ipynb) | Quantas crianças morrem antes de 1 ano, e do quê? | SIM + SINASC |
-| [`CNES/leitos-por-municipio.ipynb`](CNES/leitos-por-municipio.ipynb) | Quais municípios têm mais leitos e quantos são do SUS? | CNES |
-| [`CNES/profissionais-de-saude.ipynb`](CNES/profissionais-de-saude.ipynb) | Quantos profissionais, de quais ocupações e onde? | CNES |
 | [`SINAN/dengue-por-estado-e-mes.ipynb`](SINAN/dengue-por-estado-e-mes.ipynb) | Como a dengue se distribuiu entre estados e meses? | SINAN |
 | [`SINAN/serie-historica-tuberculose.ipynb`](SINAN/serie-historica-tuberculose.ipynb) | Como as notificações evoluíram ao longo dos anos? | SINAN |
-| [`SIH/internacoes-por-causa.ipynb`](SIH/internacoes-por-causa.ipynb) | Por que se interna pelo SUS, por quanto tempo e a que custo? | SIH |
 | [`SIM/causas-de-obito.ipynb`](SIM/causas-de-obito.ipynb) | Quais as principais causas de óbito no estado? | SIM |
 | [`SINASC/perfil-dos-nascimentos.ipynb`](SINASC/perfil-dos-nascimentos.ipynb) | Cesáreas, peso ao nascer e pré-natal | SINASC |
+| [`SIH/internacoes-por-causa.ipynb`](SIH/internacoes-por-causa.ipynb) | Por que se interna pelo SUS, por quanto tempo e a que custo? | SIH |
+| [`SIA/producao-ambulatorial.ipynb`](SIA/producao-ambulatorial.ipynb) | Quais procedimentos ambulatoriais o SUS mais realiza? | SIA |
+| [`CNES/leitos-por-municipio.ipynb`](CNES/leitos-por-municipio.ipynb) | Quais municípios têm mais leitos e quantos são do SUS? | CNES |
+| [`CNES/profissionais-de-saude.ipynb`](CNES/profissionais-de-saude.ipynb) | Quantos profissionais, de quais ocupações e onde? | CNES |
+| [`PNI/cobertura-vacinal.ipynb`](PNI/cobertura-vacinal.ipynb) | Quantas doses foram aplicadas e qual a cobertura? | PNI |
+| [`CIHA/atendimentos-ciha.ipynb`](CIHA/atendimentos-ciha.ipynb) | O que acontece nos atendimentos além do SUS? | CIHA |
+
+## Indicadores que combinam bases
+
+| Notebook | Pergunta que responde | Bases |
+|---|---|---|
+| [`indicadores/mortalidade-infantil.ipynb`](indicadores/mortalidade-infantil.ipynb) | Quantas crianças morrem antes de 1 ano, e do quê? | SIM + SINASC |
+| [`indicadores/populacao-e-taxas.ipynb`](indicadores/populacao-e-taxas.ipynb) | Como comparar estados de tamanhos diferentes (taxas por 100 mil)? | IBGE + SINAN |
+
+## Para quem já se sentir à vontade
+
+| Notebook | O que ensina |
+|---|---|
+| [`avancado/arquivos-grandes-e-sql.ipynb`](avancado/arquivos-grandes-e-sql.ipynb) | Analisar milhões de linhas sem travar: colunas selecionadas e consultas SQL |
 
 Todos trazem uma célula de **parâmetros** no início: mude a sigla do estado e o
 ano, e a análise inteira se ajusta.
@@ -83,24 +101,28 @@ célula.
 
 ---
 
-## Três armadilhas que estes notebooks já resolvem
+## Armadilhas que estes notebooks já resolvem
 
-Foram descobertas testando, e valem para qualquer análise sua:
+Foram descobertas testando, e nenhuma delas está documentada de forma óbvia:
 
 1. **`nest_asyncio` é obrigatório.** As funções da PySUS falham dentro de
    qualquer notebook sem ele (`asyncio.run() cannot be called from a running
    event loop`). Todos os exemplos começam aplicando-o.
-2. **O parâmetro `group` só vale para o CNES.** No SIH, SIM, SINASC e SIA, usá-lo
-   faz a consulta devolver **zero linhas** — sem erro nenhum. No CNES, ao
-   contrário, ele é essencial: sem `group`, vêm 33 mil linhas e 362 colunas.
+2. **O parâmetro `group` se comporta de três formas diferentes:**
+   - **CNES:** essencial — sem ele vêm 33 mil linhas e 362 colunas misturadas;
+   - **SIH, SIM, SINASC, SIA:** usá-lo devolve **zero linhas**, sem erro;
+   - **CIHA:** o valor padrão (`"CIHA"`) devolve zero — é preciso passar
+     `group=None` explicitamente.
 3. **Período inexistente devolve tabela vazia, não erro.** A cobertura do
-   catálogo é irregular por base, estado e mês. Por isso todo notebook consulta
-   `list_files` antes e confere `len(tabela)` depois.
-
-E uma quarta, específica do SINAN: a base de dengue de 2024 tem **6,5 milhões de
-linhas** e ocupa cerca de **29 GB** se carregada inteira — o suficiente para
-travar o Colab. O notebook de dengue mostra como fazer a mesma análise com
-1 GB, lendo apenas as colunas necessárias.
+   catálogo é irregular por base, estado e mês: no Paraná, por exemplo, só um
+   mês de 2024 tem internações publicadas. Por isso todo notebook consulta
+   `list_files` antes e confere `len(tabela)` depois — e o de internações
+   **descobre sozinho** um mês com dados.
+4. **Bases nacionais são enormes.** A dengue de 2024 tem 6,5 milhões de linhas
+   (~29 GB carregada inteira) e um mês do SIA tem 3,6 milhões. Os notebooks
+   dessas bases leem apenas as colunas necessárias — e o
+   [notebook avançado](avancado/arquivos-grandes-e-sql.ipynb) mostra como
+   consultar com SQL sem carregar nada.
 
 ---
 
