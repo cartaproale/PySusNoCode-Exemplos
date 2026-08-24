@@ -36,9 +36,9 @@ Cada notebook aprofundado deve:
 | 6 | SINAN | `SINAN/arboviroses-dengue-chikungunya-zika.ipynb` | **pronto** — 16 células, validado |
 | 7 | PNI | `PNI/cobertura-vacinal-e-anos-incompletos.ipynb` | **pronto** — 12 células, validado |
 | 8 | SIA | `SIA/alta-complexidade-oncologia-e-dialise.ipynb` | **pronto** — 14 células, validado |
-| 9 | CIHA | `CIHA/o-que-o-ciha-acrescenta-ao-sih.ipynb` | a fazer |
-| 10 | cruzamento | `cruzamentos/mortalidade-infantil-evitavel.ipynb` | a fazer |
-| 11 | cruzamento | `cruzamentos/painel-do-municipio.ipynb` | a fazer |
+| 9 | CIHA | `CIHA/o-que-o-ciha-acrescenta-ao-sih.ipynb` | **pronto** — 13 células, validado |
+| 10 | cruzamento | `cruzamentos/mortalidade-infantil-e-numeros-pequenos.ipynb` | **pronto** — 15 células, validado |
+| 11 | cruzamento | `cruzamentos/painel-do-municipio.ipynb` | em construção |
 
 ## Aprendizados para o aplicativo
 
