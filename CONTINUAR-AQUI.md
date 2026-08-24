@@ -1,0 +1,52 @@
+# Continuar daqui
+
+Arquivo de retomada. Se a conversa com o assistente for reiniciada, **leia este
+arquivo primeiro**: ele diz exatamente onde o trabalho parou, sem precisar
+reconstruir o histórico.
+
+Regra: atualizar este arquivo a cada notebook concluído, no mesmo commit.
+
+---
+
+## Objetivo desta etapa
+
+Um exemplo **aprofundado** para cada uma das 9 bases do PySUS, além de
+notebooks que **cruzam bases**. Os exemplos existentes (16, na pasta de cada
+base) são a porta de entrada; estes novos são material de pesquisa.
+
+Cada notebook aprofundado deve:
+
+- responder a uma pergunta de pesquisa real, não demonstrar uma função;
+- usar indicadores reconhecidos (ICSAP, mortalidade prematura por DCNT,
+  mortalidade infantil evitável, adequação do pré-natal…), para que o
+  resultado seja comparável com a literatura;
+- rodar dentro da memória do Colab gratuito, usando SQL sobre os arquivos
+  quando a base for grande;
+- conferir o resultado contra uma fonte oficial, no próprio notebook.
+
+## Situação
+
+| # | Base | Notebook | Estado |
+|---|------|----------|--------|
+| 1 | IBGE | `IBGE/populacao-denominadores-e-piramides.ipynb` | **pronto** — 16 células, validado |
+| 2 | SIM | `SIM/mortalidade-prematura-por-dcnt.ipynb` | a fazer |
+| 3 | SINASC | `SINASC/nascimentos-prematuridade-e-pre-natal.ipynb` | a fazer |
+| 4 | SIH | `SIH/internacoes-sensiveis-a-atencao-primaria.ipynb` | a fazer |
+| 5 | CNES | `CNES/rede-assistencial-e-leitos-por-habitante.ipynb` | a fazer |
+| 6 | SINAN | `SINAN/arboviroses-dengue-chikungunya-zika.ipynb` | a fazer |
+| 7 | PNI | `PNI/cobertura-vacinal-por-coorte.ipynb` | a fazer |
+| 8 | SIA | `SIA/alta-complexidade-oncologia-e-dialise.ipynb` | a fazer |
+| 9 | CIHA | `CIHA/o-que-o-ciha-acrescenta-ao-sih.ipynb` | a fazer |
+| 10 | cruzamento | `cruzamentos/mortalidade-infantil-evitavel.ipynb` | a fazer |
+| 11 | cruzamento | `cruzamentos/painel-do-municipio.ipynb` | a fazer |
+
+## Aprendizados para o aplicativo
+
+Ficam em `_ferramentas/APRENDIZADOS-KERNEL.md`, com o estado de cada um
+(pendente / aplicado na versão X).
+
+## Como retomar
+
+1. Ler este arquivo e `_ferramentas/APRENDIZADOS-KERNEL.md`.
+2. Ler `GUIA-DE-ESTILO.md`.
+3. Pegar a primeira linha "a fazer" da tabela e continuar.

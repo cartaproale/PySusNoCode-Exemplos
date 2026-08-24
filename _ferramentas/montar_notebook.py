@@ -21,6 +21,29 @@ from pysusnocode.kernel import NotebookKernel  # noqa: E402
 
 RAIZ = Path(__file__).resolve().parents[1]
 
+# As barras de progresso do PySUS são escritas em stderr com retorno de carro.
+# Ao vivo elas ajudam; salvas no notebook viram uma parede de lixo ilegível.
+RUIDO = ("file/s]", "it/s]", "?file/s", "?it/s")
+
+
+def limpar_saidas(saidas: list[dict]) -> list[dict]:
+    """Remove barras de progresso, preservando avisos de verdade."""
+    limpas = []
+    for saida in saidas:
+        if saida.get("output_type") != "stream" or saida.get("name") != "stderr":
+            limpas.append(saida)
+            continue
+        texto = "".join(saida.get("text", ""))
+        # guarda só as linhas que não são quadro de barra de progresso
+        sobra = "\n".join(
+            linha for linha in texto.replace("\r", "\n").split("\n")
+            if linha.strip() and not any(marca in linha for marca in RUIDO)
+        ).strip()
+        if sobra:
+            saida = dict(saida, text=sobra + "\n")
+            limpas.append(saida)
+    return limpas
+
 
 def md(texto: str) -> tuple[str, str]:
     return ("markdown", texto.strip("\n"))
@@ -69,7 +92,7 @@ def construir(caminho: Path, celulas: list[tuple[str, str]], executar: bool = Tr
                         saidas.append(nbformat.from_dict(saida))
                     except Exception:  # noqa: BLE001
                         pass
-                celula["outputs"] = saidas
+                celula["outputs"] = limpar_saidas(saidas)
                 if not resultado.ok:
                     erros.append(f"célula {contador}: {resultado.error_summary[-300:]}")
             nb_celulas.append(celula)
