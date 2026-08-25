@@ -46,7 +46,9 @@ Estado: **pendente** = descoberto, ainda não aplicado; **v1.x.y** = já embarca
 | 31 | O código do procedimento do SIGTAP é estruturado (2 dígitos = grupo, 4 = subgrupo). Dá para classificar milhões de linhas sem tabela auxiliar | lição | pendente |
 | 32 | Campo pronto nem sempre é confiável: o `COBERT` do PNI vem fora de escala no nível municipal. Quando os ingredientes estão no arquivo (doses e população), recalcular | prompt | pendente |
 | 33 | O catálogo do PySUS é **um único arquivo duckdb** (`~/pysus/ducklake/catalog.duckdb`) e não aceita dois processos ao mesmo tempo: "O arquivo já está sendo usado por outro processo". Duas janelas do aplicativo baixando ao mesmo tempo quebram uma delas | kernel | pendente |
-| 34 | SIM e SINASC fecham em anos diferentes (no PR, SIM até 2024 e SINASC até 2022). Ao cruzar bases, usar a interseção dos anos — nunca o ano mais recente de uma delas | lição | pendente |
+| 34 | SIM e SINASC fecham em anos diferentes (no PR, SIM até 2024 e SINASC até 2022). Ao cruzar bases, usar a interseção dos anos — nunca o ano mais recente de uma delas | lição | v1.8.2 |
+| 35 | **O outro lado do `nest_asyncio`**: dentro de notebook ele é obrigatório, mas num script `.py` comum é desnecessário **e impede o Python de encerrar** — o processo termina o trabalho, imprime tudo e fica parado para sempre. Medido: com `nest_asyncio` o script trava; sem ele, encerra em 3,9 s. Não afeta o aplicativo (o `shutdown()` mata o kernel à força — verificado), mas afeta scripts gerados para rodar sozinhos | lição | pendente |
+
 
 
 
