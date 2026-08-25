@@ -90,15 +90,52 @@ reaproveitáveis e as armadilhas que o notebook resolveu no caminho.
 
 ---
 
-## Como usar no Google Colab
+## Abrir direto no Google Colab
 
-1. Clique no notebook desejado aqui no GitHub;
-2. Copie o endereço da página;
-3. Abra [colab.research.google.com](https://colab.research.google.com), escolha
-   **GitHub** e cole o endereço — ou baixe o arquivo `.ipynb` e use **Upload**;
-4. Execute as células na ordem (`Shift + Enter`).
+Clique e o notebook abre pronto para executar, sem baixar nada e sem instalar
+nada no seu computador. Depois é só apertar `Shift + Enter` em cada célula, na
+ordem. Para guardar as suas alterações, use **Arquivo → Salvar uma cópia no
+Drive**.
 
-Não é preciso instalar nada no seu computador.
+### Comece por aqui
+
+- [1 · Primeiros passos com os dados do DATASUS](https://colab.research.google.com/github/cartaproale/PySusNoCode-Exemplos/blob/main/_comece-aqui/01-primeiros-passos.ipynb)
+- [2 · Descobrir quais dados existem](https://colab.research.google.com/github/cartaproale/PySusNoCode-Exemplos/blob/main/_comece-aqui/02-descobrir-dados-disponiveis.ipynb)
+- [Mapa completo: tudo o que dá para obter](https://colab.research.google.com/github/cartaproale/PySusNoCode-Exemplos/blob/main/_comece-aqui/03-mapa-completo-das-bases.ipynb)
+
+### Análises aprofundadas
+
+- [**CIHA** · CIHA: o que existe além do SUS — e por que usar com cuidado](https://colab.research.google.com/github/cartaproale/PySusNoCode-Exemplos/blob/main/CIHA/o-que-o-ciha-acrescenta-ao-sih.ipynb)
+- [**CNES** · A rede de saúde por habitante: leitos, UTI e médicos](https://colab.research.google.com/github/cartaproale/PySusNoCode-Exemplos/blob/main/CNES/rede-assistencial-e-leitos-por-habitante.ipynb)
+- [**Cruzando bases** · Mortalidade infantil: quando a criança morre, e o que isso denuncia](https://colab.research.google.com/github/cartaproale/PySusNoCode-Exemplos/blob/main/cruzamentos/mortalidade-infantil-e-numeros-pequenos.ipynb)
+- [**Cruzando bases** · Painel do município: um retrato de saúde com todas as bases](https://colab.research.google.com/github/cartaproale/PySusNoCode-Exemplos/blob/main/cruzamentos/painel-do-municipio.ipynb)
+- [**IBGE** · População: denominadores confiáveis, pirâmides etárias e padronização por idade](https://colab.research.google.com/github/cartaproale/PySusNoCode-Exemplos/blob/main/IBGE/populacao-denominadores-e-piramides.ipynb)
+- [**PNI** · Cobertura vacinal: e como um ano incompleto vira uma falsa catástrofe](https://colab.research.google.com/github/cartaproale/PySusNoCode-Exemplos/blob/main/PNI/cobertura-vacinal-e-anos-incompletos.ipynb)
+- [**SIA** · Para onde vai o dinheiro do ambulatório: oncologia, diálise e o resto](https://colab.research.google.com/github/cartaproale/PySusNoCode-Exemplos/blob/main/SIA/alta-complexidade-oncologia-e-dialise.ipynb)
+- [**SIH** · Internações que a atenção primária poderia ter evitado](https://colab.research.google.com/github/cartaproale/PySusNoCode-Exemplos/blob/main/SIH/internacoes-sensiveis-a-atencao-primaria.ipynb)
+- [**SIM** · Mortalidade prematura por doenças crônicas — o indicador 3.4 da ONU](https://colab.research.google.com/github/cartaproale/PySusNoCode-Exemplos/blob/main/SIM/mortalidade-prematura-por-dcnt.ipynb)
+- [**SINAN** · Três arboviroses, um mosquito: dengue, chikungunya e zika](https://colab.research.google.com/github/cartaproale/PySusNoCode-Exemplos/blob/main/SINAN/arboviroses-dengue-chikungunya-zika.ipynb)
+- [**SINASC** · Nascimentos: prematuridade, pré-natal e a epidemia de cesáreas](https://colab.research.google.com/github/cartaproale/PySusNoCode-Exemplos/blob/main/SINASC/nascimentos-prematuridade-e-pre-natal.ipynb)
+
+### Uma análise de entrada para cada base
+
+- [**CIHA** · CIHA: atendimentos além do SUS](https://colab.research.google.com/github/cartaproale/PySusNoCode-Exemplos/blob/main/CIHA/atendimentos-ciha.ipynb)
+- [**CNES** · Leitos hospitalares por município](https://colab.research.google.com/github/cartaproale/PySusNoCode-Exemplos/blob/main/CNES/leitos-por-municipio.ipynb)
+- [**CNES** · Profissionais de saúde cadastrados](https://colab.research.google.com/github/cartaproale/PySusNoCode-Exemplos/blob/main/CNES/profissionais-de-saude.ipynb)
+- [**Indicadores** · População e cálculo de taxas](https://colab.research.google.com/github/cartaproale/PySusNoCode-Exemplos/blob/main/indicadores/populacao-e-taxas.ipynb)
+- [**Indicadores** · Taxa de mortalidade infantil](https://colab.research.google.com/github/cartaproale/PySusNoCode-Exemplos/blob/main/indicadores/mortalidade-infantil.ipynb)
+- [**PNI** · Cobertura vacinal por município](https://colab.research.google.com/github/cartaproale/PySusNoCode-Exemplos/blob/main/PNI/cobertura-vacinal.ipynb)
+- [**SIA** · Produção ambulatorial: procedimentos mais realizados](https://colab.research.google.com/github/cartaproale/PySusNoCode-Exemplos/blob/main/SIA/producao-ambulatorial.ipynb)
+- [**SIH** · Internações hospitalares: causas, custo e permanência](https://colab.research.google.com/github/cartaproale/PySusNoCode-Exemplos/blob/main/SIH/internacoes-por-causa.ipynb)
+- [**SIM** · Mortalidade: causas mais frequentes no estado](https://colab.research.google.com/github/cartaproale/PySusNoCode-Exemplos/blob/main/SIM/causas-de-obito.ipynb)
+- [**SINAN** · Dengue: casos notificados por estado e por mês](https://colab.research.google.com/github/cartaproale/PySusNoCode-Exemplos/blob/main/SINAN/dengue-por-estado-e-mes.ipynb)
+- [**SINAN** · Série histórica de um agravo (tuberculose)](https://colab.research.google.com/github/cartaproale/PySusNoCode-Exemplos/blob/main/SINAN/serie-historica-tuberculose.ipynb)
+- [**SINASC** · Nascimentos: perfil dos nascidos vivos](https://colab.research.google.com/github/cartaproale/PySusNoCode-Exemplos/blob/main/SINASC/perfil-dos-nascimentos.ipynb)
+- [Trabalhando com arquivos grandes (SQL sem carregar tudo)](https://colab.research.google.com/github/cartaproale/PySusNoCode-Exemplos/blob/main/avancado/arquivos-grandes-e-sql.ipynb)
+
+> Prefere não usar o Colab? Os mesmos exemplos abrem com um clique dentro do
+> [aplicativo PySusNoCode](https://github.com/cartaproale/PySusNoCode), pelo
+> botão **📚 Exemplos**.
 
 ---
 
