@@ -84,6 +84,41 @@ resolver a pendência do [[esus-aps-sisab-viabilidade]] — não resolve.
 o ativo. A biblioteca ganhou ferramentas de conveniência, não conhecimento
 sobre o DATASUS.
 
+## Teste sistemático da origem "Saude" e da atenção primária (26/08/2026)
+
+A revisão anterior concluiu que as 19 bases de origem "Saude" **estavam
+vazias**. Estava errada — e o erro foi meu, não da fonte. `get_files()` devolve
+zero porque essas bases **não são arquivos de FTP**: são o portal
+`dadosabertos.saude.gov.br` (Next.js sobre CKAN) mais a API REST DEMAS
+(`apidadosabertos.saude.gov.br`). Os dados existem, estão atualizados e são
+baixáveis. O que não funciona são as funções de conveniência da biblioteca.
+
+| # | Aprendizado | Onde entra | Estado |
+|---|-------------|-----------|--------|
+| 42 | Base de origem "Saude" com **0 arquivos não quer dizer sem dados**. Antes de declarar uma fonte vazia, verificar por qual caminho ela é servida | prompt + lição | pendente |
+| 43 | `atencao_primaria()` devolve vazio por erro de chave: o mapa interno tem `ATENCAOPRIMARIA`, a função procura `ATENCAO_PRIMARIA`, não acha, e cai no slug `atencao_primaria` — que o portal não reconhece. Atinge as **11 funções de nome composto** (`assistencia_saude`, `saude_indigena`, `vigilancia_meio_ambiente`…). O parâmetro `group=` existe mas é ignorado: não há como contornar pela API pública | lição | pendente |
+| 44 | `sisvan()` aponta para o grupo **errado** (`saude-indigena`); o SISVAN está em `atencao-primaria`. Pior que vazio: devolveria outra base sem avisar | lição | pendente |
+| 45 | Mesmo com o slug certo não baixaria nada: a função só aceita recurso cuja URL termina em `.csv`, e no portal quase tudo é `.csv.zip` | lição | pendente |
+| 46 | O caminho que funciona é `SaudeClient` (`list_groups` → `list_datasets` → `fetch_dataset`) ou a URL do S3 direto. Medido: **189 recursos CSV em 26 datasets**, 89 deles de atenção primária | prompt + lição | pendente |
+| 47 | Os indicadores MGDI têm **esquema único de 25 colunas** — uma receita serve para todos. As somas fecham: `_mun` bate exatamente com `_rs`, `_ms`, `_uf`, `_reg` e `_br` (verificado em 4 arquivos) | lição | pendente |
+| 48 | `vl_indicador_calculado_al` é a **Amazônia Legal** — 773 municípios, exatamente as 9 UFs. Preenchido só nas linhas desses municípios, zero nas demais. O nome não diz isso em lugar nenhum. Confirmado em 3 de 4 arquivos; no 4º a própria fonte diverge 0,23% | lição | pendente |
+| 49 | A periodicidade **varia por indicador**: eMulti é série mensal (28 competências), saúde bucal é dezembro de cada ano mais a competência corrente (11). `co_anomes` no formato AAAAMM não garante série mensal — conferir os meses presentes antes de plotar | lição | pendente |
+| 50 | `aggregate_by_age_group()` aceita **qualquer** coluna numérica como se fosse idade. Passei o código da UF e ela devolveu "faixas etárias" 0-5, 5-15, 15-30, sem um aviso | lição | pendente |
+| 51 | `detect_units()` classificou **todas** as colunas numéricas como `'kg'` (confiança 0,5), inclusive o código da UF e uma contagem de equipes | lição | pendente |
+| 52 | `aggregate_by_period()` com a coluna de data em texto devolve **0 linhas e nenhum erro** | lição | pendente |
+| 53 | `to_geojson()` num DataFrame sem coordenadas grava um `FeatureCollection` **vazio** e devolve sucesso | lição | pendente |
+| 54 | `to_sql()` não grava banco nenhum: devolve o **texto** do `CREATE TABLE` | lição | pendente |
+| 55 | `search_columns()` só tem conteúdo para `sinan` (120 colunas para "idade"); `sih`, `sim` e `sinasc` devolvem 0. `get_aliases()` devolve `[]` para SIH/IDADE, SIM/IDADE e SINASC/IDADEMAE | lição | pendente |
+| 56 | O que funciona de verdade e vale ensinar: `query_parquet` + `to_df`/`to_arrow`/`stream_parquet` (175 mil linhas em 0,1 s, com projeção de colunas), `mask_data`/`unmask_data` (Fernet, reversível com a chave), `column_stats`, `profile_report`, `diff_dfs`, `link_datasets`, `to_csv`/`to_excel`/`export`, e `list_files` para as bases de FTP | prompt + lição | pendente |
+| 57 | **Previne Brasil / SISAB está acessível** por REST com filtros de `uf`, `competencia`, `quadrimestre` e `codigo_municipio` — e o helper `pysus.api.saude.rest.iter_rows` funciona (1.188 linhas do AC em 1,0 s) | lição | pendente |
+| 58 | O `offset` da API DEMAS é **linha**, não página, apesar de a própria documentação dizer "Número da página". Verificado: `offset=10` com `limit=10` não repete nada do `offset=0` | lição | pendente |
+| 59 | A API DEMAS **cai**: ficou fora do ar por mais de uma hora durante este teste (timeout e 502) enquanto o portal e o S3 continuavam de pé. Notebook que dependa só dela quebra sem culpa do usuário — o S3 é o caminho estável | prompt + lição | pendente |
+| 60 | Os códigos de indicador do Previne Brasil (10, 20, 30, 40, 50, 70) **não são documentados** no swagger, e a coluna `percentual` passa de 100 em alguns — não é numerador/denominador. Vale a lição 15: não adivinhar rótulo de código | lição | pendente |
+
+**Conclusão do teste:** a atenção primária é a maior lacuna da nossa base de
+exemplos e ela **é viável** — mas por fora das funções de conveniência da
+pysus, que estão quebradas justamente aí.
+
 | # | Aprendizado | Onde entra | Estado |
 |---|-------------|-----------|--------|
 | 35 | **O outro lado do `nest_asyncio`**: dentro de notebook ele é obrigatório, mas num script `.py` comum é desnecessário **e impede o Python de encerrar** — o processo termina o trabalho, imprime tudo e fica parado para sempre. Medido: com `nest_asyncio` o script trava; sem ele, encerra em 3,9 s. Não afeta o aplicativo (o `shutdown()` mata o kernel à força — verificado), mas afeta scripts gerados para rodar sozinhos | lição | pendente |
