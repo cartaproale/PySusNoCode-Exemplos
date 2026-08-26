@@ -68,6 +68,7 @@ def limpar_markdown(texto: str) -> str:
     """Tira a marcação para o texto caber numa lista da interface."""
     texto = re.sub(r"\[([^\]]+)\]\([^)]+\)", r"\1", texto)   # links
     texto = texto.replace("**", "").replace("`", "")
+    texto = re.sub(r"(?<!\w)\*(?!\s)([^*]+?)\*(?!\w)", r"\1", texto)   # itálico
     return " ".join(texto.split()).strip()
 
 

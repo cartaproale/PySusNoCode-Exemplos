@@ -1,8 +1,8 @@
 {
- "gerado_em": "2026-08-25",
+ "gerado_em": "2026-08-26",
  "repositorio": "cartaproale/PySusNoCode-Exemplos",
  "ramo": "main",
- "total": 27,
+ "total": 28,
  "exemplos": [
   {
    "arquivo": "_comece-aqui/01-primeiros-passos.ipynb",
@@ -58,6 +58,17 @@
    "celulas": 17,
    "graficos": 3,
    "tempo": "5 a 8 minutos"
+  },
+  {
+   "arquivo": "cruzamentos/frio-e-coracao-replicando-um-estudo.ipynb",
+   "titulo": "Frio e coração: replicando um estudo publicado",
+   "descricao": "Em julho de 2026, a revista PLOS Global Public Health publicou um estudo ecológico brasileiro sobre a relação entre temperatura e internações cardiovasculares — 2,9 milhões de internações em 103 cidades, de 2010 a 2024 (Dóris e cols., 2026). Ele usou o SIH/DATASUS: exatamente a base que abrimos aqui.",
+   "grupo": "Cruzando bases",
+   "base": "",
+   "aprofundado": true,
+   "celulas": 10,
+   "graficos": 3,
+   "tempo": "10 a 20 minutos na primeira vez (baixa vários anos)"
   },
   {
    "arquivo": "cruzamentos/mortalidade-infantil-e-numeros-pequenos.ipynb",
@@ -139,7 +150,7 @@
   {
    "arquivo": "SINAN/arboviroses-dengue-chikungunya-zika.ipynb",
    "titulo": "Três arboviroses, um mosquito: dengue, chikungunya e zika",
-   "descricao": "O *Aedes aegypti* transmite três vírus diferentes no Brasil. Eles circulam juntos, são notificados no mesmo sistema e costumam ser tratados como um bloco só — mas atingem pessoas diferentes, em épocas diferentes, com gravidades diferentes. Este notebook separa os três e mostra em que exatamente eles divergem.",
+   "descricao": "O Aedes aegypti transmite três vírus diferentes no Brasil. Eles circulam juntos, são notificados no mesmo sistema e costumam ser tratados como um bloco só — mas atingem pessoas diferentes, em épocas diferentes, com gravidades diferentes. Este notebook separa os três e mostra em que exatamente eles divergem.",
    "grupo": "SINAN",
    "base": "SINAN",
    "aprofundado": true,

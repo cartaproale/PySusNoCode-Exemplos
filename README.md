@@ -84,6 +84,7 @@ material de trabalho — não de demonstração.
 | [`CIHA/o-que-o-ciha-acrescenta-ao-sih.ipynb`](CIHA/o-que-o-ciha-acrescenta-ao-sih.ipynb) | O que existe além do SUS — e por que essa base exige cautela | CIHA + SIH |
 | [`cruzamentos/mortalidade-infantil-e-numeros-pequenos.ipynb`](cruzamentos/mortalidade-infantil-e-numeros-pequenos.ipynb) | Quando a criança morre, e por que taxas municipais anuais quase sempre são ruído | SIM + SINASC |
 | [`cruzamentos/painel-do-municipio.ipynb`](cruzamentos/painel-do-municipio.ipynb) | Como está a saúde da minha cidade, comparada com o estado | Seis bases |
+| [`cruzamentos/frio-e-coracao-replicando-um-estudo.ipynb`](cruzamentos/frio-e-coracao-replicando-um-estudo.ipynb) | Dá para chegar ao resultado de um estudo publicado partindo do zero? | SIH + SIM |
 
 Cada um deles termina com uma seção **"o que vale levar"**: as funções
 reaproveitáveis e as armadilhas que o notebook resolveu no caminho.
@@ -109,6 +110,7 @@ Drive**.
 - [**CNES** · A rede de saúde por habitante: leitos, UTI e médicos](https://colab.research.google.com/github/cartaproale/PySusNoCode-Exemplos/blob/main/CNES/rede-assistencial-e-leitos-por-habitante.ipynb)
 - [**Cruzando bases** · Mortalidade infantil: quando a criança morre, e o que isso denuncia](https://colab.research.google.com/github/cartaproale/PySusNoCode-Exemplos/blob/main/cruzamentos/mortalidade-infantil-e-numeros-pequenos.ipynb)
 - [**Cruzando bases** · Painel do município: um retrato de saúde com todas as bases](https://colab.research.google.com/github/cartaproale/PySusNoCode-Exemplos/blob/main/cruzamentos/painel-do-municipio.ipynb)
+- [**Cruzando bases** · Frio e coração: replicando um estudo publicado](https://colab.research.google.com/github/cartaproale/PySusNoCode-Exemplos/blob/main/cruzamentos/frio-e-coracao-replicando-um-estudo.ipynb)
 - [**IBGE** · População: denominadores confiáveis, pirâmides etárias e padronização por idade](https://colab.research.google.com/github/cartaproale/PySusNoCode-Exemplos/blob/main/IBGE/populacao-denominadores-e-piramides.ipynb)
 - [**PNI** · Cobertura vacinal: e como um ano incompleto vira uma falsa catástrofe](https://colab.research.google.com/github/cartaproale/PySusNoCode-Exemplos/blob/main/PNI/cobertura-vacinal-e-anos-incompletos.ipynb)
 - [**SIA** · Para onde vai o dinheiro do ambulatório: oncologia, diálise e o resto](https://colab.research.google.com/github/cartaproale/PySusNoCode-Exemplos/blob/main/SIA/alta-complexidade-oncologia-e-dialise.ipynb)
