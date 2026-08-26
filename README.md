@@ -164,6 +164,19 @@ todos os notebooks **todo mês**. Se a biblioteca mudar e algum exemplo parar de
 funcionar, abre-se uma issue automaticamente — antes que alguém trave na
 primeira célula.
 
+Executar sem erro, porém, não prova que o número está certo: em agosto de 2026
+uma mudança no catálogo do DATASUS fez três exemplos passarem a mostrar o
+Brasil inteiro rotulado como Paraná, **sem uma única exceção**. Por isso o
+repositório ganhou mais duas ferramentas:
+
+- [`_ferramentas/reexecutar.py`](_ferramentas/reexecutar.py) — reexecuta um
+  notebook e **regrava as saídas**, para que o que está publicado seja sempre o
+  que o código produz hoje;
+- [`_ferramentas/vigiar_pysus.py`](_ferramentas/vigiar_pysus.py) — consulta o
+  PyPI e testa se os defeitos conhecidos da biblioteca continuam de pé. Com
+  `--nova`, instala a versão mais recente num ambiente isolado e sonda lá, sem
+  mexer na sua instalação.
+
 Os resultados também são conferidos contra a realidade, não apenas contra a
 ausência de erro. Cada notebook aprofundado termina com uma seção de
 **verificações de sanidade**, e os números batem com as fontes oficiais:
