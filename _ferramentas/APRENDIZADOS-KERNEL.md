@@ -163,6 +163,12 @@ com o rótulo do Paraná.
 | 83 | Os indicadores MGDI têm **calendários diferentes** entre si: dos seis usados no painel, só existe **uma competência em comum**. Pegar "o mais recente de cada um" compara retratos de meses diferentes | lição | pendente |
 | 84 | O código do município tem **7 dígitos no IBGE** e **6 no MGDI**. E o arquivo de população envelhece: Boa Esperança do Norte (MT) existe no indicador e não existe no denominador | lição | pendente |
 | 85 | As barras de progresso da PySUS saem pelos **dois** canais — o FTP manda por stderr, o download do IBGE por stdout. O filtro do repositório só limpava stderr | ferramenta do repositório | feito |
+| 86 | No cadastro de UBS, `LATITUDE`/`LONGITUDE` vêm como **texto com vírgula e ponto misturados no mesmo arquivo**. Sem `str.replace(",", ".")` viram `NaN` e o mapa sai vazio sem erro. 4% das 47.910 unidades não têm coordenada nenhuma | lição | pendente |
+| 87 | **O retângulo "do Brasil" reprova dados bons**: as três UBS de Fernando de Noronha (IBGE 260545) ficam a leste de −34° de longitude. Qualquer conferência geográfica precisa incluir o arquipélago | lição | pendente |
+| 88 | A coluna `UF` do cadastro de UBS guarda o **código numérico do IBGE** (41 = PR), não a sigla. Filtrar por `"PR"` devolve zero linha sem erro | lição | pendente |
+| 89 | `to_geojson()` é útil quando as colunas existem (2.291 pontos do PR, com propriedades) — mas quando não existem grava **coleção vazia e devolve sucesso**. Confira sempre o número de pontos depois de exportar | lição | pendente |
+| 90 | **83 municípios não têm nenhuma UBS cadastrada, e 67 deles (81%) têm equipe de saúde bucal custeada.** Ausência no arquivo não é ausência de rede — o maior deles, Araruama (RJ), tem 137 mil habitantes | prompt + lição | pendente |
+| 91 | Quando a mesma base tem API paginada e arquivo publicado, **prefira o arquivo**: vem inteiro, de uma vez, igual para todos. A regra vale para UBS e para tudo que o portal publica em `.csv.zip` | prompt + lição | pendente |
 
 | # | Aprendizado | Onde entra | Estado |
 |---|-------------|-----------|--------|

@@ -2,7 +2,7 @@
  "gerado_em": "2026-08-26",
  "repositorio": "cartaproale/PySusNoCode-Exemplos",
  "ramo": "main",
- "total": 30,
+ "total": 31,
  "exemplos": [
   {
    "arquivo": "_comece-aqui/01-primeiros-passos.ipynb",
@@ -190,6 +190,17 @@
    "celulas": 13,
    "graficos": 2,
    "tempo": "3 a 6 minutos"
+  },
+  {
+   "arquivo": "AtencaoPrimaria/ubs-no-mapa-e-o-que-o-cadastro-esconde.ipynb",
+   "titulo": "UBS no mapa: onde estão as unidades básicas — e o que o cadastro esconde",
+   "descricao": "Onde ficam as Unidades Básicas de Saúde do meu estado, quantas existem por habitante, e o que falta no cadastro?",
+   "grupo": "AtencaoPrimaria",
+   "base": "AtencaoPrimaria",
+   "aprofundado": false,
+   "celulas": 10,
+   "graficos": 1,
+   "tempo": "4 a 7 minutos"
   },
   {
    "arquivo": "CIHA/atendimentos-ciha.ipynb",

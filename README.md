@@ -87,6 +87,7 @@ material de trabalho — não de demonstração.
 | [`cruzamentos/frio-e-coracao-replicando-um-estudo.ipynb`](cruzamentos/frio-e-coracao-replicando-um-estudo.ipynb) | Dá para chegar ao resultado de um estudo publicado partindo do zero? | SIH + SIM |
 | [`AtencaoPrimaria/previne-brasil-indicadores-da-aps.ipynb`](AtencaoPrimaria/previne-brasil-indicadores-da-aps.ipynb) | Como estão os municípios do estado nos indicadores da APS — e por que a coleta ingênua perde um terço dos registros | SISAB (API) |
 | [`AtencaoPrimaria/painel-da-aps-programas-do-municipio.ipynb`](AtencaoPrimaria/painel-da-aps-programas-do-municipio.ipynb) | Como o município está em seis programas da APS, comparado com a sua região de saúde — e por que zero não quer dizer ausência | MGDI + IBGE |
+| [`AtencaoPrimaria/ubs-no-mapa-e-o-que-o-cadastro-esconde.ipynb`](AtencaoPrimaria/ubs-no-mapa-e-o-que-o-cadastro-esconde.ipynb) | Onde ficam as 47.910 UBS, quantas por habitante — e quantos municípios têm rede mas não têm cadastro | CNES + IBGE |
 
 Cada um deles termina com uma seção **"o que vale levar"**: as funções
 reaproveitáveis e as armadilhas que o notebook resolveu no caminho.
@@ -114,6 +115,7 @@ Drive**.
 
 - [**Atenção Primária** · Previne Brasil: os indicadores da APS, município a município](https://colab.research.google.com/github/cartaproale/PySusNoCode-Exemplos/blob/main/AtencaoPrimaria/previne-brasil-indicadores-da-aps.ipynb)
 - [**Atenção Primária** · Painel da APS: seis programas, um município](https://colab.research.google.com/github/cartaproale/PySusNoCode-Exemplos/blob/main/AtencaoPrimaria/painel-da-aps-programas-do-municipio.ipynb)
+- [**Atenção Primária** · UBS no mapa: onde estão, e o que o cadastro esconde](https://colab.research.google.com/github/cartaproale/PySusNoCode-Exemplos/blob/main/AtencaoPrimaria/ubs-no-mapa-e-o-que-o-cadastro-esconde.ipynb)
 - [**CIHA** · CIHA: o que existe além do SUS — e por que usar com cuidado](https://colab.research.google.com/github/cartaproale/PySusNoCode-Exemplos/blob/main/CIHA/o-que-o-ciha-acrescenta-ao-sih.ipynb)
 - [**CNES** · A rede de saúde por habitante: leitos, UTI e médicos](https://colab.research.google.com/github/cartaproale/PySusNoCode-Exemplos/blob/main/CNES/rede-assistencial-e-leitos-por-habitante.ipynb)
 - [**Cruzando bases** · Mortalidade infantil: quando a criança morre, e o que isso denuncia](https://colab.research.google.com/github/cartaproale/PySusNoCode-Exemplos/blob/main/cruzamentos/mortalidade-infantil-e-numeros-pequenos.ipynb)
