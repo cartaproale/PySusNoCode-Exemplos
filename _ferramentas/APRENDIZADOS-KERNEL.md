@@ -47,6 +47,45 @@ Estado: **pendente** = descoberto, ainda não aplicado; **v1.x.y** = já embarca
 | 32 | Campo pronto nem sempre é confiável: o `COBERT` do PNI vem fora de escala no nível municipal. Quando os ingredientes estão no arquivo (doses e população), recalcular | prompt | pendente |
 | 33 | O catálogo do PySUS é **um único arquivo duckdb** (`~/pysus/ducklake/catalog.duckdb`) e não aceita dois processos ao mesmo tempo: "O arquivo já está sendo usado por outro processo". Duas janelas do aplicativo baixando ao mesmo tempo quebram uma delas | kernel | pendente |
 | 34 | SIM e SINASC fecham em anos diferentes (no PR, SIM até 2024 e SINASC até 2022). Ao cruzar bases, usar a interseção dos anos — nunca o ano mais recente de uma delas | lição | v1.8.2 |
+## Revisão "estado da arte" da PySUS 2.10 (26 de agosto de 2026)
+
+A biblioteca saltou de **20 para 99 nomes públicos** entre a 2.9 e a 2.10 — uma
+mudança grande que passou despercebida. Tudo abaixo foi **testado**, não lido:
+a documentação promete mais do que a biblioteca entrega, e é exatamente esse o
+risco de aproveitar exemplo de terceiro sem verificar.
+
+**Funciona e é útil**
+
+| Função | O que faz |
+|---|---|
+| `info()` / `info_table()` | Lista os 34 conjuntos de dados, com origem e descrição |
+| `load_column_metadata(base)` | Nome e descrição das colunas de 6 bases |
+| `missing_values(df)`, `column_stats(df)` | Perfil de completude e tipos |
+| `set_cache()`, `cache_status()`, `clear_cache()` | Gestão do cache |
+
+**Anunciado, mas vazio** — `info()` lista 34 bases, mas só as **9 de origem
+FTP** têm arquivos. As 19 de origem "Saude" (`ATENCAOPRIMARIA`, `SISVAN`,
+`ARBOVIROSES`, `SISAGUA`, `VACINACAO`…) devolvem **zero arquivos**; as 6 de
+"DadosGov" exigem autenticação. Inclusive `atencao_primaria()`, que parecia
+resolver a pendência do [[esus-aps-sisab-viabilidade]] — não resolve.
+
+**Funciona mas engana** — o mais importante desta revisão:
+
+| # | Achado | Estado |
+|---|---|---|
+| 36 | `quality_score()` dá **nota 100 de 100** a um arquivo do SIH cheio de campos em branco, porque mede nulos e o DATASUS grava vazio como string vazia | v1.8.8 |
+| 37 | `validate_data()` aprova a coluna `IDADE` do SIH pela regra "0 a 120", sem saber que ela depende de `COD_IDADE` para significar alguma coisa | v1.8.8 |
+| 38 | `to_english()` traduz **parte** dos nomes e devolve tabela metade em português, metade em inglês (`IDADE` vira `age`, mas `COD_IDADE` fica — justamente a armadilha) | v1.8.8 |
+| 39 | `disable_progress_bars()` existe, promete o que queríamos e **não tem efeito** (testado na 2.10.3): as barras continuam em stderr | v1.8.8 |
+| 40 | `load_column_metadata()` documenta nomes, mas quase não traz tabelas de código: **0 das 14 dificuldades** que tivemos ao construir os exemplos teriam sido resolvidas por ele | v1.8.8 |
+| 41 | A máquina de desenvolvimento ficou na 2.9 enquanto instalações novas já vinham com a 2.10 — daí o piso `pysus>=2.10` no requirements | v1.8.8 |
+
+**Conclusão da revisão:** as 41 lições que construímos testando continuam sendo
+o ativo. A biblioteca ganhou ferramentas de conveniência, não conhecimento
+sobre o DATASUS.
+
+| # | Aprendizado | Onde entra | Estado |
+|---|-------------|-----------|--------|
 | 35 | **O outro lado do `nest_asyncio`**: dentro de notebook ele é obrigatório, mas num script `.py` comum é desnecessário **e impede o Python de encerrar** — o processo termina o trabalho, imprime tudo e fica parado para sempre. Medido: com `nest_asyncio` o script trava; sem ele, encerra em 3,9 s. Não afeta o aplicativo (o `shutdown()` mata o kernel à força — verificado), mas afeta scripts gerados para rodar sozinhos | lição | pendente |
 
 
