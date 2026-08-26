@@ -85,9 +85,14 @@ material de trabalho — não de demonstração.
 | [`cruzamentos/mortalidade-infantil-e-numeros-pequenos.ipynb`](cruzamentos/mortalidade-infantil-e-numeros-pequenos.ipynb) | Quando a criança morre, e por que taxas municipais anuais quase sempre são ruído | SIM + SINASC |
 | [`cruzamentos/painel-do-municipio.ipynb`](cruzamentos/painel-do-municipio.ipynb) | Como está a saúde da minha cidade, comparada com o estado | Seis bases |
 | [`cruzamentos/frio-e-coracao-replicando-um-estudo.ipynb`](cruzamentos/frio-e-coracao-replicando-um-estudo.ipynb) | Dá para chegar ao resultado de um estudo publicado partindo do zero? | SIH + SIM |
+| [`AtencaoPrimaria/previne-brasil-indicadores-da-aps.ipynb`](AtencaoPrimaria/previne-brasil-indicadores-da-aps.ipynb) | Como estão os municípios do estado nos indicadores da APS — e por que a coleta ingênua perde um terço dos registros | SISAB (API) |
 
 Cada um deles termina com uma seção **"o que vale levar"**: as funções
 reaproveitáveis e as armadilhas que o notebook resolveu no caminho.
+
+> **A atenção primária vem por outro caminho.** O exemplo do Previne Brasil não
+> usa o FTP do DATASUS: os dados do SISAB só existem numa API REST do
+> Ministério da Saúde. Ele é o primeiro de uma frente nova neste repositório.
 
 ---
 
@@ -106,6 +111,7 @@ Drive**.
 
 ### Análises aprofundadas
 
+- [**Atenção Primária** · Previne Brasil: os indicadores da APS, município a município](https://colab.research.google.com/github/cartaproale/PySusNoCode-Exemplos/blob/main/AtencaoPrimaria/previne-brasil-indicadores-da-aps.ipynb)
 - [**CIHA** · CIHA: o que existe além do SUS — e por que usar com cuidado](https://colab.research.google.com/github/cartaproale/PySusNoCode-Exemplos/blob/main/CIHA/o-que-o-ciha-acrescenta-ao-sih.ipynb)
 - [**CNES** · A rede de saúde por habitante: leitos, UTI e médicos](https://colab.research.google.com/github/cartaproale/PySusNoCode-Exemplos/blob/main/CNES/rede-assistencial-e-leitos-por-habitante.ipynb)
 - [**Cruzando bases** · Mortalidade infantil: quando a criança morre, e o que isso denuncia](https://colab.research.google.com/github/cartaproale/PySusNoCode-Exemplos/blob/main/cruzamentos/mortalidade-infantil-e-numeros-pequenos.ipynb)

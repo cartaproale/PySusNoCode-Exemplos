@@ -2,7 +2,7 @@
  "gerado_em": "2026-08-26",
  "repositorio": "cartaproale/PySusNoCode-Exemplos",
  "ramo": "main",
- "total": 28,
+ "total": 29,
  "exemplos": [
   {
    "arquivo": "_comece-aqui/01-primeiros-passos.ipynb",
@@ -168,6 +168,17 @@
    "celulas": 21,
    "graficos": 4,
    "tempo": "5 a 8 minutos"
+  },
+  {
+   "arquivo": "AtencaoPrimaria/previne-brasil-indicadores-da-aps.ipynb",
+   "titulo": "Previne Brasil: os indicadores da atenção primária, município a município",
+   "descricao": "Como estão os municípios do meu estado nos indicadores de desempenho da Atenção Primária — e onde a diferença entre eles é maior?",
+   "grupo": "AtencaoPrimaria",
+   "base": "AtencaoPrimaria",
+   "aprofundado": false,
+   "celulas": 13,
+   "graficos": 2,
+   "tempo": "3 a 6 minutos"
   },
   {
    "arquivo": "CIHA/atendimentos-ciha.ipynb",
