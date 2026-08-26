@@ -119,6 +119,36 @@ baixáveis. O que não funciona são as funções de conveniência da biblioteca
 exemplos e ela **é viável** — mas por fora das funções de conveniência da
 pysus, que estão quebradas justamente aí.
 
+## A regressão do `state=` (26/08/2026) — a mais grave até hoje
+
+Descoberta por acaso, ao cruzar o Previne Brasil com o SINASC: os quatro
+estados devolveram **o mesmo total de nascimentos**. O `state=` não filtra
+nada — e três exemplos **já publicados** passaram a mostrar o Brasil inteiro
+com o rótulo do Paraná.
+
+| # | Aprendizado | Onde entra | Estado |
+|---|-------------|-----------|--------|
+| 61 | **`state=` não filtra o resultado.** Ele diz onde procurar; desde 2026 o catálogo publica um arquivo **nacional** ao lado do arquivo de cada estado, e a PySUS devolve os dois. Medido: SINASC PR/2022 passou de 140.637 para **2.702.559 linhas (19×)**, com o próprio PR contado duas vezes. Atingiu `perfil-dos-nascimentos`, `causas-de-obito` e `mortalidade-infantil` | prompt + lição | pendente |
+| 62 | `drop_duplicates()` **não** conserta: as linhas do arquivo nacional e do estadual não são idênticas, e as 281.274 continuam 281.274 | lição | pendente |
+| 63 | Procurar a sigla da UF no nome do arquivo é armadilha: **`DO23OPEN` contém "PE"**. Quem filtrar por substring mantém o arquivo nacional achando que é de Pernambuco | lição | pendente |
+| 64 | O catálogo sabe distinguir: em `list_files()` o arquivo nacional vem com `state` **vazio** e caminho `.../BR/...`; o do estado vem com a sigla. É por aí que se escolhe | lição | pendente |
+| 65 | Nem todo ano tem arquivo estadual: **SINASC 2023 só tem o nacional**. Nesse caso é preciso filtrar as linhas pelo código do IBGE — e dizer ao usuário que filtrou | lição | pendente |
+| 66 | `sih(state=...)` sem `group` escolhe **tabelas diferentes conforme o estado**: AC → `RJ` (AIH *rejeitada*), SP → `SP` (serviços profissionais), RR → `SP`. Contar "internações" no arquivo errado dá outro número e outro significado | lição | pendente |
+| 67 | `pni(state=..., year=2023)` devolve **0 arquivos**, e `ciha(state="RR")` também. Zero arquivo não é erro: é resultado vazio em silêncio | lição | pendente |
+| 68 | **A validação precisa conferir ordem de grandeza, não só execução.** Os três notebooks quebrados continuaram rodando e imprimindo sem um único erro — só que o número virou outro. Executar sem exceção não é prova de que está certo | ferramenta do repositório | pendente |
+| 69 | `validar_todos.py` executa mas **não regrava as saídas**. Foi por isso que a regressão ficou invisível: o GitHub continuava exibindo os números certos da validação antiga ao lado de um código que já devolvia outra coisa. Criado o `reexecutar.py` para fechar essa brecha | ferramenta do repositório | feito |
+
+## O que a 2.10.4 (lançada em 26/08/2026) muda — testado em ambiente limpo
+
+| # | Aprendizado | Onde entra | Estado |
+|---|-------------|-----------|--------|
+| 70 | **`pip install pysus==2.10.4` num ambiente limpo não importa**: `ModuleNotFoundError: No module named 'yaml'`. O PyYAML continua sem ser declarado, o mesmo defeito que pegamos ao montar o instalador offline da 1.8.3. Nosso `requirements.txt` já contorna com `pyyaml>=6.0` | requirements | v1.8.3 |
+| 71 | A 2.10.4 **não corrige** a regressão do `state=`: `sinasc("PR", 2022)` continua devolvendo `SINASC_2022` + `DNPR2022`, e `atencao_primaria()` continua vazia (a chave `ATENCAO_PRIMARIA` segue ausente do mapa) | lição | pendente |
+| 72 | Na 2.10.4 `sisvan()` passou a devolver **2 arquivos** — mas ainda do grupo `saude-indigena`. Piorou: antes vinha vazio, agora vem dado errado com cara de certo | lição | pendente |
+| 73 | **O espelho do SIH é muito incompleto.** Para PR/2024 o catálogo tem 12 arquivos: **RD só em agosto**, `RJ` em dezembro e `SP` nos outros dez meses. Nosso exemplo de internações só está certo porque calhou de pegar agosto. Trocar o mês devolve outra tabela, com outro significado | lição + prompt | pendente |
+| 74 | Não dá para escolher a tabela: `sih(..., group="RD")` devolve **lista vazia**, e a coluna `group` do `list_files()` vem `None` mesmo para `RDPR2408`. O jeito é ler o prefixo do nome do arquivo | lição | pendente |
+| 75 | Cinco versões em três dias (2.10.0 a 2.10.4). Para trabalho reprodutível o piso `pysus>=2.10` é arriscado: o certo é **fixar a versão** | requirements | pendente |
+
 | # | Aprendizado | Onde entra | Estado |
 |---|-------------|-----------|--------|
 | 35 | **O outro lado do `nest_asyncio`**: dentro de notebook ele é obrigatório, mas num script `.py` comum é desnecessário **e impede o Python de encerrar** — o processo termina o trabalho, imprime tudo e fica parado para sempre. Medido: com `nest_asyncio` o script trava; sem ele, encerra em 3,9 s. Não afeta o aplicativo (o `shutdown()` mata o kernel à força — verificado), mas afeta scripts gerados para rodar sozinhos | lição | pendente |
