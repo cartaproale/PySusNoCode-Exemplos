@@ -2,7 +2,7 @@
  "gerado_em": "2026-08-26",
  "repositorio": "cartaproale/PySusNoCode-Exemplos",
  "ramo": "main",
- "total": 29,
+ "total": 30,
  "exemplos": [
   {
    "arquivo": "_comece-aqui/01-primeiros-passos.ipynb",
@@ -168,6 +168,17 @@
    "celulas": 21,
    "graficos": 4,
    "tempo": "5 a 8 minutos"
+  },
+  {
+   "arquivo": "AtencaoPrimaria/painel-da-aps-programas-do-municipio.ipynb",
+   "titulo": "Painel da Atenção Primária: seis programas, um município",
+   "descricao": "Como o meu município está nos programas da atenção primária — equipes multiprofissionais, saúde bucal, Academia da Saúde, Farmácia Popular, telessaúde e especialidades odontológicas — comparado com a sua região de saúde, o estado e o Brasil?",
+   "grupo": "AtencaoPrimaria",
+   "base": "AtencaoPrimaria",
+   "aprofundado": false,
+   "celulas": 13,
+   "graficos": 1,
+   "tempo": "4 a 8 minutos"
   },
   {
    "arquivo": "AtencaoPrimaria/previne-brasil-indicadores-da-aps.ipynb",

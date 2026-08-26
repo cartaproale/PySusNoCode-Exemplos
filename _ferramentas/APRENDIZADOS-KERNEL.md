@@ -149,6 +149,21 @@ com o rótulo do Paraná.
 | 74 | Não dá para escolher a tabela: `sih(..., group="RD")` devolve **lista vazia**, e a coluna `group` do `list_files()` vem `None` mesmo para `RDPR2408`. O jeito é ler o prefixo do nome do arquivo | lição | pendente |
 | 75 | Cinco versões em três dias (2.10.0 a 2.10.4). Para trabalho reprodutível o piso `pysus>=2.10` é arriscado: o certo é **fixar a versão** | requirements | pendente |
 
+## Construindo o exemplo do Previne Brasil (26/08/2026)
+
+| # | Aprendizado | Onde entra | Estado |
+|---|-------------|-----------|--------|
+| 76 | **A paginação por `offset` da API DEMAS é instável.** Ela pagina por deslocamento de linha sobre um resultado sem ordenação garantida: entre uma página e a próxima as linhas se movem. Três coletas seguidas do PR devolveram 21.546 linhas cada, mas **14.071, 16.137 e 12.829 registros distintos** — união de 20.800. Cada passada perde de 22% a 38% e preenche o buraco repetindo outras linhas. **O total sempre bate; o conteúdo, nunca** | prompt + lição | pendente |
+| 77 | A saída é **não paginar**: particionar o pedido até caber numa resposta só. Por `codigo_municipio`, cada pedido traz ~54 linhas, e o estado inteiro sai estável em 14 s com 8 pedidos em paralelo — 21.546 registros únicos, idênticos entre execuções | lição | pendente |
+| 78 | Correção de um erro meu: a "cobertura irregular" que eu tinha anotado (município que não reportaria certos indicadores) **era artefato da paginação**. A base é completa e retangular: 399 municípios × 3 competências × 6 indicadores × 3 visões | — | corrigido |
+| 79 | No Previne Brasil, **`percentual` não é o resultado do indicador**: é cobertura de cadastro (identificados ÷ estimados do IBGE), por isso passa de 100 em metade das linhas. O resultado é `percentual_quadrimestre` (numerador ÷ denominador utilizado). Ambas conferidas em 100% das linhas | lição | pendente |
+| 80 | Quando um código não tem tabela em lugar nenhum, dá para identificá-lo **pela evidência**: os três indicadores de gestante compartilham denominador idêntico em 100% dos municípios, o que os isola sem precisar adivinhar. É a lição 15 aplicada de forma construtiva | prompt + lição | pendente |
+| 81 | Nos indicadores MGDI, **zero não quer dizer ausência do serviço**: cada arquivo mede uma modalidade. Dos 502 municípios com zero equipes de Saúde Bucal 40h, **147 (29%) têm equipe na modalidade de carga horária diferenciada**, contada em outro arquivo | prompt + lição | pendente |
+| 82 | **Nem todo indicador é somável.** Equipes, polos e centros pertencem a um município só e a soma bate com o total nacional. Já "pessoas atendidas pela Farmácia Popular" **não fecha** (12.008.228 somando municípios contra 11.942.618 declarados): a mesma pessoa pode ser atendida em mais de um município. Antes de somar, olhe a unidade de medida | prompt + lição | pendente |
+| 83 | Os indicadores MGDI têm **calendários diferentes** entre si: dos seis usados no painel, só existe **uma competência em comum**. Pegar "o mais recente de cada um" compara retratos de meses diferentes | lição | pendente |
+| 84 | O código do município tem **7 dígitos no IBGE** e **6 no MGDI**. E o arquivo de população envelhece: Boa Esperança do Norte (MT) existe no indicador e não existe no denominador | lição | pendente |
+| 85 | As barras de progresso da PySUS saem pelos **dois** canais — o FTP manda por stderr, o download do IBGE por stdout. O filtro do repositório só limpava stderr | ferramenta do repositório | feito |
+
 | # | Aprendizado | Onde entra | Estado |
 |---|-------------|-----------|--------|
 | 35 | **O outro lado do `nest_asyncio`**: dentro de notebook ele é obrigatório, mas num script `.py` comum é desnecessário **e impede o Python de encerrar** — o processo termina o trabalho, imprime tudo e fica parado para sempre. Medido: com `nest_asyncio` o script trava; sem ele, encerra em 3,9 s. Não afeta o aplicativo (o `shutdown()` mata o kernel à força — verificado), mas afeta scripts gerados para rodar sozinhos | lição | pendente |

@@ -23,16 +23,18 @@ RAIZ = Path(__file__).resolve().parents[1]
 
 # As barras de progresso do PySUS são escritas em stderr com retorno de carro.
 # Ao vivo elas ajudam; salvas no notebook viram uma parede de lixo ilegível.
-RUIDO = ("file/s]", "it/s]", "?file/s", "?it/s")
+RUIDO = ("file/s]", "it/s]", "?file/s", "?it/s", "B/s]", "[A")
 
 
 def limpar_saidas(saidas: list[dict]) -> list[dict]:
     """Remove barras de progresso, preservando avisos de verdade."""
     limpas = []
     for saida in saidas:
-        if saida.get("output_type") != "stream" or saida.get("name") != "stderr":
+        if saida.get("output_type") != "stream":
             limpas.append(saida)
             continue
+        # a PySUS manda barra de progresso pelos dois canais: as do FTP vão
+        # para stderr, as do download do IBGE aparecem em stdout.
         texto = "".join(saida.get("text", ""))
         # guarda só as linhas que não são quadro de barra de progresso
         sobra = "\n".join(
