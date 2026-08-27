@@ -81,6 +81,7 @@ material de trabalho — não de demonstração.
 | [`SINAN/arboviroses-dengue-chikungunya-zika.ipynb`](SINAN/arboviroses-dengue-chikungunya-zika.ipynb) | Como as três arboviroses diferem em sazonalidade, idade e gravidade | SINAN |
 | [`PNI/cobertura-vacinal-e-anos-incompletos.ipynb`](PNI/cobertura-vacinal-e-anos-incompletos.ipynb) | Quanto da queda de cobertura vacinal é real e quanto é arquivo incompleto | PNI |
 | [`SIA/alta-complexidade-oncologia-e-dialise.ipynb`](SIA/alta-complexidade-oncologia-e-dialise.ipynb) | Para onde vai o dinheiro do ambulatório, e quanto se anda para se tratar | SIA |
+| [`SIA/dialise-o-caminho-do-paciente-renal.ipynb`](SIA/dialise-o-caminho-do-paciente-renal.ipynb) | Quem faz diálise, quanto se desloca e o que acontece ao longo de um ano — o único exemplo com dado clínico individual | SIA + CNES |
 | [`CIHA/o-que-o-ciha-acrescenta-ao-sih.ipynb`](CIHA/o-que-o-ciha-acrescenta-ao-sih.ipynb) | O que existe além do SUS — e por que essa base exige cautela | CIHA + SIH |
 | [`cruzamentos/mortalidade-infantil-e-numeros-pequenos.ipynb`](cruzamentos/mortalidade-infantil-e-numeros-pequenos.ipynb) | Quando a criança morre, e por que taxas municipais anuais quase sempre são ruído | SIM + SINASC |
 | [`cruzamentos/painel-do-municipio.ipynb`](cruzamentos/painel-do-municipio.ipynb) | Como está a saúde da minha cidade, comparada com o estado | Seis bases |
@@ -124,6 +125,7 @@ Drive**.
 - [**IBGE** · População: denominadores confiáveis, pirâmides etárias e padronização por idade](https://colab.research.google.com/github/cartaproale/PySusNoCode-Exemplos/blob/main/IBGE/populacao-denominadores-e-piramides.ipynb)
 - [**PNI** · Cobertura vacinal: e como um ano incompleto vira uma falsa catástrofe](https://colab.research.google.com/github/cartaproale/PySusNoCode-Exemplos/blob/main/PNI/cobertura-vacinal-e-anos-incompletos.ipynb)
 - [**SIA** · Para onde vai o dinheiro do ambulatório: oncologia, diálise e o resto](https://colab.research.google.com/github/cartaproale/PySusNoCode-Exemplos/blob/main/SIA/alta-complexidade-oncologia-e-dialise.ipynb)
+- [**SIA** · Diálise: o caminho do paciente renal](https://colab.research.google.com/github/cartaproale/PySusNoCode-Exemplos/blob/main/SIA/dialise-o-caminho-do-paciente-renal.ipynb)
 - [**SIH** · Internações que a atenção primária poderia ter evitado](https://colab.research.google.com/github/cartaproale/PySusNoCode-Exemplos/blob/main/SIH/internacoes-sensiveis-a-atencao-primaria.ipynb)
 - [**SIM** · Mortalidade prematura por doenças crônicas — o indicador 3.4 da ONU](https://colab.research.google.com/github/cartaproale/PySusNoCode-Exemplos/blob/main/SIM/mortalidade-prematura-por-dcnt.ipynb)
 - [**SINAN** · Três arboviroses, um mosquito: dengue, chikungunya e zika](https://colab.research.google.com/github/cartaproale/PySusNoCode-Exemplos/blob/main/SINAN/arboviroses-dengue-chikungunya-zika.ipynb)

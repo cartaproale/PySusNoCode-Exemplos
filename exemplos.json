@@ -1,8 +1,8 @@
 {
- "gerado_em": "2026-08-26",
+ "gerado_em": "2026-08-27",
  "repositorio": "cartaproale/PySusNoCode-Exemplos",
  "ramo": "main",
- "total": 31,
+ "total": 32,
  "exemplos": [
   {
    "arquivo": "_comece-aqui/01-primeiros-passos.ipynb",
@@ -278,6 +278,17 @@
    "celulas": 6,
    "graficos": 0,
    "tempo": "5 a 8 minutos"
+  },
+  {
+   "arquivo": "SIA/dialise-o-caminho-do-paciente-renal.ipynb",
+   "titulo": "Diálise no SUS: o caminho do paciente renal",
+   "descricao": "Quem faz diálise no meu estado, quanto essas pessoas se deslocam para se tratar, quem oferece o serviço e o que acontece com elas ao longo de um ano?",
+   "grupo": "SIA",
+   "base": "SIA",
+   "aprofundado": false,
+   "celulas": 13,
+   "graficos": 1,
+   "tempo": "6 a 12 minutos"
   },
   {
    "arquivo": "SIA/producao-ambulatorial.ipynb",

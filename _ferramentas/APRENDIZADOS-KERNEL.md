@@ -184,7 +184,24 @@ duas versões nome a nome, assinatura a assinatura.
 | 96 | **Achado aproveitável: o grupo `AT` (arquivos `ATD`) é a APAC de diálise, com dado individual e exames.** No PR, jan/2024: 6.813 APACs, 6.669 pacientes distintos, 42 estabelecimentos, 413 municípios de residência, R$ 20,9 milhões no mês, série mensal completa de 2015 a 2024. Traz identificador do paciente (`AP_CNSPCN`), acesso vascular, situação quanto a transplante, sorologias e exames laboratoriais (`ATD_HB`, `ATD_ALBUMI`, `ATD_FOSFOR`, `ATD_PTH`, `ATD_KTVSEM`) | exemplo novo | proposto |
 | 97 | Nos campos do `ATD`, os **categóricos vêm 100% preenchidos** (acesso vascular, transplante, HIV, HCV) mas os **laboratoriais variam muito por estado**: no PR de 42% a 71%, no AC de 12% a 13%. Não dá para tirar conclusão nacional desses exames sem antes medir o preenchimento em cada UF | lição | pendente |
 | 98 | No `ATD`, `AP_CIDPRI` (diagnóstico principal) vem **vazio em 100% das linhas** nos dois estados testados. Um campo existir na tabela não significa que ele tenha conteúdo | lição | pendente |
-| 99 | Ainda no `ATD`: **45% dos pacientes do PR se tratam fora do município onde moram** (26% no AC). Como a diálise é três vezes por semana, isso é deslocamento recorrente — uma pergunta de acesso que a base responde sozinha, cruzando `AP_MUNPCN` com `AP_UFMUN` | exemplo novo | proposto |
+| 99 | Ainda no `ATD`: **45% dos pacientes do PR se tratam fora do município onde moram** (26% no AC). Como a diálise é três vezes por semana, isso é deslocamento recorrente — uma pergunta de acesso que a base responde sozinha, cruzando `AP_MUNPCN` com `AP_UFMUN` | exemplo | v1.8.10+ |
+
+## O SIA tem catorze tipos de arquivo (27/08/2026)
+
+O Alexandre trouxe a documentação técnica com os significados **oficiais** dos
+prefixos do SIA, e eles batem exatamente com o que o dado já tinha mostrado:
+`AB`/`ABO` é acompanhamento de cirurgia bariátrica (daí a coluna `AB_PROCAIH`
+apontar para cirurgia do aparelho digestivo), `ATD` é tratamento dialítico e
+`ACF` é confecção de fístula arteriovenosa — o acesso vascular da diálise.
+
+| # | Aprendizado | Onde entra | Estado |
+|---|-------------|-----------|--------|
+| 100 | Os prefixos reais do SIA e o que cada um é: `PA` produção ambulatorial, `BI` boletim individualizado, `AB`/`ABO` acompanhamento de cirurgia bariátrica e pós-bariátrica, `ACF` confecção de fístula arteriovenosa, `AD` laudos diversos, `AM` medicamentos, `AMP` acompanhamento multiprofissional, `AN` nefrologia, `AQ` quimioterapia, `AR` radioterapia, `ATD` tratamento dialítico, `PS` psicossocial, `SAD` atenção domiciliar | prompt + lição | pendente |
+| 101 | **Não filtre o SIA pelo `group` da PySUS: ela junta prefixos diferentes sob o mesmo nome.** Medido no PR, jan/2024: `group="AM"` devolve `AMPR2401` (311.217 linhas, 51 colunas, 100% medicamentos) **e** `AMPPR2401` (143 linhas, 65 colunas, 100% consultas) — duas bases distintas concatenadas, e nada no DataFrame diz de qual arquivo veio cada linha. `group="AB"` em SP/2015 junta bariátrica com pós-bariátrica. Selecione pelo **prefixo do nome do arquivo** | prompt + lição | pendente |
+| 102 | Correção do que anotei na lição 92: a 2.10.4 **mudou sim** o interpretador de nomes (mapa `ABO→AB`, `AMP→AM`, `ACF→AC`, `ATD→AT`, `SAD→SA`, e sufixo alfabético na regex). O que medi é que isso **não muda o resultado das nossas consultas**, porque o catálogo que consultamos é o DuckLake do servidor, que ainda não foi ressincronizado com o interpretador novo: `group="AT"` devolve o mesmo arquivo nas duas versões e `list_files()` mostra `group=None` nas duas | — | corrigido |
+| 103 | A normalização da 2.10.4 é **destrutiva por natureza**: ao converter `ATD` em `AT` e `AMP` em `AM`, ela apaga do campo `group` a distinção entre tratamento dialítico e acompanhamento multiprofissional. Para pesquisa, guarde sempre o nome original do arquivo | prompt + lição | pendente |
+| 104 | O `AP_MOTSAI` do SIA tem **dois** códigos de óbito, não um: no ano inteiro do PR, `41` (886 APACs) e `43` (136), ambos com 100% de `AP_OBITO=1`. Um mês só mostraria apenas o `41` — outra razão para não generalizar a partir de um recorte pequeno | lição | pendente |
+| 105 | O preenchimento dos exames do `ATD` varia por estado **e por mês**: o Kt/V do PR está em 42% em janeiro de 2024 e em 83% no ano inteiro. Medir num mês e concluir para o ano subestima muito | lição | pendente |
 
 | # | Aprendizado | Onde entra | Estado |
 |---|-------------|-----------|--------|
