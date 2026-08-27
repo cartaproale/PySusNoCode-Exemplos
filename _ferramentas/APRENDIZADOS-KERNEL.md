@@ -233,6 +233,21 @@ binário. **Baixei e rodei o SQL**: `catalog_sia.duckdb`, 83 MB, em
 | 113 | As janelas reais no catálogo: `PA` 1994–2026, `AB` 2008–2025, `AN` 2008–2014 (encerrado), `AMP` 2008–2026, `ABO`/`ACF`/`ATD` 2014–2026, `PS` 2012–2026, `SAD` 2012–**2016** (o inventário de FTP dizia até 2018) | lição | pendente |
 | 114 | O exemplo antigo do SIA estimava o número de pessoas em diálise pelos registros do `PA` e dizia que nenhuma outra base entregava isso diretamente. **Ficou desatualizado**: o `ATD` entrega. Medido no PR, jun/2024: a estimativa dá 7.514 registros contra **6.658 pacientes distintos** — 13% acima. O notebook foi atualizado para conferir a estimativa contra a contagem, em vez de afirmar que ela é a única disponível | exemplo | feito |
 
+## Rede bloqueada: o endereço que ninguém espera (27/08/2026)
+
+O Alexandre levou o aplicativo para o computador de uma prefeitura e o
+diagnóstico dele fechou uma lacuna que estava aberta desde sempre: nós
+documentávamos o `pypi.org` e o DATASUS, e faltava o principal.
+
+| # | Aprendizado | Onde entra | Estado |
+|---|-------------|-----------|--------|
+| 115 | **A PySUS não baixa direto do DATASUS.** Antes de qualquer arquivo ela consulta um catálogo em `nbg1.your-objectstorage.com` (constante `S3_ENDPOINT`, bucket `pysus`, caminho `public/catalog_<base>.duckdb`). São **11 catálogos**, de 1 MB a **128 MB** (o do CNES). Liberar só os endereços do DATASUS num firewall **não faz a biblioteca funcionar** — e esse é o endereço que os filtros mais bloqueiam, por cair na categoria "cloud storage" | prompt + lição | v1.8.12 |
+| 116 | **O sintoma engana.** O erro chega como `ConnectTimeout`, que soa como internet lenta, e o usuário tenta de novo. Em rede controlada o equipamento simplesmente não responde ao destino bloqueado. O sinal que distingue: a conexão TCP na porta 443 **é estabelecida** e a negociação TLS é que expira — bloqueio seletivo de destino, não porta fechada | prompt + lição | v1.8.12 |
+| 117 | Até a 1.8.11 esse erro **não era reconhecido como erro de ambiente**: o aplicativo o entregava à IA como se fosse erro de código, e ela gastava as tentativas de correção reescrevendo uma célula correta. Corrigido | kernel | v1.8.12 |
+| 118 | O pedido à TI precisa de três pontos que quase nunca são pedidos: regra por **FQDN e não por IP** (é nuvem, os IPs mudam); verificar a **inspeção de TLS**; e o proxy **preservar HTTP Range e respostas 206** — o catálogo é lido em pedaços, e sem isso uma consulta simples passa a baixar até 128 MB. Testado: o servidor responde `206 Partial Content` com `Content-Range` | prompt + lição | v1.8.12 |
+| 119 | **Conectar no Wi-Fi do celular não basta** para contornar a rede bloqueada: com o cabo ligado o Windows continua roteando pela Ethernet, porque escolhe pela métrica das interfaces. É preciso desconectar o cabo ou desativar o adaptador. E não se deve alterar métricas, rotas ou adaptadores por conta própria em computador institucional | prompt + lição | v1.8.12 |
+| 120 | O reconhecimento da trava do catálogo dependia da **acentuação exata** da mensagem do Windows ("já está sendo usado"), que muda conforme a página de código do console. Descoberto por um erro de digitação num teste — vale como lembrete de que casar mensagem de sistema por texto exato é frágil | kernel | v1.8.12 |
+
 | # | Aprendizado | Onde entra | Estado |
 |---|-------------|-----------|--------|
 | 35 | **O outro lado do `nest_asyncio`**: dentro de notebook ele é obrigatório, mas num script `.py` comum é desnecessário **e impede o Python de encerrar** — o processo termina o trabalho, imprime tudo e fica parado para sempre. Medido: com `nest_asyncio` o script trava; sem ele, encerra em 3,9 s. Não afeta o aplicativo (o `shutdown()` mata o kernel à força — verificado), mas afeta scripts gerados para rodar sozinhos | lição | pendente |
