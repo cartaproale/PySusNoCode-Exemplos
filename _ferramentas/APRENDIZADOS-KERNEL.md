@@ -170,6 +170,22 @@ com o rótulo do Paraná.
 | 90 | **83 municípios não têm nenhuma UBS cadastrada, e 67 deles (81%) têm equipe de saúde bucal custeada.** Ausência no arquivo não é ausência de rede — o maior deles, Araruama (RJ), tem 137 mil habitantes | prompt + lição | pendente |
 | 91 | Quando a mesma base tem API paginada e arquivo publicado, **prefira o arquivo**: vem inteiro, de uma vez, igual para todos. A regra vale para UBS e para tudo que o portal publica em `.csv.zip` | prompt + lição | pendente |
 
+## Varredura sistemática da 2.10.4 (27/08/2026)
+
+A 2.10.4 é a última publicada e nada entrou no `main` depois dela. Comparei as
+duas versões nome a nome, assinatura a assinatura.
+
+| # | Aprendizado | Onde entra | Estado |
+|---|-------------|-----------|--------|
+| 92 | **A 2.10.4 não muda nada de observável para nós.** Superfície pública idêntica à 2.10.3: 99 nomes, 95 módulos, zero assinaturas alteradas, `_SAUDE_GROUP_MAP` inalterado. A única mudança de código são +866 caracteres no arquivo de bancos do FTP. Não há razão para mover o pino `pysus==2.10.3` | requirements | verificado |
+| 93 | O que a 2.10.4 acrescentou foram cinco **rótulos** de grupo do SIA (`AB`, `AC`, `AT`, `PS`, `SA`) — mas os arquivos **já eram alcançáveis na 2.10.3**: `sia(state="PR", year=2024, month=1, group="AT")` devolve o mesmo `ATDPR2401.parquet` nas duas versões, e a coluna `group` do `list_files()` continua `None` nas duas | lição | pendente |
+| 94 | **Os rótulos novos do SIA não descrevem o conteúdo.** Testado pelo procedimento principal (`AP_PRIPAL`), com o grupo `AM` como controle (100% medicamentos especializados, como o rótulo promete): `AT` ("Atenção") é **100% subgrupo 0305, nefrologia/diálise**; `AC` ("Alta Complexidade") é um único procedimento cirúrgico (0418010030); `AB` ("Atenção Básica") é 100% subgrupo 0301 **com a coluna `AB_PROCAIH` preenchida em todas as linhas**, apontando para uma cirurgia do aparelho digestivo | prompt + lição | pendente |
+| 95 | **`group="AB"` não é atenção básica.** No Paraná, janeiro de 2024: `AB` tem **615 linhas** e a produção ambulatorial de verdade (`PA`) tem **3.246.596** — 0,02%. Quem procurar atenção primária no SIA pelo rótulo vai concluir que ela é minúscula. A produção da atenção primária está em `PA` e `BI` | prompt + lição | pendente |
+| 96 | **Achado aproveitável: o grupo `AT` (arquivos `ATD`) é a APAC de diálise, com dado individual e exames.** No PR, jan/2024: 6.813 APACs, 6.669 pacientes distintos, 42 estabelecimentos, 413 municípios de residência, R$ 20,9 milhões no mês, série mensal completa de 2015 a 2024. Traz identificador do paciente (`AP_CNSPCN`), acesso vascular, situação quanto a transplante, sorologias e exames laboratoriais (`ATD_HB`, `ATD_ALBUMI`, `ATD_FOSFOR`, `ATD_PTH`, `ATD_KTVSEM`) | exemplo novo | proposto |
+| 97 | Nos campos do `ATD`, os **categóricos vêm 100% preenchidos** (acesso vascular, transplante, HIV, HCV) mas os **laboratoriais variam muito por estado**: no PR de 42% a 71%, no AC de 12% a 13%. Não dá para tirar conclusão nacional desses exames sem antes medir o preenchimento em cada UF | lição | pendente |
+| 98 | No `ATD`, `AP_CIDPRI` (diagnóstico principal) vem **vazio em 100% das linhas** nos dois estados testados. Um campo existir na tabela não significa que ele tenha conteúdo | lição | pendente |
+| 99 | Ainda no `ATD`: **45% dos pacientes do PR se tratam fora do município onde moram** (26% no AC). Como a diálise é três vezes por semana, isso é deslocamento recorrente — uma pergunta de acesso que a base responde sozinha, cruzando `AP_MUNPCN` com `AP_UFMUN` | exemplo novo | proposto |
+
 | # | Aprendizado | Onde entra | Estado |
 |---|-------------|-----------|--------|
 | 35 | **O outro lado do `nest_asyncio`**: dentro de notebook ele é obrigatório, mas num script `.py` comum é desnecessário **e impede o Python de encerrar** — o processo termina o trabalho, imprime tudo e fica parado para sempre. Medido: com `nest_asyncio` o script trava; sem ele, encerra em 3,9 s. Não afeta o aplicativo (o `shutdown()` mata o kernel à força — verificado), mas afeta scripts gerados para rodar sozinhos | lição | pendente |
