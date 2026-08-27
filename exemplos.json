@@ -121,7 +121,7 @@
    "grupo": "SIA",
    "base": "SIA",
    "aprofundado": true,
-   "celulas": 14,
+   "celulas": 15,
    "graficos": 3,
    "tempo": "5 a 10 minutos — o arquivo mensal passa de três milhões de linhas"
   },
@@ -286,7 +286,7 @@
    "grupo": "SIA",
    "base": "SIA",
    "aprofundado": false,
-   "celulas": 13,
+   "celulas": 14,
    "graficos": 1,
    "tempo": "6 a 12 minutos"
   },

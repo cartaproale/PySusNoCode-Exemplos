@@ -5,13 +5,13 @@ Gerado automaticamente por `_ferramentas/validar_todos.py`. Cada notebook
 
 **Última validação:** 27/08/2026  
 **Resultado:** 3 de 3 notebooks funcionando  
-**Versão da PySUS usada no teste:** 2.10.3
+**Versão da PySUS usada no teste:** 2.10.4
 
 | Notebook | Células | Gráficos | Tempo | Situação |
 |---|---:|---:|---:|---|
-| `SIA/alta-complexidade-oncologia-e-dialise.ipynb` | 14 | 3 | 10s | ✅ funcionando |
-| `SIA/dialise-o-caminho-do-paciente-renal.ipynb` | 13 | 1 | 77s | ✅ funcionando |
-| `SIA/producao-ambulatorial.ipynb` | 9 | 1 | 12s | ✅ funcionando |
+| `SIA/alta-complexidade-oncologia-e-dialise.ipynb` | 15 | 3 | 17s | ✅ funcionando |
+| `SIA/dialise-o-caminho-do-paciente-renal.ipynb` | 14 | 1 | 89s | ✅ funcionando |
+| `SIA/producao-ambulatorial.ipynb` | 9 | 1 | 14s | ✅ funcionando |
 
 > Um notebook só é listado como funcionando depois de executar
 > todas as suas células sem erro, com dados reais.

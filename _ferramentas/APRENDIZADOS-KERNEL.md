@@ -203,6 +203,36 @@ apontar para cirurgia do aparelho digestivo), `ATD` é tratamento dialítico e
 | 104 | O `AP_MOTSAI` do SIA tem **dois** códigos de óbito, não um: no ano inteiro do PR, `41` (886 APACs) e `43` (136), ambos com 100% de `AP_OBITO=1`. Um mês só mostraria apenas o `41` — outra razão para não generalizar a partir de um recorte pequeno | lição | pendente |
 | 105 | O preenchimento dos exames do `ATD` varia por estado **e por mês**: o Kt/V do PR está em 42% em janeiro de 2024 e em 83% no ano inteiro. Medir num mês e concluir para o ano subestima muito | lição | pendente |
 
+## A adoção da 2.10.4, e o que ela obriga a saber (27/08/2026)
+
+O Alexandre trouxe a documentação do Ministério e do `microdatasus`, que
+**corrige os rótulos da própria biblioteca**. Adotamos a 2.10.4 porque ela
+reconhece arquivos que a 2.10.3 deixava sem grupo — mas os nomes que ela dá a
+esses grupos não são a nomenclatura do DATASUS.
+
+| # | Aprendizado | Onde entra | Estado |
+|---|-------------|-----------|--------|
+| 106 | **Os rótulos da PySUS para os grupos do SIA contradizem o DATASUS.** `AB` não é "Atenção Básica", é acompanhamento à cirurgia bariátrica; `AT` não é "Atenção", é tratamento dialítico; `AC` não é "Alta Complexidade", é confecção de fístula arteriovenosa; `PS` não é "Procedimentos Especiais", é psicossocial; `SA` não é "Saúde", é atenção domiciliar. Nunca use o `long_name` desses grupos como definição num trabalho | prompt + lição | pendente |
+| 107 | **A mistura já chega ao usuário, não é risco teórico.** `sia(state="PR", year=2024, month=1, group="AM")` devolve hoje `AMPR2401` (medicamentos) **e** `AMPPR2401` (acompanhamento multiprofissional) — o S3 já entrega os dois juntos | prompt + lição | pendente |
+| 108 | **Pior: a composição do grupo muda ao longo do tempo.** `group="AB"` no PR devolve `ABPR1001` em 2010, **`ABPR1601` + `ABOPR1601` em 2016** e só `ABOPR2401` em 2024. Uma série histórica montada pelo `group` troca de base no meio sem avisar. Some sempre pelo prefixo do nome do arquivo | prompt + lição | pendente |
+| 109 | Cada família de arquivo do SIA tem a sua janela, conferida contra o catálogo: `PA` desde 1994; `AD`, `AM`, `AQ`, `AR` desde 2008; `AN` **termina** em out/2014; `ABO`, `ACF` e `ATD` **começam** em ago/2014; `AB` termina em abr/2017; `PS` desde nov/2012; `SAD` de abr/2012 a out/2018. Fora da janela, a consulta devolve lista vazia sem erro | prompt + lição | pendente |
+| 110 | A 2.10.4 também endureceu o **sincronizador** (timeout de 600 s para download e para conversão, teto de 500 MB por arquivo bruto). Isso vale para o motor administrativo do catálogo, **não** para `pysus.download()` do usuário, cujo `timeout` continua `None` por padrão | lição | pendente |
+
+## Auditoria do catálogo público do SIA (27/08/2026)
+
+O Alexandre levantou a hipótese, a partir do código, de que arquivos antigos
+tivessem ficado com `group_id` nulo — o que truncaria séries históricas ao
+filtrar por `group`. O passo que faltou na pesquisa dele era abrir o catálogo
+binário. **Baixei e rodei o SQL**: `catalog_sia.duckdb`, 83 MB, em
+`nbg1.your-objectstorage.com/pysus/public/`.
+
+| # | Aprendizado | Onde entra | Estado |
+|---|-------------|-----------|--------|
+| 111 | **A hipótese do `group_id` nulo NÃO se confirma**: o catálogo do SIA tem **50.069 arquivos e ZERO sem grupo**, em todos os anos de 1994 a 2026. O reprocessamento foi feito; nenhuma série é truncada por falta de grupo | — | verificado |
+| 112 | **Mas a mistura é maior do que dava para ver pelo FTP.** No catálogo inteiro: o grupo `AM` reúne 4.826 arquivos `AM` (medicamentos) **e 1.985 `AMP`** (acompanhamento multiprofissional) — **29% do grupo não é medicamento**. O grupo `AB` reúne 635 `AB` (bariátrica) e **1.592 `ABO`** (pós-bariátrica) — **71% do grupo é ABO**. Também `ACF`→`AC` (3.741), `ATD`→`AT` (3.857) e `SAD`→`SA` (151) | prompt + lição | pendente |
+| 113 | As janelas reais no catálogo: `PA` 1994–2026, `AB` 2008–2025, `AN` 2008–2014 (encerrado), `AMP` 2008–2026, `ABO`/`ACF`/`ATD` 2014–2026, `PS` 2012–2026, `SAD` 2012–**2016** (o inventário de FTP dizia até 2018) | lição | pendente |
+| 114 | O exemplo antigo do SIA estimava o número de pessoas em diálise pelos registros do `PA` e dizia que nenhuma outra base entregava isso diretamente. **Ficou desatualizado**: o `ATD` entrega. Medido no PR, jun/2024: a estimativa dá 7.514 registros contra **6.658 pacientes distintos** — 13% acima. O notebook foi atualizado para conferir a estimativa contra a contagem, em vez de afirmar que ela é a única disponível | exemplo | feito |
+
 | # | Aprendizado | Onde entra | Estado |
 |---|-------------|-----------|--------|
 | 35 | **O outro lado do `nest_asyncio`**: dentro de notebook ele é obrigatório, mas num script `.py` comum é desnecessário **e impede o Python de encerrar** — o processo termina o trabalho, imprime tudo e fica parado para sempre. Medido: com `nest_asyncio` o script trava; sem ele, encerra em 3,9 s. Não afeta o aplicativo (o `shutdown()` mata o kernel à força — verificado), mas afeta scripts gerados para rodar sozinhos | lição | pendente |
