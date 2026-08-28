@@ -1,8 +1,8 @@
 {
- "gerado_em": "2026-08-27",
+ "gerado_em": "2026-08-28",
  "repositorio": "cartaproale/PySusNoCode-Exemplos",
  "ramo": "main",
- "total": 32,
+ "total": 33,
  "exemplos": [
   {
    "arquivo": "_comece-aqui/01-primeiros-passos.ipynb",
@@ -168,6 +168,17 @@
    "celulas": 21,
    "graficos": 4,
    "tempo": "5 a 8 minutos"
+  },
+  {
+   "arquivo": "AtencaoPrimaria/producao-da-ubs-no-sisab-equipe-por-equipe.ipynb",
+   "titulo": "A produção da sua UBS no SISAB, equipe por equipe",
+   "descricao": "A minha unidade básica está enviando registros de atendimento? Quais equipes estão enviando, quanto foi aprovado e como isso se compara ao município?",
+   "grupo": "AtencaoPrimaria",
+   "base": "AtencaoPrimaria",
+   "aprofundado": false,
+   "celulas": 10,
+   "graficos": 1,
+   "tempo": "4 a 9 minutos"
   },
   {
    "arquivo": "AtencaoPrimaria/painel-da-aps-programas-do-municipio.ipynb",
