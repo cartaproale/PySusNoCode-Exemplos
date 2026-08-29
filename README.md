@@ -38,6 +38,7 @@ Todas as nove bases da biblioteca estão cobertas:
 |---|---|---|
 | [`SINAN/dengue-por-estado-e-mes.ipynb`](SINAN/dengue-por-estado-e-mes.ipynb) | Como a dengue se distribuiu entre estados e meses? | SINAN |
 | [`SINAN/serie-historica-tuberculose.ipynb`](SINAN/serie-historica-tuberculose.ipynb) | Como as notificações evoluíram ao longo dos anos? | SINAN |
+| [`SINAN/decodificar-os-codigos-do-sinan.ipynb`](SINAN/decodificar-os-codigos-do-sinan.ipynb) | A tabela veio cheia de 1, 2 e 9 — o que cada número quer dizer? | SINAN |
 | [`SIM/causas-de-obito.ipynb`](SIM/causas-de-obito.ipynb) | Quais as principais causas de óbito no estado? | SIM |
 | [`SINASC/perfil-dos-nascimentos.ipynb`](SINASC/perfil-dos-nascimentos.ipynb) | Cesáreas, peso ao nascer e pré-natal | SINASC |
 | [`SIH/internacoes-por-causa.ipynb`](SIH/internacoes-por-causa.ipynb) | Por que se interna pelo SUS, por quanto tempo e a que custo? | SIH |
@@ -154,6 +155,7 @@ Drive**.
 - [**SIM** · Mortalidade: causas mais frequentes no estado](https://colab.research.google.com/github/cartaproale/PySusNoCode-Exemplos/blob/main/SIM/causas-de-obito.ipynb)
 - [**SINAN** · Dengue: casos notificados por estado e por mês](https://colab.research.google.com/github/cartaproale/PySusNoCode-Exemplos/blob/main/SINAN/dengue-por-estado-e-mes.ipynb)
 - [**SINAN** · Série histórica de um agravo (tuberculose)](https://colab.research.google.com/github/cartaproale/PySusNoCode-Exemplos/blob/main/SINAN/serie-historica-tuberculose.ipynb)
+- [**SINAN** · Decodificar os códigos: transformar 1, 2 e 9 em texto](https://colab.research.google.com/github/cartaproale/PySusNoCode-Exemplos/blob/main/SINAN/decodificar-os-codigos-do-sinan.ipynb)
 - [**SINASC** · Nascimentos: perfil dos nascidos vivos](https://colab.research.google.com/github/cartaproale/PySusNoCode-Exemplos/blob/main/SINASC/perfil-dos-nascimentos.ipynb)
 - [Trabalhando com arquivos grandes (SQL sem carregar tudo)](https://colab.research.google.com/github/cartaproale/PySusNoCode-Exemplos/blob/main/avancado/arquivos-grandes-e-sql.ipynb)
 - [Compartilhar dados sem expor identificadores](https://colab.research.google.com/github/cartaproale/PySusNoCode-Exemplos/blob/main/avancado/compartilhar-dados-sem-expor-identificadores.ipynb)
