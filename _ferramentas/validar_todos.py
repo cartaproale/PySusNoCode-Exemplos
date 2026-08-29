@@ -128,10 +128,22 @@ def main() -> int:
         )
     linhas += ["", "> Um notebook só é listado como funcionando depois de executar",
                "> todas as suas células sem erro, com dados reais."]
-    RELATORIO.write_text("\n".join(linhas) + "\n", encoding="utf-8")
-
     print(f"\n{'=' * 60}")
     print(f"{len(aprovados)} de {len(resultados)} notebooks funcionando")
+
+    # Uma rodada com filtro NÃO reescreve o relatório. O VALIDACAO.md é a
+    # garantia do repositório: ele afirma que TODOS os notebooks foram
+    # executados. Uma rodada parcial que o sobrescreve transforma essa garantia
+    # em mentira — e já transformou. O repositório chegou a publicar 33
+    # exemplos acompanhados de um relatório que cobria três, porque a última
+    # rodada tinha sido só na pasta SIA.
+    if filtro:
+        print(f"Rodada parcial (filtro {filtro!r}): {RELATORIO.name} NÃO foi "
+              "atualizado.")
+        print("Rode sem filtro para regerar o relatório completo.")
+        return 0 if not reprovados else 1
+
+    RELATORIO.write_text("\n".join(linhas) + "\n", encoding="utf-8")
     print(f"Relatório: {RELATORIO.relative_to(RAIZ)}")
     return 0 if not reprovados else 1
 

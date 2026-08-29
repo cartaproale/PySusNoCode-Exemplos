@@ -28,7 +28,7 @@ equipes do CNES, pela biblioteca PySUS.
 > demais param no município — e a próxima célula explica por quê.
 """),
 
-    code("%pip install pysus nest_asyncio -q"),
+    code("%pip install pysus==2.10.6 nest_asyncio -q"),
 
     code("""
 import nest_asyncio
@@ -121,8 +121,46 @@ def _campos_do_formulario(html: str) -> dict:
     return campos
 
 
-def baixar_validacao(competencia: str, ficha: str) -> pd.DataFrame:
-    """Baixa uma competência inteira do Relatório de Validação (Brasil)."""
+class ServidorForaDoAr(RuntimeError):
+    """O SISAB não respondeu. Não é erro do notebook."""
+
+
+def baixar_validacao(competencia: str, ficha: str,
+                     tentativas: int = 5) -> pd.DataFrame:
+    """Baixa uma competência inteira do Relatório de Validação (Brasil).
+
+    Tenta mais de uma vez de propósito. O servidor do Ministério sai do ar por
+    minutos, sem aviso: enquanto este notebook era escrito ele caiu duas vezes
+    e voltou sozinho nas duas. As esperas somam pouco mais de um minuto, o que
+    cobre um soluço mas não uma queda longa — e quando não cobre, a mensagem
+    diz de quem é a culpa em vez de despejar um traceback.
+    """
+    import time
+
+    esperas = [3, 8, 20, 40]
+    for tentativa in range(1, tentativas + 1):
+        try:
+            return _baixar_uma_vez(competencia, ficha)
+        except Exception as erro:
+            if tentativa == tentativas:
+                raise ServidorForaDoAr(
+                    f"O servidor do SISAB não respondeu depois de {tentativas} "
+                    f"tentativas ({type(erro).__name__}).\\n\\n"
+                    "Isso NÃO é erro do notebook nem do seu computador: o "
+                    "sisab.saude.gov.br sai do ar por alguns minutos de vez em "
+                    "quando e volta sozinho. Espere um pouco e execute esta "
+                    "célula de novo.\\n\\n"
+                    "Para conferir se é isso, abra no navegador: "
+                    "https://sisab.saude.gov.br/paginas/acessoRestrito/"
+                    "relatorio/federal/envio/RelValidacao.xhtml"
+                ) from erro
+            espera = esperas[min(tentativa - 1, len(esperas) - 1)]
+            print(f"   tentativa {tentativa} falhou ({type(erro).__name__}); "
+                  f"repetindo em {espera}s...")
+            time.sleep(espera)
+
+
+def _baixar_uma_vez(competencia: str, ficha: str) -> pd.DataFrame:
     with httpx.Client(timeout=600, follow_redirects=True) as cliente:
         pagina = cliente.get(URL_SISAB)
         pagina.raise_for_status()
@@ -251,8 +289,10 @@ display(nomes)
     code("""
 com_nome = unidade.merge(nomes[["INE", "NOME_EQP"]], on="INE", how="left")
 com_nome["equipe"] = com_nome["NOME_EQP"].fillna("(sem equipe informada)")
-# As linhas sem INE existem de verdade: sao fichas enviadas sem vinculo de
-# equipe. Vale olhar para elas — costumam indicar cadastro incompleto.
+# Linhas sem INE NAO sao erro de cadastro: o art. 311 da Portaria de
+# Consolidacao 1/2017, na redacao da Portaria 7.639/2025, obriga a enviar ao
+# Siaps tambem os profissionais lotados na unidade que nao fazem parte de
+# equipe com INE. Elas sao esperadas.
 
 painel = com_nome.pivot_table(index="equipe", columns="competencia",
                               values="fichas", aggfunc="sum").fillna(0)
@@ -312,14 +352,20 @@ recente ainda esteja sendo consolidada.
 Essa é a razão de sempre comparar com o município antes de concluir qualquer
 coisa sobre uma equipe.
 
-## Duas ressalvas que mudam a leitura
+## Três ressalvas que mudam a leitura
 
 **1. Isto são fichas, não atendimentos.** O Relatório de Validação conta
 fichas enviadas e validadas. Uma ficha pode carregar mais de uma informação.
 Ele responde bem a "a unidade está enviando? quais equipes? quanto foi
 aprovado?" — e não responde "quantas consultas foram feitas".
 
-**2. O tipo de ficha decide quais equipes aparecem.** Com
+**2. Linhas "sem equipe informada" são esperadas, não erro.** O art. 311 da
+Portaria de Consolidação nº 1/2017, na redação dada pela Portaria GM/MS nº
+7.639/2025, obriga a enviar ao Siaps também os profissionais lotados na
+unidade que **não fazem parte de equipe com INE**. Quando essas linhas
+aparecerem, não conclua que o cadastro está incompleto.
+
+**3. O tipo de ficha decide quais equipes aparecem.** Com
 `TIPO_DE_FICHA = "4"` (Atendimento Individual) as equipes de saúde bucal não
 aparecem: elas registram em `"5"` (Atendimento Odontológico). Se uma equipe que
 você conhece sumir do resultado, troque o tipo de ficha antes de concluir que

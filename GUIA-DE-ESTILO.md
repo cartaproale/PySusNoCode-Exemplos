@@ -3,10 +3,25 @@
 Regras para manter todos os exemplos consistentes e confiáveis. Quem contribuir
 com um notebook novo deve segui-las.
 
-## A regra que não se negocia
+## As duas regras que não se negociam
 
-**Nenhum notebook entra sem passar por `_ferramentas/validar_todos.py`**, que o
-executa do início ao fim com dados reais. Não vale "deve funcionar".
+**1. Nenhum notebook entra sem passar por `_ferramentas/validar_todos.py`**, que
+o executa do início ao fim com dados reais. Não vale "deve funcionar".
+
+**2. Todo notebook termina com uma verificação de sanidade** — uma célula que
+confere se o resultado faz sentido e diz em voz alta quando não faz: ordem de
+grandeza contra uma referência externa, soma das partes contra o total, `len()`
+maior que zero, UF única quando se pediu uma UF.
+
+O motivo é a versão da PySUS estar fixa (`pysus==2.10.6`). O pino garante que o
+notebook publicado roda com a biblioteca contra a qual foi validado — mas não
+protege contra o catálogo do servidor mudar, que está fora do nosso controle. A
+verificação de sanidade é o que transforma essa mudança em **aviso na tela** em
+vez de número errado com cara de certo.
+
+Por que isso importa aqui: uma mudança de catálogo já fez três exemplos
+devolverem o Brasil inteiro rotulado como Paraná, sem erro nenhum. Falhar alto
+é incômodo; acertar o formato e errar o número vira decisão errada.
 
 ## Estrutura de cada notebook
 
@@ -14,7 +29,7 @@ executa do início ao fim com dados reais. Não vale "deve funcionar".
    dados e o tempo estimado.
 2. **Preparação** — sempre estas duas células:
    ```python
-   %pip install pysus nest_asyncio -q
+   %pip install pysus==2.10.6 nest_asyncio -q
    ```
    ```python
    import nest_asyncio

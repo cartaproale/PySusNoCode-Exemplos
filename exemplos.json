@@ -1,5 +1,5 @@
 {
- "gerado_em": "2026-08-28",
+ "gerado_em": "2026-08-29",
  "repositorio": "cartaproale/PySusNoCode-Exemplos",
  "ramo": "main",
  "total": 33,
@@ -68,7 +68,7 @@
    "aprofundado": true,
    "celulas": 10,
    "graficos": 3,
-   "tempo": "10 a 20 minutos na primeira vez (baixa vários anos)"
+   "tempo": "20 a 40 minutos na primeira vez. Ele baixa o SIH mês a mês de 2010 a 2024 para dois estados — são centenas de arquivos. Medido: 21 minutos com os arquivos já em cache, mais de 30 sem eles. Deixe rodando e volte depois"
   },
   {
    "arquivo": "cruzamentos/mortalidade-infantil-e-numeros-pequenos.ipynb",

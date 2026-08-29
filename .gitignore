@@ -4,3 +4,8 @@ __pycache__/
 # cache de downloads do DATASUS (fica no perfil do usuário, nunca no repositório)
 pysus/
 *.parquet
+
+# Arquivos que os proprios notebooks geram ao rodar (mapas, planilhas). Sao
+# resultado, nao fonte: quem executar o notebook os produz de novo.
+*.geojson
+*.xlsx
