@@ -2,7 +2,7 @@
  "gerado_em": "2026-08-29",
  "repositorio": "cartaproale/PySusNoCode-Exemplos",
  "ramo": "main",
- "total": 35,
+ "total": 36,
  "exemplos": [
   {
    "arquivo": "_comece-aqui/01-primeiros-passos.ipynb",
@@ -355,6 +355,17 @@
    "celulas": 8,
    "graficos": 1,
    "tempo": "3 a 5 minutos"
+  },
+  {
+   "arquivo": "SINAN/decodificar-os-codigos-do-sinan.ipynb",
+   "titulo": "Decodificar os códigos do SINAN",
+   "descricao": "A tabela veio cheia de 1, 2 e 9. O que cada número quer dizer — e como transformar isso em algo que se possa ler?",
+   "grupo": "SINAN",
+   "base": "SINAN",
+   "aprofundado": false,
+   "celulas": 14,
+   "graficos": 1,
+   "tempo": "2 a 4 minutos"
   },
   {
    "arquivo": "SINAN/dengue-por-estado-e-mes.ipynb",
