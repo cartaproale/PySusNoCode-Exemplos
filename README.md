@@ -59,6 +59,16 @@ Todas as nove bases da biblioteca estão cobertas:
 | Notebook | O que ensina |
 |---|---|
 | [`avancado/arquivos-grandes-e-sql.ipynb`](avancado/arquivos-grandes-e-sql.ipynb) | Analisar milhões de linhas sem travar: colunas selecionadas e consultas SQL |
+| [`avancado/compartilhar-dados-sem-expor-identificadores.ipynb`](avancado/compartilhar-dados-sem-expor-identificadores.ipynb) | Mandar um recorte adiante sem levar junto quem atendeu — e onde o mascaramento engana |
+| [`avancado/arquivos-grandes-pelas-ferramentas-da-pysus.ipynb`](avancado/arquivos-grandes-pelas-ferramentas-da-pysus.ipynb) | *Alternativa* ao primeiro: o mesmo trabalho pelas ferramentas da própria PySUS |
+
+> **Sobre o par de notebooks de arquivos grandes.** Os dois resolvem o mesmo
+> problema por caminhos diferentes, e isso é de propósito. O recomendado é o
+> **`arquivos-grandes-e-sql`**, com duckdb direto: é ferramenta estável, de uso
+> geral, e o que se aprende ali serve fora da PySUS. O outro usa a camada de
+> conveniência da PySUS, que muda depressa — foram seis versões em cinco dias em
+> agosto de 2026. Ele existe como **plano B**: se um dia um dos caminhos parar de
+> funcionar, o outro está testado e pronto.
 
 Todos trazem uma célula de **parâmetros** no início: mude a sigla do estado e o
 ano, e a análise inteira se ajusta.
@@ -146,6 +156,7 @@ Drive**.
 - [**SINAN** · Série histórica de um agravo (tuberculose)](https://colab.research.google.com/github/cartaproale/PySusNoCode-Exemplos/blob/main/SINAN/serie-historica-tuberculose.ipynb)
 - [**SINASC** · Nascimentos: perfil dos nascidos vivos](https://colab.research.google.com/github/cartaproale/PySusNoCode-Exemplos/blob/main/SINASC/perfil-dos-nascimentos.ipynb)
 - [Trabalhando com arquivos grandes (SQL sem carregar tudo)](https://colab.research.google.com/github/cartaproale/PySusNoCode-Exemplos/blob/main/avancado/arquivos-grandes-e-sql.ipynb)
+- [Compartilhar dados sem expor identificadores](https://colab.research.google.com/github/cartaproale/PySusNoCode-Exemplos/blob/main/avancado/compartilhar-dados-sem-expor-identificadores.ipynb)
 
 > Prefere não usar o Colab? Os mesmos exemplos abrem com um clique dentro do
 > [aplicativo PySusNoCode](https://github.com/cartaproale/PySusNoCode), pelo

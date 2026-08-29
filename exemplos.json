@@ -2,7 +2,7 @@
  "gerado_em": "2026-08-29",
  "repositorio": "cartaproale/PySusNoCode-Exemplos",
  "ramo": "main",
- "total": 33,
+ "total": 35,
  "exemplos": [
   {
    "arquivo": "_comece-aqui/01-primeiros-passos.ipynb",
@@ -278,6 +278,28 @@
    "celulas": 7,
    "graficos": 1,
    "tempo": "3 a 5 minutos"
+  },
+  {
+   "arquivo": "avancado/arquivos-grandes-pelas-ferramentas-da-pysus.ipynb",
+   "titulo": "Arquivos grandes pelas ferramentas da PySUS",
+   "descricao": "Dá para consultar um arquivo de milhões de linhas sem carregá-lo na memória, usando só o que a própria PySUS oferece?",
+   "grupo": "Para quem já se sente à vontade",
+   "base": "",
+   "aprofundado": false,
+   "celulas": 9,
+   "graficos": 0,
+   "tempo": "2 a 5 minutos"
+  },
+  {
+   "arquivo": "avancado/compartilhar-dados-sem-expor-identificadores.ipynb",
+   "titulo": "Compartilhar dados sem expor identificadores",
+   "descricao": "Preciso mandar um recorte da produção ambulatorial para um colega analisar. Como tiro de lá quem atendeu, sem estragar a análise?",
+   "grupo": "Para quem já se sente à vontade",
+   "base": "",
+   "aprofundado": false,
+   "celulas": 13,
+   "graficos": 0,
+   "tempo": "3 a 6 minutos"
   },
   {
    "arquivo": "avancado/arquivos-grandes-e-sql.ipynb",

@@ -23,6 +23,26 @@ Por que isso importa aqui: uma mudança de catálogo já fez três exemplos
 devolverem o Brasil inteiro rotulado como Paraná, sem erro nenhum. Falhar alto
 é incômodo; acertar o formato e errar o número vira decisão errada.
 
+## Notebooks-alternativa
+
+Alguns problemas têm dois caminhos que valem a pena manter vivos ao mesmo
+tempo — hoje é o caso de "arquivos grandes", que existe com **duckdb direto** e
+com as **ferramentas da PySUS**. Não é redundância por descuido: é seguro contra
+o imponderável. A camada de conveniência da PySUS mudou seis vezes em cinco dias
+em agosto de 2026; o duckdb pode um dia não estar disponível num ambiente. Ter
+os dois testados significa que, se um cair, o outro já está pronto.
+
+Quando criar um par assim:
+
+- **Diga qual é o recomendado**, no cabeçalho dos dois e no README. Um par sem
+  hierarquia deixa o leitor escolhendo no escuro.
+- **Explique por que o outro existe** — a razão é redundância, e dizer isso
+  evita que alguém "limpe" o repositório apagando o que parece duplicado.
+- **Os dois calculam o mesmo número**, e a verificação de sanidade de cada um
+  confere contra o outro caminho quando for possível.
+- **Os dois são validados** como qualquer outro notebook. Um plano B que não
+  roda não é plano B.
+
 ## Estrutura de cada notebook
 
 1. **Título e cabeçalho** — a pergunta que o notebook responde, a fonte dos
