@@ -81,10 +81,22 @@ def reexecutar(caminho: Path) -> tuple[bool, list[str]]:
     return not erros, erros
 
 
-def alvos(argumento: str | None) -> list[Path]:
-    if not argumento:
+def alvos(argumentos: list[str]) -> list[Path]:
+    if not argumentos:
         return sorted(p for p in RAIZ.rglob("*.ipynb")
                       if "_ferramentas" not in str(p))
+    # Um por um, e nao so o primeiro: a versao anterior lia sys.argv[1] e jogava
+    # fora o resto CALADA. Pedir dois notebooks rodava um, dizia "1 de 1 sem
+    # erro", e o segundo ficava por reexecutar sem ninguem saber.
+    reunidos: list[Path] = []
+    for argumento in argumentos:
+        for achado in um_alvo(argumento):
+            if achado not in reunidos:
+                reunidos.append(achado)
+    return reunidos
+
+
+def um_alvo(argumento: str) -> list[Path]:
     caminho = RAIZ / argumento
     if caminho.is_file():
         return [caminho]
@@ -100,8 +112,35 @@ def alvos(argumento: str | None) -> list[Path]:
     raise SystemExit(f"não encontrei: {argumento}")
 
 
+def conferir_sintaxe(caminho: Path) -> None:
+    # json puro: o nbformat so e importado dentro de reexecutar(), e aqui a
+    # conferencia roda ANTES de qualquer kernel subir.
+    doc = json.loads(caminho.read_text(encoding="utf-8"))
+    n = 0
+    for celula in doc["cells"]:
+        if celula["cell_type"] != "code":
+            continue
+        n += 1
+        fonte = "".join(celula["source"])
+        if fonte.lstrip().startswith(("!", "%")):
+            continue
+        try:
+            compile(fonte, str(caminho), "exec")
+        except SyntaxError as erro:
+            raise SystemExit(
+                f"{caminho.relative_to(RAIZ)}, célula de código {n}: "
+                f"{erro.msg} (linha {erro.lineno}). Corrija antes de reexecutar."
+            )
+
+
 def main() -> int:
-    escolhidos = alvos(sys.argv[1] if len(sys.argv) > 1 else None)
+    escolhidos = alvos(sys.argv[1:])
+
+    # Sintaxe antes do kernel: compilar as 400 celulas leva menos de um segundo,
+    # e um f-string quebrado so aparecia depois de minutos de download.
+    for nb in escolhidos:
+        conferir_sintaxe(nb)
+
     print(f"Reexecutando {len(escolhidos)} notebook(s) com dados reais.\n")
     falhas = []
     for nb in escolhidos:

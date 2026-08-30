@@ -12,6 +12,7 @@ Uso:
 from __future__ import annotations
 
 import json
+import re
 import sys
 import time
 from datetime import date
@@ -41,6 +42,34 @@ def versao_pysus() -> str:
             return version("pysus")
         except Exception:  # noqa: BLE001
             return "não identificada"
+
+
+CABECALHO_DE_EXCECAO = re.compile(r"^([A-Za-z_][\w.]*(?:Error|Exception|Warning|"
+                                  r"Interrupt|Exit|[A-Z]\w*)): (.+)$")
+
+
+def diagnostico(resumo: str, largura: int = 200) -> str:
+    """Extrai a linha que DIAGNOSTICA o erro, e nao a ultima linha qualquer.
+
+    Pegar splitlines()[-1] funciona para "NameError: name 'x' is not defined",
+    e falha justamente nos erros que alguem se deu ao trabalho de escrever bem:
+    o notebook do SISAB levanta uma excecao com quatro paragrafos explicando
+    que o servidor do Ministerio caiu e que a culpa nao e do usuario, e o
+    relatorio mostrava so o rabo dela — "abra no navegador: https:", cortado no
+    meio da URL. A informacao existia e foi jogada fora na hora de exibir.
+
+    Entao: varremos de baixo para cima ate achar o CABECALHO da excecao, que e
+    onde mora o diagnostico.
+    """
+    linhas = [l.rstrip() for l in resumo.strip().splitlines() if l.strip()]
+    if not linhas:
+        return "erro sem mensagem"
+    for linha in reversed(linhas):
+        achado = CABECALHO_DE_EXCECAO.match(linha.strip())
+        if achado:
+            classe, mensagem = achado.groups()
+            return f"{classe}: {mensagem}"[:largura]
+    return linhas[-1][:largura]
 
 
 def executar(caminho: Path) -> dict:
@@ -75,7 +104,7 @@ def executar(caminho: Path) -> dict:
                 if "ATENÇÃO" in linha:
                     alertas.append(f"célula {executadas}: {linha.strip()[:150]}")
             if not resultado.ok:
-                erros.append(f"célula {executadas}: {resultado.error_summary.strip().splitlines()[-1][:160]}")
+                erros.append(f"célula {executadas}: {diagnostico(resultado.error_summary)}")
                 break   # as seguintes dependeriam desta
     finally:
         kernel.shutdown()
@@ -90,12 +119,33 @@ def executar(caminho: Path) -> dict:
     }
 
 
+# Notebooks que precisam rodar ANTES dos outros, e por que.
+#
+# 03-mapa-completo-das-bases varre onze conjuntos do portal de dados abertos do
+# Ministerio, e medimos em 30/08/2026 que isso derruba o acesso ao
+# sisab.saude.gov.br por mais de UMA HORA — reproduzido em teste A/B. Duas
+# validacoes completas foram reprovadas por isso, sempre no mesmo notebook, e a
+# culpa nunca foi dele. Espacar as chamadas foi testado e nao resolveu (a
+# rajada e interna a pysus).
+#
+# Entao a ordem alfabetica, que punha o mapa antes do SISAB, deixa de valer:
+# quem depende do SISAB roda primeiro. Nao e conserto do bloqueio, e desvio.
+PRIMEIRO = ("AtencaoPrimaria/producao-da-ubs-no-sisab-equipe-por-equipe.ipynb",)
+
+
+def ordenar(notebooks: list[Path]) -> list[Path]:
+    def chave(p: Path) -> tuple[int, str]:
+        rel = p.relative_to(RAIZ).as_posix()
+        return (PRIMEIRO.index(rel) if rel in PRIMEIRO else len(PRIMEIRO), rel)
+    return sorted(notebooks, key=chave)
+
+
 def main() -> int:
     filtro = sys.argv[1] if len(sys.argv) > 1 else ""
-    notebooks = sorted(
+    notebooks = ordenar(sorted(
         p for p in RAIZ.rglob("*.ipynb")
         if ".ipynb_checkpoints" not in str(p) and filtro in str(p.relative_to(RAIZ))
-    )
+    ))
     if not notebooks:
         print("Nenhum notebook encontrado.")
         return 1
@@ -145,7 +195,7 @@ def main() -> int:
     ]
     for r in resultados:
         if r["erros"]:
-            estado = f"❌ {r['erros'][0][:60]}"
+            estado = f"❌ {r['erros'][0][:120]}"
         elif r["alertas"]:
             estado = f"⚠️ a própria verificação alertou: {r['alertas'][0][:45]}"
         else:

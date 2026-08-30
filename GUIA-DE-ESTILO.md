@@ -98,3 +98,43 @@ um arquivo com espaço de largura zero no nome não abre no Colab.
 
 Os notebooks são publicados **com as saídas salvas**, para que possam ser lidos
 no GitHub sem executar. As saídas vêm da validação, então refletem dados reais.
+
+## Gráficos: a procedência vai dentro da figura
+
+As bases do SUS não andam juntas. Um painel municipal típico junta população do
+IBGE de um ano, SINASC de dois anos atrás, SIM de dois anos atrás, CNES de um
+mês e SIH de outro ano. O gráfico sai do notebook sozinho para dentro de uma
+apresentação — e lá ninguém vê o código que explicava as safras.
+
+- Todo gráfico que mistura bases traz **as fontes com os anos num subtítulo**.
+- O subtítulo é montado a partir das **variáveis que escolheram cada arquivo**,
+  nunca digitado à mão: texto fixo envelhece calado quando o ano muda.
+- Gráfico de série temporal se salva pelo eixo x. **Dispersão e mapa não**: se a
+  figura mostra um recorte único dentro de uma série — um quadrimestre, uma
+  competência, um mês — o título diz qual.
+- Instantâneo baixado de URL sem versão (as extrações do `ckan.saude.gov.br`)
+  não tem ano nenhum no nome. Use a data do arquivo **dentro do zip**.
+
+```python
+fontes = (f"População IBGE {ANO_POP} · SINASC {ANO_NASC} · SIM {ANO_OBITO}"
+          f" · CNES {MES_CNES:02d}/{ANO_CNES} · SIH {ANO_SIH} (ano inteiro)")
+eixo.set_title(f"{NOME} comparada com {UF}\n{fontes}", fontsize=12)
+```
+
+## Períodos: ano completo, não o mais recente
+
+O ano mais recente quase sempre está **em andamento**, e meio ano não se compara
+com referência anual — internação respiratória tem estação. Escolha o último ano
+**completo**, e diga por quê:
+
+```python
+meses_por_ano = rd.groupby(rd["year"].astype(int))["mes"].nunique()
+completos = meses_por_ano[meses_por_ano == 12].index
+if len(completos) == 0:
+    raise ValueError("Nenhum ano tem os doze meses no catálogo.")
+ANO = int(max(completos))
+```
+
+Antes de escrever no notebook que uma base tem cobertura falha, **meça**. Ensinar
+uma limitação que não existe é pior que não ensinar nada: o leitor passa a
+desconfiar do dado certo.
