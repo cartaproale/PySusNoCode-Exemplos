@@ -89,7 +89,14 @@ def alvos(argumento: str | None) -> list[Path]:
     if caminho.is_file():
         return [caminho]
     if caminho.is_dir():
-        return sorted(caminho.glob("*.ipynb"))
+        # rglob, e nao glob: 'reexecutar.py .' devolvia ZERO notebooks em
+        # silencio, porque a raiz nao tem .ipynb solto. Zero calado e o defeito
+        # que este repositorio inteiro existe para ensinar a evitar.
+        achados = sorted(caminho.rglob("*.ipynb"))
+        achados = [a for a in achados if "_ferramentas" not in str(a)]
+        if not achados:
+            raise SystemExit(f"nenhum notebook em {argumento}")
+        return achados
     raise SystemExit(f"não encontrei: {argumento}")
 
 

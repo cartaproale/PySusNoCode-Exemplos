@@ -76,7 +76,11 @@ Quando criar um par assim:
 
 - Converta antes de contar: `pd.to_numeric(col, errors="coerce")`.
 - Nunca use `asyncio.run()` — o `nest_asyncio` já resolve.
-- CNES **com** `group`; SIH, SIM, SINASC e SIA **sem** `group`.
+- CNES **com** `group`. **SIH também**: sem ele vêm quatro arquivos, e o de
+  serviços profissionais (SP) tem 13x mais linhas que o de internações (RD)
+  — filtre pelo prefixo `RD` ou peça `group="RD"`. SIM e SINASC **sem**
+  `group`, mas escolhendo o arquivo do estado pelo nome (`DO`/`DN` + UF):
+  o catálogo publica o nacional junto, e em 2025-2026 publica só ele.
 - SINAN: `as_dataframe=False` + `pd.read_parquet(caminho, columns=[...])`.
 - Gráficos com matplotlib, títulos e eixos em português, `plt.tight_layout()`.
 
