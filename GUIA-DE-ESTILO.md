@@ -76,11 +76,15 @@ Quando criar um par assim:
 
 - Converta antes de contar: `pd.to_numeric(col, errors="coerce")`.
 - Nunca use `asyncio.run()` — o `nest_asyncio` já resolve.
-- CNES **com** `group`. **SIH também**: sem ele vêm quatro arquivos, e o de
-  serviços profissionais (SP) tem 13x mais linhas que o de internações (RD)
-  — filtre pelo prefixo `RD` ou peça `group="RD"`. SIM e SINASC **sem**
-  `group`, mas escolhendo o arquivo do estado pelo nome (`DO`/`DN` + UF):
-  o catálogo publica o nacional junto, e em 2025-2026 publica só ele.
+- **`group` em CNES, SIA e SIH; nunca em SIM e SINASC.** Medido em 30/08/2026:
+  `sia(..., group="PA")` devolve só `PAPR2401` (sem ele vêm dez arquivos, uma
+  família diferente cada) e `sih(..., group="RD")` devolve só `RDPR2401` (sem
+  ele vêm quatro, e o de serviços profissionais tem 14x mais linhas que o de
+  internações). Já `sinasc(..., group="DN")` devolve `SINASC_2022`, que é o
+  arquivo **nacional**, e `sim(..., group="DO")` devolve `DO22OPEN`, também
+  nacional — ali o `group` não filtra o estado, entrega o Brasil com cara de
+  acerto. Em SIM e SINASC escolha o arquivo pelo **nome** (`DO`/`DN` + UF), e
+  prefira um ano que tenha arquivo estadual: 2025 e 2026 só têm o nacional.
 - SINAN: `as_dataframe=False` + `pd.read_parquet(caminho, columns=[...])`.
 - Gráficos com matplotlib, títulos e eixos em português, `plt.tight_layout()`.
 
