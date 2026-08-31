@@ -69,7 +69,116 @@ def diagnostico(resumo: str, largura: int = 200) -> str:
         if achado:
             classe, mensagem = achado.groups()
             return f"{classe}: {mensagem}"[:largura]
+    # O duckdb usa cabecalho de erro com ESPACOS ("Invalid Input Error: ...")
+    # e termina com um marcador de posicao ("      ^") — que era exatamente o
+    # que aparecia no relatorio: "célula 4: ^". Segunda passada, mais frouxa.
+    for linha in reversed(linhas):
+        l = linha.strip()
+        if re.search(r"(Error|Exception)\b.*\S", l) and len(l) > 8:
+            return l[:largura]
     return linhas[-1][:largura]
+
+
+# ---------------------------------------------------------------------------
+# Sentinelas: a memória entre validações.
+#
+# Cada notebook imprime duas coisas que valem guardar: as linhas de PERÍODO
+# ("Ano do SINASC: 2022", "Período do SIH: ano de 2025...") e as linhas da
+# VERIFICAÇÃO DE SANIDADE ("4. ICSAP entre 5% e 35%? 15.7% (sim)"). Guardamos
+# as linhas INTEIRAS, sem tentar interpretar os números: deriva é linha que
+# mudou, e quem lê a diferença é gente.
+#
+# A regra que importa: valor que muda SEM o período mudar merece um olhar.
+# Não é reprovação — o DATASUS retifica arquivo publicado, e isso é rotina —
+# mas também pode ser uma fórmula que alguém quebrou. A memória existe para
+# que a mudança nunca passe em silêncio.
+# ---------------------------------------------------------------------------
+SENTINELAS = RAIZ / "_ferramentas" / "sentinelas.json"
+
+PADROES_PERIODO = [
+    re.compile(r"^Ano d[oe] \S+: *\d{4}"),
+    re.compile(r"^Per[íi]odo (do|analisado|da)\b.*\d{4}"),
+    re.compile(r"^Compet[êe]ncia.*\d{2}/\d{4}"),
+    re.compile(r"^Vamos usar .*\d{4}"),
+    re.compile(r"\(o mais recente com arquivo"),
+    re.compile(r"^Estado: .+ — \d{4}"),
+]
+# Uma linha de sanidade é uma linha NUMERADA que carrega um veredito. Os 36
+# notebooks falam dois dialetos — "...: confere", "...? 15.7% (sim)", e o mapa
+# ainda escreve "— confere (é o estado conhecido...)". O que é comum a todos:
+# começa com "N." e contém confere/sim/ATENÇÃO.
+PADRAO_SANIDADE = re.compile(
+    r"^\d+\.\s.*(confere|\(sim\)|ATENÇÃO)|\((sim|ATENÇÃO)\)\s*$")
+
+
+def extrair_sentinelas(textos: list[str]) -> dict:
+    """Colhe linhas de período e de sanidade das saídas de um notebook."""
+    periodos: list[str] = []
+    sanidade: list[str] = []
+    for texto in textos:
+        # O tqdm termina a barra de progresso com \r sem \n; sem esta troca, a
+        # barra cola na linha seguinte ("Downloading...|Nascimentos: ano 2022")
+        # e o período vira outro texto — foi um falso positivo real.
+        for linha in texto.replace("\r", "\n").splitlines():
+            limpa = re.sub(r"\s+", " ", linha).strip()[:160]
+            if not limpa:
+                continue
+            if PADRAO_SANIDADE.search(limpa) and limpa not in sanidade:
+                sanidade.append(limpa)
+            elif any(p.search(limpa) for p in PADROES_PERIODO) and limpa not in periodos:
+                periodos.append(limpa)
+    return {"periodos": periodos, "sanidade": sanidade}
+
+
+def comparar_sentinelas(arquivo: str, memoria: dict, atual: dict) -> list[str]:
+    """Compara com a validação anterior. Devolve linhas de relato (vazio = estável)."""
+    antiga = memoria.get(arquivo)
+    if antiga is None:
+        return []          # primeira vez na memória: nada com que comparar
+    relato: list[str] = []
+    if antiga.get("periodos") != atual["periodos"]:
+        relato.append("período mudou — diferença nos valores é esperada:")
+        for l in antiga.get("periodos", []):
+            if l not in atual["periodos"]:
+                relato.append(f"  − {l}")
+        for l in atual["periodos"]:
+            if l not in antiga.get("periodos", []):
+                relato.append(f"  + {l}")
+        return relato
+    sumiram = [l for l in antiga.get("sanidade", []) if l not in atual["sanidade"]]
+    surgiram = [l for l in atual["sanidade"] if l not in antiga.get("sanidade", [])]
+    if sumiram or surgiram:
+        relato.append("DERIVA: valor mudou sem o período mudar — olhe:")
+        for l in sumiram:
+            relato.append(f"  − {l}")
+        for l in surgiram:
+            relato.append(f"  + {l}")
+    return relato
+
+
+def semear() -> int:
+    """Cria a memória de sentinelas a partir das SAÍDAS SALVAS, sem executar.
+
+    Para o primeiro uso, ou depois de uma mudança intencional já validada.
+    As saídas salvas vêm da última validação completa, então a memória nasce
+    dizendo a verdade sobre o estado publicado.
+    """
+    memoria: dict = {}
+    for caminho in sorted(RAIZ.rglob("*.ipynb")):
+        if ".ipynb_checkpoints" in str(caminho):
+            continue
+        nb = json.loads(caminho.read_text(encoding="utf-8"))
+        textos = ["".join(s.get("text", []))
+                  for c in nb.get("cells", []) for s in c.get("outputs", [])]
+        rel = str(caminho.relative_to(RAIZ)).replace("\\", "/")
+        memoria[rel] = {"data": f"{date.today():%d/%m/%Y}",
+                        **extrair_sentinelas(textos)}
+    SENTINELAS.write_text(json.dumps(memoria, ensure_ascii=False, indent=1) + "\n",
+                          encoding="utf-8")
+    com_algo = sum(1 for v in memoria.values() if v["periodos"] or v["sanidade"])
+    print(f"Memória semeada das saídas salvas: {len(memoria)} notebooks, "
+          f"{com_algo} com sentinelas.")
+    return 0
 
 
 def executar(caminho: Path) -> dict:
@@ -80,6 +189,7 @@ def executar(caminho: Path) -> dict:
     inicio = time.time()
     erros: list[str] = []
     alertas: list[str] = []
+    textos: list[str] = []
     executadas = 0
     graficos = 0
 
@@ -99,7 +209,13 @@ def executar(caminho: Path) -> dict:
             # validador so olhasse resultado.ok, um notebook cuja propria
             # conferencia esta gritando passaria como funcionando — e passou,
             # por meses, em dois deles.
-            texto = "".join("".join(s.get("text", [])) for s in resultado.outputs)
+            # Cada saida vai SEPARADA para as sentinelas: o tqdm termina a
+            # barra sem newline, e juntar tudo numa string so cola a barra na
+            # linha seguinte ("...file/s]Nascimentos: ano 2022") — dois falsos
+            # positivos de deriva vieram exatamente dai.
+            pedacos = ["".join(s.get("text", [])) for s in resultado.outputs]
+            textos.extend(pedacos)
+            texto = "\n".join(pedacos)
             for linha in texto.splitlines():
                 if "ATENÇÃO" in linha:
                     alertas.append(f"célula {executadas}: {linha.strip()[:150]}")
@@ -116,6 +232,7 @@ def executar(caminho: Path) -> dict:
         "segundos": round(time.time() - inicio, 1),
         "erros": erros,
         "alertas": alertas,
+        "sentinelas": extrair_sentinelas(textos),
     }
 
 
@@ -141,6 +258,8 @@ def ordenar(notebooks: list[Path]) -> list[Path]:
 
 
 def main() -> int:
+    if "--semear" in sys.argv[1:]:
+        return semear()
     filtro = sys.argv[1] if len(sys.argv) > 1 else ""
     notebooks = ordenar(sorted(
         p for p in RAIZ.rglob("*.ipynb")
@@ -151,11 +270,25 @@ def main() -> int:
         return 1
 
     print(f"Validando {len(notebooks)} notebook(s) com dados reais do DATASUS.\n")
+    try:
+        memoria = json.loads(SENTINELAS.read_text(encoding="utf-8"))
+    except FileNotFoundError:
+        memoria = {}
+        print("(sem memória de sentinelas — rode --semear depois de validar)\n")
+    derivas: dict[str, list[str]] = {}
     resultados = []
     for caminho in notebooks:
         print(f"→ {caminho.relative_to(RAIZ)}")
         r = executar(caminho)
         resultados.append(r)
+        # Notebook que FALHOU nao entra na comparacao: a sanidade nem rodou,
+        # e o retrato pela metade so geraria "sumiu tudo" — o erro ja conta.
+        relato = ([] if r["erros"] else
+                  comparar_sentinelas(r["arquivo"], memoria, r["sentinelas"]))
+        if relato:
+            derivas[r["arquivo"]] = relato
+            for linha in relato:
+                print(f"    ~ {linha}")
         # ALERTA e um estado proprio: a verificacao de sanidade nao levanta
         # excecao, ela imprime. Sem isto o notebook passava como OK enquanto
         # a propria conferencia dele gritava — e passou, por meses.
@@ -204,6 +337,15 @@ def main() -> int:
             f"| `{r['arquivo']}` | {r['celulas']} | {r['graficos']} | "
             f"{r['segundos']:.0f}s | {estado} |"
         )
+    if derivas:
+        linhas += ["", "## Sentinelas: o que mudou desde a validação anterior", ""]
+        for arquivo, relato in derivas.items():
+            linhas.append(f"**`{arquivo}`**")
+            linhas += [f"- {l}" for l in relato]
+            linhas.append("")
+        linhas += ["> Deriva não reprova: o DATASUS retifica arquivos publicados, e",
+                   "> isso é rotina. Mas valor que muda sem o período mudar merece",
+                   "> um olhar antes do próximo commit."]
     linhas += ["", "> Um notebook só é listado como funcionando depois de executar",
                "> todas as suas células sem erro, com dados reais."]
     print(f"\n{'=' * 60}")
@@ -229,6 +371,22 @@ def main() -> int:
 
     RELATORIO.write_text("\n".join(linhas) + "\n", encoding="utf-8")
     print(f"Relatório: {RELATORIO.relative_to(RAIZ)}")
+
+    # A memória só avança em rodada completa — pela mesma razão do relatório:
+    # uma parcial que a sobrescrevesse apagaria a referência dos outros 30.
+    # E notebook que FALHOU mantém a memória antiga: as sentinelas de uma
+    # execução interrompida no meio são um retrato pela metade, e gravá-las
+    # apagaria justamente a referência boa com que a próxima rodada compara.
+    nova_memoria = {}
+    for r in resultados:
+        if r["erros"] and r["arquivo"] in memoria:
+            nova_memoria[r["arquivo"]] = memoria[r["arquivo"]]
+        else:
+            nova_memoria[r["arquivo"]] = {"data": f"{date.today():%d/%m/%Y}",
+                                          **r["sentinelas"]}
+    SENTINELAS.write_text(json.dumps(nova_memoria, ensure_ascii=False, indent=1)
+                          + "\n", encoding="utf-8")
+    print(f"Memória de sentinelas atualizada: {SENTINELAS.relative_to(RAIZ)}")
     return 0 if not (reprovados or com_alerta) else 1
 
 

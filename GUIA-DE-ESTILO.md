@@ -138,3 +138,32 @@ ANO = int(max(completos))
 Antes de escrever no notebook que uma base tem cobertura falha, **meça**. Ensinar
 uma limitação que não existe é pior que não ensinar nada: o leitor passa a
 desconfiar do dado certo.
+
+## Sanidade com numerador e denominador
+
+A faixa de plausibilidade ("ICSAP entre 5% e 35%?") pega o absurdo, mas deixa
+passar o **errado-porém-plausível** — que é o pior desfecho possível. A defesa
+medida contra ele (31/08/2026, vinte indicadores do painel reproduzidos por uma
+segunda conta) é expor as partes da fração:
+
+- Quando a verificação de sanidade confere um indicador que é razão, o
+  `detalhe` traz **numerador e denominador**: `conferir(4, "ICSAP na faixa",
+  5 < p < 35, f"{sensiveis:,} de {elegiveis:,} = {p:.1f}%")`.
+- `avg(CASE ...)` esconde quem ficou fora da conta. Os denominadores do mesmo
+  arquivo **não são iguais entre si** (no SINASC de Londrina 2022: 6.116
+  nascidos, 6.112 com parto válido, 6.079 com semanas válidas, 6.020 com
+  pré-natal contado). Diga qual denominador cada indicador usou.
+- A validação guarda essas linhas como **sentinelas**
+  (`_ferramentas/sentinelas.json`): valor que muda sem o período mudar aparece
+  como deriva na rodada seguinte. Linha de sanidade estável = deriva visível.
+
+## A segunda conta, e o ouro
+
+- `_ferramentas/auditar.py` reconta indicadores dos notebooks por caminho
+  independente (count() com N/D explícitos contra o avg do notebook), lendo só
+  o cache. Rode depois da validação; divergência ali é defeito nosso.
+- `_ferramentas/valores_ouro.json` guarda totais conferidos **uma vez** contra
+  fonte externa (TABNET, SIDRA), com data. O programa nunca os recalcula.
+  Antes de gravar um ouro novo, confirme a semântica: o TABNET do SIH conta
+  por **mês de internação** e os arquivos RD por **competência** — os totais
+  nunca baterão por igualdade, e está medido por quê no próprio arquivo.

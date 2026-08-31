@@ -1,0 +1,367 @@
+{
+ "AtencaoPrimaria/producao-da-ubs-no-sisab-equipe-por-equipe.ipynb": {
+  "data": "31/08/2026",
+  "periodos": [],
+  "sanidade": [
+   "1. O SISAB devolveu o relatório — 307,840 linhas: confere",
+   "2. A unidade pedida aparece no relatório — CNES 2673002, 15 linhas: confere",
+   "3. Todas as competências pedidas vieram — 3 pedidas: confere",
+   "4. Todo INE preenchido tem 10 dígitos — 12 de 15 linhas têm INE; tamanhos: [np.int64(10)]: confere",
+   "5. A soma das equipes bate com o total da unidade: confere"
+  ]
+ },
+ "AtencaoPrimaria/painel-da-aps-programas-do-municipio.ipynb": {
+  "data": "31/08/2026",
+  "periodos": [],
+  "sanidade": [
+   "1. O painel tem indicadores — 6 linhas: confere",
+   "2. A linha do município escolhido foi encontrada — Londrina (IBGE 411370): confere",
+   "3. Nenhum indicador ficou vazio: confere",
+   "4. População do município é plausível: confere"
+  ]
+ },
+ "AtencaoPrimaria/previne-brasil-indicadores-da-aps.ipynb": {
+  "data": "31/08/2026",
+  "periodos": [],
+  "sanidade": [
+   "1. Vieram indicadores — 21,546 linhas: confere",
+   "2. O recorte é do estado pedido: confere",
+   "3. A coluna 'percentual' passa de 100 (é cobertura, não resultado) — 51% das linhas: confere",
+   "4. O indicador de verdade fica entre 0 e 100 — de 0.0 a 100.0: confere",
+   "5. O recorte do gráfico exclui denominador pequeno — 1711 municípios: confere"
+  ]
+ },
+ "AtencaoPrimaria/ubs-no-mapa-e-o-que-o-cadastro-esconde.ipynb": {
+  "data": "31/08/2026",
+  "periodos": [],
+  "sanidade": [
+   "1. Há UBS no estado — 2,293 unidades: confere",
+   "2. Todas as unidades do recorte são do estado pedido — código 41: confere",
+   "3. As coordenadas do recorte caem dentro do Brasil: confere",
+   "4. As suspeitas são poucas diante do total nacional — 3 de 47,920 unidades no país: confere"
+  ]
+ },
+ "CIHA/atendimentos-ciha.ipynb": {
+  "data": "31/08/2026",
+  "periodos": [],
+  "sanidade": [
+   "1. Vieram atendimentos — 137,746 registros: confere",
+   "2. Todos os registros são de um estado só (MUNIC_MOV) — prefixos: ['41']: confere",
+   "3. Os procedimentos mais frequentes não somam mais que o total — 43,763 de 137,746: confere",
+   "4. O perfil por sexo cobre os registros — 137,746 de 137,746: confere"
+  ]
+ },
+ "CIHA/o-que-o-ciha-acrescenta-ao-sih.ipynb": {
+  "data": "31/08/2026",
+  "periodos": [],
+  "sanidade": [
+   "2. Permanência do CIHA entre 1 e 10 dias? 2.5 (sim)",
+   "3. CIHA é menor que o SIH? 0.2% do SIH (sim)"
+  ]
+ },
+ "CNES/leitos-por-municipio.ipynb": {
+  "data": "31/08/2026",
+  "periodos": [],
+  "sanidade": [
+   "1. Vieram leitos — 3,261 registros: confere",
+   "2. Leitos SUS não passam do total — 21,898 de 31,713: confere",
+   "3. A soma por município bate com o total do estado — 31,713 x 31,713: confere",
+   "4. Todos os municípios são do estado pedido — 243 municípios, prefixo 41: confere",
+   "5. Ordem de grandeza plausível (mais de 100 leitos no estado) — 31,713 leitos: confere"
+  ]
+ },
+ "CNES/profissionais-de-saude.ipynb": {
+  "data": "31/08/2026",
+  "periodos": [],
+  "sanidade": [
+   "1. Vieram profissionais — 356,758 registros: confere",
+   "2. Uma linha é um VÍNCULO, não uma pessoa (CNS_PROF) — 230,947 pessoas em 356,758 vínculos: confere",
+   "3. A soma por ocupação não passa do total — 280,350 de 356,758: confere",
+   "4. Os municípios são todos do estado pedido — 10 municípios, prefixo 41: confere"
+  ]
+ },
+ "CNES/rede-assistencial-e-leitos-por-habitante.ipynb": {
+  "data": "31/08/2026",
+  "periodos": [],
+  "sanidade": [
+   "1. Leitos por mil entre 1,5 e 4,0? 2.63 (sim)",
+   "2. Complementares entre 8% e 18% do total? 13.6% (sim)",
+   "3. Médicos por mil entre 1,0 e 5,0? 2.77 (sim)",
+   "5. Leitos SUS entre 50% e 90% do total? 69.2% (sim)"
+  ]
+ },
+ "IBGE/populacao-denominadores-e-piramides.ipynb": {
+  "data": "31/08/2026",
+  "periodos": [],
+  "sanidade": [
+   "1. A pirâmide tem as faixas etárias — 19 faixas: confere",
+   "2. A pirâmide do estado soma menos que o Brasil — 11,824,665 de 212,583,750: confere",
+   "3. População do Brasil na ordem de grandeza certa — 212,583,750 habitantes: confere",
+   "4. Homens por 100 mulheres entre 90 e 110 — 95.2 homens por 100 mulheres: confere"
+  ]
+ },
+ "PNI/cobertura-vacinal-e-anos-incompletos.ipynb": {
+  "data": "31/08/2026",
+  "periodos": [],
+  "sanidade": [
+   "1. Cobertura mediana entre 60% e 110%? 87.1% (sim)",
+   "2. Todos os municípios do estado presentes? 399 (sim)"
+  ]
+ },
+ "PNI/cobertura-vacinal.ipynb": {
+  "data": "31/08/2026",
+  "periodos": [],
+  "sanidade": [
+   "1. Vieram registros de vacinação — 225,717 registros: confere",
+   "2. Há mais de uma vacina no recorte — 15 vacinas: confere",
+   "3. Há mais doses aplicadas do que linhas (a linha não é a dose) — 2,578,390 doses em 225,717 linhas: confere",
+   "4. Nenhuma cobertura absurda (acima de 200%) — máximo 75%: confere"
+  ]
+ },
+ "SIA/alta-complexidade-oncologia-e-dialise.ipynb": {
+  "data": "31/08/2026",
+  "periodos": [],
+  "sanidade": [
+   "1. Alta complexidade acima de 40% do valor? 50.8% (sim)",
+   "2. Atenção básica com valor próximo de zero? 0.0% (sim)",
+   "3. Oncologia e diálise somam mais de 20%? 26.7% (sim)"
+  ]
+ },
+ "SIA/dialise-o-caminho-do-paciente-renal.ipynb": {
+  "data": "31/08/2026",
+  "periodos": [],
+  "sanidade": [
+   "1. Vieram registros de diálise: confere",
+   "3. O resumo por serviço não está vazio — 44 serviços: confere",
+   "4. O prefixo ATD continua mapeado para o grupo AT — ATD -> AT: confere"
+  ]
+ },
+ "SIA/producao-ambulatorial.ipynb": {
+  "data": "31/08/2026",
+  "periodos": [],
+  "sanidade": [
+   "1. Veio produção — 3,246,596 registros: confere",
+   "2. A quantidade aprovada supera o número de linhas — 26,766,560 realizações em 3,246,596 linhas: confere",
+   "3. A soma por grupo cobre a soma por procedimento — 167,586,751 x 19,990,827: confere",
+   "4. Os municípios são do estado pedido: confere"
+  ]
+ },
+ "SIH/internacoes-por-causa.ipynb": {
+  "data": "31/08/2026",
+  "periodos": [],
+  "sanidade": [
+   "1. Vieram internações — 80,026 internações: confere",
+   "2. A soma por capítulo não passa do total — 80,026 de 80,026: confere",
+   "3. Letalidade hospitalar entre 1% e 15% — 3.8%: confere",
+   "4. Permanência média entre 1 e 20 dias — 4.2 dias: confere"
+  ]
+ },
+ "SIH/internacoes-sensiveis-a-atencao-primaria.ipynb": {
+  "data": "31/08/2026",
+  "periodos": [
+   "Vamos usar PR, 2025, os 12 meses do ano.",
+   "Período analisado: 12 mês(es) de 2025"
+  ],
+  "sanidade": [
+   "1. Proporção de ICSAP entre 10% e 35%? 16.0% (sim)",
+   "2. Permanência média entre 3 e 8 dias? 4.2 (sim)",
+   "3. Letalidade hospitalar entre 3% e 10%? 4.3% (sim)"
+  ]
+ },
+ "SIM/causas-de-obito.ipynb": {
+  "data": "31/08/2026",
+  "periodos": [],
+  "sanidade": [
+   "1. Vieram óbitos — 83,465 óbitos: confere",
+   "2. Todos são do estado pedido — código 41: confere",
+   "3. O capítulo mais frequente é plausível para o Brasil — 1º lugar: Aparelho circulatório: confere",
+   "4. A soma dos capítulos não passa do total de óbitos — 83,465 de 83,465: confere"
+  ]
+ },
+ "SIM/mortalidade-prematura-por-dcnt.ipynb": {
+  "data": "31/08/2026",
+  "periodos": [
+   "Ano de referência: 2026",
+   "Ano usado: 2024 (o mais recente com arquivo do estado)"
+  ],
+  "sanidade": [
+   "1. Circulatório é a principal causa? 25.4% (sim)",
+   "2. Neoplasias vêm em seguida? 19.3% (sim)",
+   "3. Causas mal definidas abaixo de 10%? 1.8% (sim)",
+   "4. Indicador 3.4 na faixa esperada? 14.4% (sim)"
+  ]
+ },
+ "SINAN/arboviroses-dengue-chikungunya-zika.ipynb": {
+  "data": "31/08/2026",
+  "periodos": [],
+  "sanidade": [
+   "3. Pico entre as semanas 8 e 20? semana 12 (sim)"
+  ]
+ },
+ "SINAN/decodificar-os-codigos-do-sinan.ipynb": {
+  "data": "31/08/2026",
+  "periodos": [],
+  "sanidade": [
+   "1. O esquema rendeu dicionário: 34 colunas — confere",
+   "2. Colunas rotuladas no arquivo: 34 — confere",
+   "3. EVOLUCAO código 1 = 'alta' — confere",
+   "4. Rotular não mudou o número de linhas: 25,487 -> 25,487 confere",
+   "5. EVOLUCAO: 23,129 rotulados + 0 sem rótulo = 23,129 preenchidos confere"
+  ]
+ },
+ "SINAN/dengue-por-estado-e-mes.ipynb": {
+  "data": "31/08/2026",
+  "periodos": [],
+  "sanidade": [
+   "1. Vieram casos — 6,564,924 notificações: confere",
+   "2. A soma por UF bate com o total — 6,564,924 x 6,564,924: confere",
+   "3. A soma por mês bate com o total — 6,564,163 de 6,564,924: confere",
+   "4. O pico de dengue cai no primeiro semestre — mês 4: confere"
+  ]
+ },
+ "SINAN/serie-historica-tuberculose.ipynb": {
+  "data": "31/08/2026",
+  "periodos": [],
+  "sanidade": [
+   "1. A série tem mais de um ano — 5 anos: confere",
+   "2. Todos os anos pedidos vieram — [2020, 2021, 2022, 2023, 2024]: confere",
+   "3. Notificações por ano na ordem de grandeza do Brasil — média de 100,778 por ano: confere",
+   "4. Nenhuma variação anual absurda (acima de 50%) — maior variação: 13%: confere"
+  ]
+ },
+ "SINASC/nascimentos-prematuridade-e-pre-natal.ipynb": {
+  "data": "31/08/2026",
+  "periodos": [
+   "Ano de referência: 2022",
+   "Ano usado: 2022 (o mais recente com arquivo do estado)"
+  ],
+  "sanidade": [
+   "2. Taxa de cesárea entre 40% e 75%? 64.8% (sim)",
+   "3. Prematuridade entre 8% e 15%? 11.2% (sim)",
+   "4. Baixo peso entre 6% e 12%? 9.4% (sim)"
+  ]
+ },
+ "SINASC/perfil-dos-nascimentos.ipynb": {
+  "data": "31/08/2026",
+  "periodos": [],
+  "sanidade": [
+   "1. Vieram nascimentos — 140,637 nascidos vivos: confere",
+   "2. Todos são do estado pedido — código 41: confere",
+   "4. Baixo peso ao nascer entre 5% e 15% — 9.4%: confere"
+  ]
+ },
+ "_comece-aqui/01-primeiros-passos.ipynb": {
+  "data": "31/08/2026",
+  "periodos": [],
+  "sanidade": [
+   "1. O download trouxe leitos — 276 registros: confere",
+   "2. Leitos SUS não passam do total de leitos — 1,625 de 1,807: confere",
+   "3. Ordem de grandeza plausível para um estado — 1,807 leitos: confere",
+   "4. A proporção de leitos SUS faz sentido (entre 20% e 100%) — 90% são SUS: confere"
+  ]
+ },
+ "_comece-aqui/02-descobrir-dados-disponiveis.ipynb": {
+  "data": "31/08/2026",
+  "periodos": [],
+  "sanidade": [
+   "1. O catálogo respondeu — 80 arquivos: confere",
+   "2. Há mais de um ano disponível — de 1979 a 2026: confere",
+   "3. O catálogo chega a um ano recente — vai até 2026: confere",
+   "4. O SINAN tem vários agravos — 56 agravos em 2024: confere"
+  ]
+ },
+ "_comece-aqui/03-mapa-completo-das-bases.ipynb": {
+  "data": "31/08/2026",
+  "periodos": [],
+  "sanidade": [
+   "1. Todas as 9 bases têm arquivo? confere",
+   "2. As duas maiores bases são CNES e SIA? ['CNES', 'SIA'] — confere",
+   "3. Bases com dado de 2025 ou depois: 8 de 8 — confere",
+   "4. Funções da origem 'Saúde' que devolvem vazio: 9 de 11 — confere (é o estado conhecido da 2.10.6)",
+   "5. CNES/EP entrega equipes com INE: 571 identificadores — confere"
+  ]
+ },
+ "avancado/arquivos-grandes-e-sql.ipynb": {
+  "data": "31/08/2026",
+  "periodos": [],
+  "sanidade": []
+ },
+ "avancado/arquivos-grandes-pelas-ferramentas-da-pysus.ipynb": {
+  "data": "31/08/2026",
+  "periodos": [],
+  "sanidade": []
+ },
+ "avancado/compartilhar-dados-sem-expor-identificadores.ipynb": {
+  "data": "31/08/2026",
+  "periodos": [],
+  "sanidade": [
+   "1. O arquivo traz identificador real: 1,019 CNS distintos — confere",
+   "2. A auto-detecção ignora o PA_CNSMED e marca outras: ['PA_INCURG', 'PA_CNPJCPF'] — confere",
+   "3. Distintos — original 377 | encrypt 20,000 | hash 377 | redact 1 — confere",
+   "4. unmask_data devolve o original: confere",
+   "5. O hash é revertido por dicionário (100%) — confere (é pseudonimização)"
+  ]
+ },
+ "cruzamentos/frio-e-coracao-replicando-um-estudo.ipynb": {
+  "data": "31/08/2026",
+  "periodos": [],
+  "sanidade": [
+   "Porto Alegre razão 0.80 (sim)",
+   "Curitiba razão 1.58 (sim)",
+   "Rio Grande do Sul (temperado): pico em jul (sim)",
+   "1.16 contra 1.15 (sim)"
+  ]
+ },
+ "cruzamentos/mortalidade-infantil-e-numeros-pequenos.ipynb": {
+  "data": "31/08/2026",
+  "periodos": [
+   "Ano de referência: 2022 | série: 2015 a 2022"
+  ],
+  "sanidade": [
+   "1. Taxa infantil entre 5 e 25 por mil? 10.32 (sim)",
+   "2. Neonatal é a maior parte (acima de 60%)? 69% (sim)",
+   "4. Causas mal definidas abaixo de 10%? 2.3% (sim)",
+   "5. Acumular anos ampliou o que dá para analisar? 80 para 219 municípios (sim)"
+  ]
+ },
+ "cruzamentos/painel-do-municipio.ipynb": {
+  "data": "31/08/2026",
+  "periodos": [
+   "Nascimentos: ano 2022 (o mais recente com arquivo do estado)",
+   "Ano do SINASC: 2022",
+   "Óbitos: ano 2022 (o mais recente com arquivo do estado)",
+   "Ano do SIM: 2022",
+   "Competência do CNES: 06/2024",
+   "Período do SIH: ano de 2025 inteiro, 12 meses (grupo RD)"
+  ],
+  "sanidade": [
+   "1. População do município encontrada? 577.318 (sim)",
+   "2. Cesárea entre 30% e 90%? 63.2% (sim)",
+   "3. Mortalidade geral entre 4 e 12 por mil? 7.6 (sim)",
+   "4. ICSAP entre 5% e 35%? 15.7% (sim)",
+   "5. Causas mal definidas abaixo de 10%? 1.7% (sim)"
+  ]
+ },
+ "indicadores/mortalidade-infantil.ipynb": {
+  "data": "31/08/2026",
+  "periodos": [
+   "Estado: PR — 2022"
+  ],
+  "sanidade": [
+   "1. Vieram óbitos e nascimentos — 89,808 óbitos, 140,637 nascimentos: confere",
+   "2. Taxa de mortalidade infantil entre 5 e 30 por mil — 10.3 por mil nascidos vivos: confere",
+   "3. Neonatal + pós-neonatal = óbitos infantis — 998 + 453 = 1451 x 1451: confere",
+   "4. A neonatal é a maior parte da mortalidade infantil — 998 x 453: confere"
+  ]
+ },
+ "indicadores/populacao-e-taxas.ipynb": {
+  "data": "31/08/2026",
+  "periodos": [],
+  "sanidade": [
+   "1. A tabela de taxas foi montada — 27 estados: confere",
+   "2. Todo estado tem população maior que zero: confere",
+   "3. O ranking por casos difere do ranking por taxa — é exatamente o que este notebook existe para mostrar: confere",
+   "4. A soma das populações estaduais é plausível para o Brasil — 212,583,750 habitantes: confere"
+  ]
+ }
+}

@@ -1,0 +1,78 @@
+{
+ "leia-me": [
+  "Valores conferidos UMA VEZ contra fonte EXTERNA e congelados aqui.",
+  "Este arquivo NUNCA é recalculado pelo programa: ele é a verdade de teste.",
+  "O auditar.py compara os totais dele com as recontagens. Se a recontagem",
+  "bate com o notebook mas os dois discordam do ouro, o defeito é nosso",
+  "duas vezes. Cada valor carrega fonte e data — dado do SUS é retificado,",
+  "e um ouro de 2026 pode precisar de reconferência em 2027."
+ ],
+ "valores": {
+  "populacao_londrina_2024": {
+   "valor": 577318,
+   "tolerancia": 0,
+   "fonte": "SIDRA/IBGE t6579 v9324, apisidra.ibge.gov.br",
+   "data": "31/08/2026"
+  },
+  "populacao_pr_2024": {
+   "valor": 11824665,
+   "tolerancia": 0,
+   "fonte": "SIDRA/IBGE t6579 v9324, apisidra.ibge.gov.br",
+   "data": "31/08/2026"
+  },
+  "nascidos_vivos_londrina_2022": {
+   "valor": 6116,
+   "tolerancia": 0,
+   "fonte": "TABNET SINASC nvpr.def, nascim p/resid.mãe, nvpr22",
+   "data": "31/08/2026"
+  },
+  "nascidos_vivos_pr_2022": {
+   "valor": 140637,
+   "tolerancia": 0,
+   "fonte": "TABNET SINASC nvpr.def, nascim p/resid.mãe, nvpr22",
+   "data": "31/08/2026"
+  },
+  "obitos_londrina_2022": {
+   "valor": 4412,
+   "tolerancia": 0,
+   "fonte": "TABNET SIM obt10pr.def, óbitos p/residênc, obtpr22",
+   "data": "31/08/2026"
+  },
+  "obitos_pr_2022": {
+   "valor": 89808,
+   "tolerancia": 0,
+   "fonte": "TABNET SIM obt10pr.def, óbitos p/residênc, obtpr22",
+   "data": "31/08/2026"
+  },
+  "obitos_infantis_londrina_2022": {
+   "valor": 72,
+   "tolerancia": 0,
+   "fonte": "TABNET SIM inf10pr.def, óbitos p/residênc, infpr22",
+   "data": "31/08/2026"
+  },
+  "obitos_infantis_pr_2022": {
+   "valor": 1451,
+   "tolerancia": 0,
+   "fonte": "TABNET SIM inf10pr.def, óbitos p/residênc, infpr22",
+   "data": "31/08/2026"
+  }
+ },
+ "referencias-sem-comparacao-automatica": {
+  "internacoes_pr_2025_tabnet": {
+   "valor": 1080732,
+   "fonte": "TABNET SIH nrpr.def, internações, nrpr2501-2512",
+   "data": "31/08/2026",
+   "por-que-nao-compara": [
+    "TABNET conta por MÊS DE INTERNAÇÃO; os arquivos RD são por COMPETÊNCIA",
+    "de apresentação. Medido em 31/08/2026: as 12 competências de 2025 têm",
+    "1.101.298 linhas, das quais 71.154 são internações OCORRIDAS em 2024;",
+    "e 79.175 internações de 2025 só aparecem nas competências 01-06/2026.",
+    "Além disso o TABNET não conta as AIH de longa permanência (IDENT=5,",
+    "16.345 em 2025) e tem corte de publicação próprio (sobraram +12.079,",
+    "+1,1%, já descontados IDENT e sem nenhuma duplicata de N_AIH).",
+    "Comparação legítima exige recorte por DT_INTER, IDENT='1' e paciência",
+    "com a defasagem — nunca igualdade de totais."
+   ]
+  }
+ }
+}
