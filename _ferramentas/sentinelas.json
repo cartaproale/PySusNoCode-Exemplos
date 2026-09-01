@@ -1,33 +1,13 @@
 {
- "_comece-aqui/01-primeiros-passos.ipynb": {
+ "AtencaoPrimaria/producao-da-ubs-no-sisab-equipe-por-equipe.ipynb": {
   "data": "01/09/2026",
   "periodos": [],
   "sanidade": [
-   "1. O download trouxe leitos — 276 registros: confere",
-   "2. Leitos SUS não passam do total de leitos — 1,625 de 1,807: confere",
-   "3. Ordem de grandeza plausível para um estado — 1,807 leitos: confere",
-   "4. A proporção de leitos SUS faz sentido (entre 20% e 100%) — 90% são SUS: confere"
-  ]
- },
- "_comece-aqui/02-descobrir-dados-disponiveis.ipynb": {
-  "data": "01/09/2026",
-  "periodos": [],
-  "sanidade": [
-   "1. O catálogo respondeu — 80 arquivos: confere",
-   "2. Há mais de um ano disponível — de 1979 a 2026: confere",
-   "3. O catálogo chega a um ano recente — vai até 2026: confere",
-   "4. O SINAN tem vários agravos — 56 agravos em 2024: confere"
-  ]
- },
- "_comece-aqui/03-mapa-completo-das-bases.ipynb": {
-  "data": "01/09/2026",
-  "periodos": [],
-  "sanidade": [
-   "1. Todas as 9 bases têm arquivo? confere",
-   "2. As duas maiores bases são CNES e SIA? ['CNES', 'SIA'] — confere",
-   "3. Bases com dado de 2025 ou depois: 8 de 8 — confere",
-   "4. Funções da origem 'Saúde' com resposta: 2 de 11 — confere (o número varia com a saúde do portal)",
-   "5. CNES/EP entrega equipes com INE: 571 identificadores — confere"
+   "1. O SISAB devolveu o relatório — 307,840 linhas: confere",
+   "2. A unidade pedida aparece no relatório — CNES 2673002, 15 linhas: confere",
+   "3. Todas as competências pedidas vieram — 3 pedidas: confere",
+   "4. Todo INE preenchido tem 10 dígitos — 12 de 15 linhas têm INE; tamanhos: [np.int64(10)]: confere",
+   "5. A soma das equipes bate com o total da unidade: confere"
   ]
  },
  "AtencaoPrimaria/painel-da-aps-programas-do-municipio.ipynb": {
@@ -51,17 +31,6 @@
    "5. O recorte do gráfico exclui denominador pequeno — 1711 municípios: confere"
   ]
  },
- "AtencaoPrimaria/producao-da-ubs-no-sisab-equipe-por-equipe.ipynb": {
-  "data": "01/09/2026",
-  "periodos": [],
-  "sanidade": [
-   "1. O SISAB devolveu o relatório — 307,820 linhas: confere",
-   "2. A unidade pedida aparece no relatório — CNES 2673002, 15 linhas: confere",
-   "3. Todas as competências pedidas vieram — 3 pedidas: confere",
-   "4. Todo INE preenchido tem 10 dígitos — 12 de 15 linhas têm INE; tamanhos: [np.int64(10)]: confere",
-   "5. A soma das equipes bate com o total da unidade: confere"
-  ]
- },
  "AtencaoPrimaria/ubs-no-mapa-e-o-que-o-cadastro-esconde.ipynb": {
   "data": "01/09/2026",
   "periodos": [],
@@ -69,28 +38,7 @@
    "1. Há UBS no estado — 2,293 unidades: confere",
    "2. Todas as unidades do recorte são do estado pedido — código 41: confere",
    "3. As coordenadas do recorte caem dentro do Brasil: confere",
-   "4. As suspeitas são poucas diante do total nacional — 3 de 47,920 unidades no país: confere"
-  ]
- },
- "avancado/arquivos-grandes-e-sql.ipynb": {
-  "data": "01/09/2026",
-  "periodos": [],
-  "sanidade": []
- },
- "avancado/arquivos-grandes-pelas-ferramentas-da-pysus.ipynb": {
-  "data": "01/09/2026",
-  "periodos": [],
-  "sanidade": []
- },
- "avancado/compartilhar-dados-sem-expor-identificadores.ipynb": {
-  "data": "01/09/2026",
-  "periodos": [],
-  "sanidade": [
-   "1. O arquivo traz identificador real: 1,019 CNS distintos — confere",
-   "2. A auto-detecção ignora o PA_CNSMED e marca outras: ['PA_INCURG', 'PA_CNPJCPF'] — confere",
-   "3. Distintos — original 377 | encrypt 20,000 | hash 377 | redact 1 — confere",
-   "4. unmask_data devolve o original: confere",
-   "5. O hash é revertido por dicionário (100%) — confere (é pseudonimização)"
+   "4. As suspeitas são poucas diante do total nacional — 3 de 47,930 unidades no país: confere"
   ]
  },
  "CIHA/atendimentos-ciha.ipynb": {
@@ -142,46 +90,6 @@
    "5. Leitos SUS entre 50% e 90% do total? 69.2% (sim)"
   ]
  },
- "cruzamentos/frio-e-coracao-replicando-um-estudo.ipynb": {
-  "data": "01/09/2026",
-  "periodos": [],
-  "sanidade": [
-   "Porto Alegre razão 0.80 (sim)",
-   "Curitiba razão 1.58 (sim)",
-   "Rio Grande do Sul (temperado): pico em jul (sim)",
-   "1.16 contra 1.15 (sim)"
-  ]
- },
- "cruzamentos/mortalidade-infantil-e-numeros-pequenos.ipynb": {
-  "data": "01/09/2026",
-  "periodos": [
-   "Ano de referência: 2022 | série: 2015 a 2022"
-  ],
-  "sanidade": [
-   "1. Taxa infantil entre 5 e 25 por mil? 10.32 (sim)",
-   "2. Neonatal é a maior parte (acima de 60%)? 69% (sim)",
-   "4. Causas mal definidas abaixo de 10%? 2.3% (sim)",
-   "5. Acumular anos ampliou o que dá para analisar? 80 para 219 municípios (sim)"
-  ]
- },
- "cruzamentos/painel-do-municipio.ipynb": {
-  "data": "01/09/2026",
-  "periodos": [
-   "Nascimentos: ano 2022 (o mais recente com arquivo do estado)",
-   "Ano do SINASC: 2022",
-   "Óbitos: ano 2022 (o mais recente com arquivo do estado)",
-   "Ano do SIM: 2022",
-   "Competência do CNES: 06/2024",
-   "Período do SIH: ano de 2025 inteiro, 12 meses (grupo RD)"
-  ],
-  "sanidade": [
-   "1. População do município encontrada? 577.318 (sim)",
-   "2. Cesárea entre 30% e 90%? 63.2% (sim)",
-   "3. Mortalidade geral entre 4 e 12 por mil? 7.6 (sim)",
-   "4. ICSAP entre 5% e 35%? 15.7% (sim)",
-   "5. Causas mal definidas abaixo de 10%? 1.7% (sim)"
-  ]
- },
  "IBGE/populacao-denominadores-e-piramides.ipynb": {
   "data": "01/09/2026",
   "periodos": [],
@@ -190,28 +98,6 @@
    "2. A pirâmide do estado soma menos que o Brasil — 11,824,665 de 212,583,750: confere",
    "3. População do Brasil na ordem de grandeza certa — 212,583,750 habitantes: confere",
    "4. Homens por 100 mulheres entre 90 e 110 — 95.2 homens por 100 mulheres: confere"
-  ]
- },
- "indicadores/mortalidade-infantil.ipynb": {
-  "data": "01/09/2026",
-  "periodos": [
-   "Estado: PR — 2022"
-  ],
-  "sanidade": [
-   "1. Vieram óbitos e nascimentos — 89,808 óbitos, 140,637 nascimentos: confere",
-   "2. Taxa de mortalidade infantil entre 5 e 30 por mil — 10.3 por mil nascidos vivos: confere",
-   "3. Neonatal + pós-neonatal = óbitos infantis — 998 + 453 = 1451 x 1451: confere",
-   "4. A neonatal é a maior parte da mortalidade infantil — 998 x 453: confere"
-  ]
- },
- "indicadores/populacao-e-taxas.ipynb": {
-  "data": "01/09/2026",
-  "periodos": [],
-  "sanidade": [
-   "1. A tabela de taxas foi montada — 27 estados: confere",
-   "2. Todo estado tem população maior que zero: confere",
-   "3. O ranking por casos difere do ranking por taxa — é exatamente o que este notebook existe para mostrar: confere",
-   "4. A soma das populações estaduais é plausível para o Brasil — 212,583,750 habitantes: confere"
   ]
  },
  "PNI/cobertura-vacinal-e-anos-incompletos.ipynb": {
@@ -362,6 +248,125 @@
    "1. Vieram nascimentos — 140,637 nascidos vivos: confere",
    "2. Todos são do estado pedido — código 41: confere",
    "4. Baixo peso ao nascer entre 5% e 15% — 9.4%: confere"
+  ]
+ },
+ "_comece-aqui/01-primeiros-passos.ipynb": {
+  "data": "01/09/2026",
+  "periodos": [],
+  "sanidade": [
+   "1. O download trouxe leitos — 276 registros: confere",
+   "2. Leitos SUS não passam do total de leitos — 1,625 de 1,807: confere",
+   "3. Ordem de grandeza plausível para um estado — 1,807 leitos: confere",
+   "4. A proporção de leitos SUS faz sentido (entre 20% e 100%) — 90% são SUS: confere"
+  ]
+ },
+ "_comece-aqui/02-descobrir-dados-disponiveis.ipynb": {
+  "data": "01/09/2026",
+  "periodos": [],
+  "sanidade": [
+   "1. O catálogo respondeu — 80 arquivos: confere",
+   "2. Há mais de um ano disponível — de 1979 a 2026: confere",
+   "3. O catálogo chega a um ano recente — vai até 2026: confere",
+   "4. O SINAN tem vários agravos — 56 agravos em 2024: confere"
+  ]
+ },
+ "_comece-aqui/03-mapa-completo-das-bases.ipynb": {
+  "data": "01/09/2026",
+  "periodos": [],
+  "sanidade": [
+   "1. Todas as 9 bases têm arquivo? confere",
+   "2. As duas maiores bases são CNES e SIA? ['CNES', 'SIA'] — confere",
+   "3. Bases com dado de 2025 ou depois: 8 de 8 — confere",
+   "4. Funções da origem 'Saúde' com resposta: 2 de 11 — confere (o número varia com a saúde do portal)",
+   "5. CNES/EP entrega equipes com INE: 571 identificadores — confere"
+  ]
+ },
+ "avancado/arquivos-grandes-e-sql.ipynb": {
+  "data": "01/09/2026",
+  "periodos": [],
+  "sanidade": [
+   "1. A consulta SQL devolveu resultado — 10 linhas: confere",
+   "2. A consulta SQL devolveu linhas agregadas — 10 linhas agregadas de 6,564,924 registros: confere",
+   "3. A série de vários anos foi montada — 3 anos: confere",
+   "4. O SQL foi mais rápido que carregar tudo — leitura completa levou 0.4s: confere"
+  ]
+ },
+ "avancado/arquivos-grandes-pelas-ferramentas-da-pysus.ipynb": {
+  "data": "01/09/2026",
+  "periodos": [],
+  "sanidade": []
+ },
+ "avancado/compartilhar-dados-sem-expor-identificadores.ipynb": {
+  "data": "01/09/2026",
+  "periodos": [],
+  "sanidade": [
+   "1. O arquivo traz identificador real: 1,019 CNS distintos — confere",
+   "2. A auto-detecção ignora o PA_CNSMED e marca outras: ['PA_INCURG', 'PA_CNPJCPF'] — confere",
+   "3. Distintos — original 377 | encrypt 20,000 | hash 377 | redact 1 — confere",
+   "4. unmask_data devolve o original: confere",
+   "5. O hash é revertido por dicionário (100%) — confere (é pseudonimização)"
+  ]
+ },
+ "cruzamentos/frio-e-coracao-replicando-um-estudo.ipynb": {
+  "data": "01/09/2026",
+  "periodos": [],
+  "sanidade": [
+   "Porto Alegre razão 0.80 (sim)",
+   "Curitiba razão 1.58 (sim)",
+   "Rio Grande do Sul (temperado): pico em jul (sim)",
+   "1.16 contra 1.15 (sim)"
+  ]
+ },
+ "cruzamentos/mortalidade-infantil-e-numeros-pequenos.ipynb": {
+  "data": "01/09/2026",
+  "periodos": [
+   "Ano de referência: 2022 | série: 2015 a 2022"
+  ],
+  "sanidade": [
+   "1. Taxa infantil entre 5 e 25 por mil? 10.32 (sim)",
+   "2. Neonatal é a maior parte (acima de 60%)? 69% (sim)",
+   "4. Causas mal definidas abaixo de 10%? 2.3% (sim)",
+   "5. Acumular anos ampliou o que dá para analisar? 80 para 219 municípios (sim)"
+  ]
+ },
+ "cruzamentos/painel-do-municipio.ipynb": {
+  "data": "01/09/2026",
+  "periodos": [
+   "Nascimentos: ano 2022 (o mais recente com arquivo do estado)",
+   "Ano do SINASC: 2022",
+   "Óbitos: ano 2022 (o mais recente com arquivo do estado)",
+   "Ano do SIM: 2022",
+   "Competência do CNES: 06/2024",
+   "Período do SIH: ano de 2025 inteiro, 12 meses (grupo RD)"
+  ],
+  "sanidade": [
+   "1. População do município encontrada? 577.318 (sim)",
+   "2. Cesárea entre 30% e 90%? 63.2% (sim)",
+   "3. Mortalidade geral entre 4 e 12 por mil? 7.6 (sim)",
+   "4. ICSAP entre 5% e 35%? 15.7% (sim)",
+   "5. Causas mal definidas abaixo de 10%? 1.7% (sim)"
+  ]
+ },
+ "indicadores/mortalidade-infantil.ipynb": {
+  "data": "01/09/2026",
+  "periodos": [
+   "Estado: PR — 2022"
+  ],
+  "sanidade": [
+   "1. Vieram óbitos e nascimentos — 89,808 óbitos, 140,637 nascimentos: confere",
+   "2. Taxa de mortalidade infantil entre 5 e 30 por mil — 10.3 por mil nascidos vivos: confere",
+   "3. Neonatal + pós-neonatal = óbitos infantis — 998 + 453 = 1451 x 1451: confere",
+   "4. A neonatal é a maior parte da mortalidade infantil — 998 x 453: confere"
+  ]
+ },
+ "indicadores/populacao-e-taxas.ipynb": {
+  "data": "01/09/2026",
+  "periodos": [],
+  "sanidade": [
+   "1. A tabela de taxas foi montada — 27 estados: confere",
+   "2. Todo estado tem população maior que zero: confere",
+   "3. O ranking por casos difere do ranking por taxa — é exatamente o que este notebook existe para mostrar: confere",
+   "4. A soma das populações estaduais é plausível para o Brasil — 212,583,750 habitantes: confere"
   ]
  }
 }

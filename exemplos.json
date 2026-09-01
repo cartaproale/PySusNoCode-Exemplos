@@ -5,7 +5,7 @@
  "total": 36,
  "validacao": {
   "data": "01/09/2026",
-  "funcionando": 32,
+  "funcionando": 36,
   "total": 36,
   "versao_pysus": "2.10.6"
  },
@@ -203,8 +203,7 @@
    "graficos": 4,
    "tempo": "8 a 15 minutos — os arquivos são grandes",
    "validacao": {
-    "situacao": "falha",
-    "detalhe": "célula 4: Error: TProtocolException: Invalid data"
+    "situacao": "ok"
    }
   },
   {
@@ -330,8 +329,7 @@
    "graficos": 1,
    "tempo": "4 a 6 minutos",
    "validacao": {
-    "situacao": "falha",
-    "detalhe": "célula 6: OSError: Couldn't deserialize thrift: invalid TType"
+    "situacao": "ok"
    }
   },
   {
@@ -401,8 +399,7 @@
    "graficos": 0,
    "tempo": "5 a 8 minutos",
    "validacao": {
-    "situacao": "falha",
-    "detalhe": "célula 3: OSError: Couldn't deserialize thrift: TProtocolException: Invalid data"
+    "situacao": "ok"
    }
   },
   {
@@ -486,8 +483,7 @@
    "graficos": 2,
    "tempo": "5 a 8 minutos, a maior parte em download",
    "validacao": {
-    "situacao": "falha",
-    "detalhe": "célula 5: OSError: Couldn't deserialize thrift: TProtocolException: Invalid data"
+    "situacao": "ok"
    }
   },
   {
