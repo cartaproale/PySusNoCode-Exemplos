@@ -4,7 +4,7 @@
  "ramo": "main",
  "total": 36,
  "validacao": {
-  "data": "31/08/2026",
+  "data": "01/09/2026",
   "funcionando": 32,
   "total": 36,
   "versao_pysus": "2.10.6"
@@ -204,7 +204,7 @@
    "tempo": "8 a 15 minutos — os arquivos são grandes",
    "validacao": {
     "situacao": "falha",
-    "detalhe": "célula 7: Error: TProtocolException: Invalid data"
+    "detalhe": "célula 4: Error: TProtocolException: Invalid data"
    }
   },
   {
