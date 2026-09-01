@@ -1,8 +1,14 @@
 {
- "gerado_em": "2026-08-29",
+ "gerado_em": "2026-09-01",
  "repositorio": "cartaproale/PySusNoCode-Exemplos",
  "ramo": "main",
  "total": 36,
+ "validacao": {
+  "data": "31/08/2026",
+  "funcionando": 32,
+  "total": 36,
+  "versao_pysus": "2.10.6"
+ },
  "exemplos": [
   {
    "arquivo": "_comece-aqui/01-primeiros-passos.ipynb",
@@ -11,9 +17,12 @@
    "grupo": "Comece por aqui",
    "base": "",
    "aprofundado": false,
-   "celulas": 9,
+   "celulas": 10,
    "graficos": 0,
-   "tempo": "3 a 5 minutos"
+   "tempo": "3 a 5 minutos",
+   "validacao": {
+    "situacao": "ok"
+   }
   },
   {
    "arquivo": "_comece-aqui/02-descobrir-dados-disponiveis.ipynb",
@@ -22,9 +31,12 @@
    "grupo": "Comece por aqui",
    "base": "",
    "aprofundado": false,
-   "celulas": 5,
+   "celulas": 6,
    "graficos": 0,
-   "tempo": "3 minutos"
+   "tempo": "3 minutos",
+   "validacao": {
+    "situacao": "ok"
+   }
   },
   {
    "arquivo": "_comece-aqui/03-mapa-completo-das-bases.ipynb",
@@ -33,9 +45,12 @@
    "grupo": "Comece por aqui",
    "base": "",
    "aprofundado": false,
-   "celulas": 5,
+   "celulas": 8,
    "graficos": 0,
-   "tempo": "4 a 6 minutos (só consulta catálogos, não baixa dados)"
+   "tempo": "4 a 6 minutos (só consulta catálogos, quase não baixa dados)",
+   "validacao": {
+    "situacao": "ok"
+   }
   },
   {
    "arquivo": "CIHA/o-que-o-ciha-acrescenta-ao-sih.ipynb",
@@ -46,7 +61,10 @@
    "aprofundado": true,
    "celulas": 13,
    "graficos": 2,
-   "tempo": "4 a 8 minutos"
+   "tempo": "4 a 8 minutos",
+   "validacao": {
+    "situacao": "ok"
+   }
   },
   {
    "arquivo": "CNES/rede-assistencial-e-leitos-por-habitante.ipynb",
@@ -57,7 +75,10 @@
    "aprofundado": true,
    "celulas": 17,
    "graficos": 3,
-   "tempo": "5 a 8 minutos"
+   "tempo": "5 a 8 minutos",
+   "validacao": {
+    "situacao": "ok"
+   }
   },
   {
    "arquivo": "cruzamentos/frio-e-coracao-replicando-um-estudo.ipynb",
@@ -68,7 +89,10 @@
    "aprofundado": true,
    "celulas": 10,
    "graficos": 3,
-   "tempo": "20 a 40 minutos na primeira vez. Ele baixa o SIH mês a mês de 2010 a 2024 para dois estados — são centenas de arquivos. Medido: 21 minutos com os arquivos já em cache, mais de 30 sem eles. Deixe rodando e volte depois"
+   "tempo": "20 a 40 minutos na primeira vez. Ele baixa o SIH mês a mês de 2010 a 2024 para dois estados — são centenas de arquivos. Medido: 21 minutos com os arquivos já em cache, mais de 30 sem eles. Deixe rodando e volte depois",
+   "validacao": {
+    "situacao": "ok"
+   }
   },
   {
    "arquivo": "cruzamentos/mortalidade-infantil-e-numeros-pequenos.ipynb",
@@ -77,9 +101,12 @@
    "grupo": "Cruzando bases",
    "base": "",
    "aprofundado": true,
-   "celulas": 15,
+   "celulas": 16,
    "graficos": 4,
-   "tempo": "6 a 10 minutos"
+   "tempo": "6 a 10 minutos",
+   "validacao": {
+    "situacao": "ok"
+   }
   },
   {
    "arquivo": "cruzamentos/painel-do-municipio.ipynb",
@@ -88,9 +115,12 @@
    "grupo": "Cruzando bases",
    "base": "",
    "aprofundado": true,
-   "celulas": 11,
+   "celulas": 12,
    "graficos": 1,
-   "tempo": "10 a 15 minutos"
+   "tempo": "10 a 15 minutos",
+   "validacao": {
+    "situacao": "ok"
+   }
   },
   {
    "arquivo": "IBGE/populacao-denominadores-e-piramides.ipynb",
@@ -99,9 +129,12 @@
    "grupo": "IBGE",
    "base": "IBGE",
    "aprofundado": true,
-   "celulas": 16,
+   "celulas": 18,
    "graficos": 4,
-   "tempo": "3 a 5 minutos"
+   "tempo": "3 a 5 minutos",
+   "validacao": {
+    "situacao": "ok"
+   }
   },
   {
    "arquivo": "PNI/cobertura-vacinal-e-anos-incompletos.ipynb",
@@ -112,7 +145,10 @@
    "aprofundado": true,
    "celulas": 12,
    "graficos": 3,
-   "tempo": "5 a 10 minutos"
+   "tempo": "5 a 10 minutos",
+   "validacao": {
+    "situacao": "ok"
+   }
   },
   {
    "arquivo": "SIA/alta-complexidade-oncologia-e-dialise.ipynb",
@@ -123,7 +159,10 @@
    "aprofundado": true,
    "celulas": 15,
    "graficos": 3,
-   "tempo": "5 a 10 minutos — o arquivo mensal passa de três milhões de linhas"
+   "tempo": "5 a 10 minutos — o arquivo mensal passa de três milhões de linhas",
+   "validacao": {
+    "situacao": "ok"
+   }
   },
   {
    "arquivo": "SIH/internacoes-sensiveis-a-atencao-primaria.ipynb",
@@ -134,7 +173,10 @@
    "aprofundado": true,
    "celulas": 18,
    "graficos": 3,
-   "tempo": "4 a 8 minutos"
+   "tempo": "4 a 8 minutos",
+   "validacao": {
+    "situacao": "ok"
+   }
   },
   {
    "arquivo": "SIM/mortalidade-prematura-por-dcnt.ipynb",
@@ -143,9 +185,12 @@
    "grupo": "SIM",
    "base": "SIM",
    "aprofundado": true,
-   "celulas": 18,
+   "celulas": 19,
    "graficos": 4,
-   "tempo": "6 a 10 minutos (baixa vários anos)"
+   "tempo": "6 a 10 minutos (baixa vários anos)",
+   "validacao": {
+    "situacao": "ok"
+   }
   },
   {
    "arquivo": "SINAN/arboviroses-dengue-chikungunya-zika.ipynb",
@@ -156,7 +201,11 @@
    "aprofundado": true,
    "celulas": 16,
    "graficos": 4,
-   "tempo": "8 a 15 minutos — os arquivos são grandes"
+   "tempo": "8 a 15 minutos — os arquivos são grandes",
+   "validacao": {
+    "situacao": "falha",
+    "detalhe": "célula 7: Error: TProtocolException: Invalid data"
+   }
   },
   {
    "arquivo": "SINASC/nascimentos-prematuridade-e-pre-natal.ipynb",
@@ -165,9 +214,12 @@
    "grupo": "SINASC",
    "base": "SINASC",
    "aprofundado": true,
-   "celulas": 21,
+   "celulas": 22,
    "graficos": 4,
-   "tempo": "5 a 8 minutos"
+   "tempo": "5 a 8 minutos",
+   "validacao": {
+    "situacao": "ok"
+   }
   },
   {
    "arquivo": "AtencaoPrimaria/producao-da-ubs-no-sisab-equipe-por-equipe.ipynb",
@@ -176,9 +228,12 @@
    "grupo": "AtencaoPrimaria",
    "base": "AtencaoPrimaria",
    "aprofundado": false,
-   "celulas": 10,
+   "celulas": 11,
    "graficos": 1,
-   "tempo": "4 a 9 minutos"
+   "tempo": "4 a 9 minutos",
+   "validacao": {
+    "situacao": "ok"
+   }
   },
   {
    "arquivo": "AtencaoPrimaria/painel-da-aps-programas-do-municipio.ipynb",
@@ -187,9 +242,12 @@
    "grupo": "AtencaoPrimaria",
    "base": "AtencaoPrimaria",
    "aprofundado": false,
-   "celulas": 13,
+   "celulas": 14,
    "graficos": 1,
-   "tempo": "4 a 8 minutos"
+   "tempo": "4 a 8 minutos",
+   "validacao": {
+    "situacao": "ok"
+   }
   },
   {
    "arquivo": "AtencaoPrimaria/previne-brasil-indicadores-da-aps.ipynb",
@@ -198,9 +256,12 @@
    "grupo": "AtencaoPrimaria",
    "base": "AtencaoPrimaria",
    "aprofundado": false,
-   "celulas": 13,
+   "celulas": 14,
    "graficos": 2,
-   "tempo": "3 a 6 minutos"
+   "tempo": "3 a 6 minutos",
+   "validacao": {
+    "situacao": "ok"
+   }
   },
   {
    "arquivo": "AtencaoPrimaria/ubs-no-mapa-e-o-que-o-cadastro-esconde.ipynb",
@@ -209,9 +270,12 @@
    "grupo": "AtencaoPrimaria",
    "base": "AtencaoPrimaria",
    "aprofundado": false,
-   "celulas": 10,
+   "celulas": 11,
    "graficos": 1,
-   "tempo": "4 a 7 minutos"
+   "tempo": "4 a 7 minutos",
+   "validacao": {
+    "situacao": "ok"
+   }
   },
   {
    "arquivo": "CIHA/atendimentos-ciha.ipynb",
@@ -220,9 +284,12 @@
    "grupo": "CIHA",
    "base": "CIHA",
    "aprofundado": false,
-   "celulas": 8,
+   "celulas": 9,
    "graficos": 1,
-   "tempo": "3 a 5 minutos"
+   "tempo": "3 a 5 minutos",
+   "validacao": {
+    "situacao": "ok"
+   }
   },
   {
    "arquivo": "CNES/leitos-por-municipio.ipynb",
@@ -231,9 +298,12 @@
    "grupo": "CNES",
    "base": "CNES",
    "aprofundado": false,
-   "celulas": 9,
+   "celulas": 10,
    "graficos": 1,
-   "tempo": "3 a 5 minutos"
+   "tempo": "3 a 5 minutos",
+   "validacao": {
+    "situacao": "ok"
+   }
   },
   {
    "arquivo": "CNES/profissionais-de-saude.ipynb",
@@ -242,9 +312,12 @@
    "grupo": "CNES",
    "base": "CNES",
    "aprofundado": false,
-   "celulas": 8,
+   "celulas": 9,
    "graficos": 1,
-   "tempo": "4 a 6 minutos"
+   "tempo": "4 a 6 minutos",
+   "validacao": {
+    "situacao": "ok"
+   }
   },
   {
    "arquivo": "indicadores/populacao-e-taxas.ipynb",
@@ -253,9 +326,13 @@
    "grupo": "Indicadores",
    "base": "",
    "aprofundado": false,
-   "celulas": 8,
+   "celulas": 9,
    "graficos": 1,
-   "tempo": "4 a 6 minutos"
+   "tempo": "4 a 6 minutos",
+   "validacao": {
+    "situacao": "falha",
+    "detalhe": "célula 6: OSError: Couldn't deserialize thrift: invalid TType"
+   }
   },
   {
    "arquivo": "indicadores/mortalidade-infantil.ipynb",
@@ -264,9 +341,12 @@
    "grupo": "Indicadores",
    "base": "",
    "aprofundado": false,
-   "celulas": 10,
+   "celulas": 11,
    "graficos": 1,
-   "tempo": "5 a 8 minutos"
+   "tempo": "5 a 8 minutos",
+   "validacao": {
+    "situacao": "ok"
+   }
   },
   {
    "arquivo": "PNI/cobertura-vacinal.ipynb",
@@ -275,9 +355,12 @@
    "grupo": "PNI",
    "base": "PNI",
    "aprofundado": false,
-   "celulas": 7,
+   "celulas": 8,
    "graficos": 1,
-   "tempo": "3 a 5 minutos"
+   "tempo": "3 a 5 minutos",
+   "validacao": {
+    "situacao": "ok"
+   }
   },
   {
    "arquivo": "avancado/arquivos-grandes-pelas-ferramentas-da-pysus.ipynb",
@@ -288,7 +371,10 @@
    "aprofundado": false,
    "celulas": 9,
    "graficos": 0,
-   "tempo": "2 a 5 minutos"
+   "tempo": "2 a 5 minutos",
+   "validacao": {
+    "situacao": "ok"
+   }
   },
   {
    "arquivo": "avancado/compartilhar-dados-sem-expor-identificadores.ipynb",
@@ -299,7 +385,10 @@
    "aprofundado": false,
    "celulas": 13,
    "graficos": 0,
-   "tempo": "3 a 6 minutos"
+   "tempo": "3 a 6 minutos",
+   "validacao": {
+    "situacao": "ok"
+   }
   },
   {
    "arquivo": "avancado/arquivos-grandes-e-sql.ipynb",
@@ -308,9 +397,13 @@
    "grupo": "Para quem já se sente à vontade",
    "base": "",
    "aprofundado": false,
-   "celulas": 6,
+   "celulas": 7,
    "graficos": 0,
-   "tempo": "5 a 8 minutos"
+   "tempo": "5 a 8 minutos",
+   "validacao": {
+    "situacao": "falha",
+    "detalhe": "célula 3: OSError: Couldn't deserialize thrift: TProtocolException: Invalid data"
+   }
   },
   {
    "arquivo": "SIA/dialise-o-caminho-do-paciente-renal.ipynb",
@@ -319,9 +412,12 @@
    "grupo": "SIA",
    "base": "SIA",
    "aprofundado": false,
-   "celulas": 14,
+   "celulas": 15,
    "graficos": 1,
-   "tempo": "6 a 12 minutos"
+   "tempo": "6 a 12 minutos",
+   "validacao": {
+    "situacao": "ok"
+   }
   },
   {
    "arquivo": "SIA/producao-ambulatorial.ipynb",
@@ -330,9 +426,12 @@
    "grupo": "SIA",
    "base": "SIA",
    "aprofundado": false,
-   "celulas": 9,
+   "celulas": 10,
    "graficos": 1,
-   "tempo": "6 a 10 minutos"
+   "tempo": "6 a 10 minutos",
+   "validacao": {
+    "situacao": "ok"
+   }
   },
   {
    "arquivo": "SIH/internacoes-por-causa.ipynb",
@@ -341,9 +440,12 @@
    "grupo": "SIH",
    "base": "SIH",
    "aprofundado": false,
-   "celulas": 9,
+   "celulas": 10,
    "graficos": 1,
-   "tempo": "4 a 6 minutos"
+   "tempo": "4 a 6 minutos",
+   "validacao": {
+    "situacao": "ok"
+   }
   },
   {
    "arquivo": "SIM/causas-de-obito.ipynb",
@@ -352,9 +454,12 @@
    "grupo": "SIM",
    "base": "SIM",
    "aprofundado": false,
-   "celulas": 8,
+   "celulas": 9,
    "graficos": 1,
-   "tempo": "3 a 5 minutos"
+   "tempo": "3 a 5 minutos",
+   "validacao": {
+    "situacao": "ok"
+   }
   },
   {
    "arquivo": "SINAN/decodificar-os-codigos-do-sinan.ipynb",
@@ -365,7 +470,10 @@
    "aprofundado": false,
    "celulas": 14,
    "graficos": 1,
-   "tempo": "2 a 4 minutos"
+   "tempo": "2 a 4 minutos",
+   "validacao": {
+    "situacao": "ok"
+   }
   },
   {
    "arquivo": "SINAN/dengue-por-estado-e-mes.ipynb",
@@ -374,9 +482,13 @@
    "grupo": "SINAN",
    "base": "SINAN",
    "aprofundado": false,
-   "celulas": 9,
+   "celulas": 10,
    "graficos": 2,
-   "tempo": "5 a 8 minutos, a maior parte em download"
+   "tempo": "5 a 8 minutos, a maior parte em download",
+   "validacao": {
+    "situacao": "falha",
+    "detalhe": "célula 5: OSError: Couldn't deserialize thrift: TProtocolException: Invalid data"
+   }
   },
   {
    "arquivo": "SINAN/serie-historica-tuberculose.ipynb",
@@ -385,9 +497,12 @@
    "grupo": "SINAN",
    "base": "SINAN",
    "aprofundado": false,
-   "celulas": 7,
+   "celulas": 8,
    "graficos": 1,
-   "tempo": "6 a 10 minutos (baixa um arquivo por ano)"
+   "tempo": "6 a 10 minutos (baixa um arquivo por ano)",
+   "validacao": {
+    "situacao": "ok"
+   }
   },
   {
    "arquivo": "SINASC/perfil-dos-nascimentos.ipynb",
@@ -396,9 +511,12 @@
    "grupo": "SINASC",
    "base": "SINASC",
    "aprofundado": false,
-   "celulas": 8,
+   "celulas": 9,
    "graficos": 1,
-   "tempo": "3 a 5 minutos"
+   "tempo": "3 a 5 minutos",
+   "validacao": {
+    "situacao": "ok"
+   }
   }
  ]
 }

@@ -104,7 +104,51 @@ def descrever(nb: dict) -> tuple[str, str, str, bool]:
     return titulo, descricao, tempo, aprofundado
 
 
+VALIDACAO = RAIZ / "VALIDACAO.md"
+
+
+def ler_validacao() -> tuple[dict, dict]:
+    """Resumo e situação por notebook, direto do VALIDACAO.md.
+
+    O catálogo é o que o aplicativo mostra ao usuário na hora de escolher um
+    exemplo — e a validação faz parte da escolha. Quem lê "reprovado na última
+    validação" ANTES de abrir não perde tempo com um notebook que o próprio
+    repositório sabe que está quebrado (quase sempre por defeito a montante,
+    como o catálogo duplicado da dengue em 31/08/2026).
+    """
+    resumo: dict = {}
+    por_arquivo: dict = {}
+    if not VALIDACAO.is_file():
+        return resumo, por_arquivo
+    texto = VALIDACAO.read_text(encoding="utf-8")
+    m = re.search(r"\*\*Última validação:\*\* *(\S+)", texto)
+    if m:
+        resumo["data"] = m.group(1)
+    m = re.search(r"\*\*Resultado:\*\* *(\d+) de (\d+)", texto)
+    if m:
+        resumo["funcionando"] = int(m.group(1))
+        resumo["total"] = int(m.group(2))
+    m = re.search(r"\*\*Versão da PySUS usada no teste:\*\* *(\S+)", texto)
+    if m:
+        resumo["versao_pysus"] = m.group(1)
+    for linha in texto.splitlines():
+        m = re.match(r"\| `([^`]+)` \| \d+ \| \d+ \| \S+ \| (.+?) \|\s*$", linha)
+        if not m:
+            continue
+        arquivo, situacao = m.group(1), m.group(2).strip()
+        if situacao.startswith("✅"):
+            por_arquivo[arquivo] = {"situacao": "ok"}
+        elif situacao.startswith("⚠️"):
+            por_arquivo[arquivo] = {"situacao": "alerta",
+                                    "detalhe": situacao.lstrip("⚠️ ").strip()[:160]}
+        else:
+            por_arquivo[arquivo] = {"situacao": "falha",
+                                    "detalhe": situacao.lstrip("❌ ").strip()[:160]}
+    return resumo, por_arquivo
+
+
 def main() -> int:
+    resumo_val, situacao_val = ler_validacao()
     exemplos = []
     for caminho in sorted(RAIZ.rglob("*.ipynb")):
         if ".ipynb_checkpoints" in str(caminho):
@@ -130,6 +174,7 @@ def main() -> int:
             "celulas": celulas,
             "graficos": graficos,
             "tempo": tempo,
+            "validacao": situacao_val.get(relativo, {}),
         })
 
     # Comece por aqui primeiro; depois os aprofundados; o resto em seguida.
@@ -145,6 +190,7 @@ def main() -> int:
         "repositorio": REPOSITORIO,
         "ramo": RAMO,
         "total": len(exemplos),
+        "validacao": resumo_val,
         "exemplos": exemplos,
     }
     DESTINO.write_text(
