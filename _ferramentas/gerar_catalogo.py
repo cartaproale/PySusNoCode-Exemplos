@@ -16,6 +16,19 @@ from datetime import date
 from pathlib import Path
 
 RAIZ = Path(__file__).resolve().parents[1]
+
+
+def do_repositorio(caminho) -> bool:
+    """Notebook que faz parte do repositório de verdade.
+
+    Uma worktree do git (`.claude/worktrees/<nome>/`) e uma pasta de
+    checkpoints do Jupyter carregam CÓPIAS de todos os notebooks. Em
+    07/09/2026 uma rodada completa validou 72 arquivos em vez de 36, gastou o
+    dobro do tempo e relatou cada defeito duas vezes.
+    """
+    partes = set(Path(caminho).parts)
+    return not (partes & {".claude", ".ipynb_checkpoints", "_ferramentas"})
+
 DESTINO = RAIZ / "exemplos.json"
 REPOSITORIO = "cartaproale/PySusNoCode-Exemplos"
 RAMO = "main"
@@ -150,7 +163,8 @@ def ler_validacao() -> tuple[dict, dict]:
 def main() -> int:
     resumo_val, situacao_val = ler_validacao()
     exemplos = []
-    for caminho in sorted(RAIZ.rglob("*.ipynb")):
+    for caminho in sorted(p for p in RAIZ.rglob("*.ipynb")
+                          if do_repositorio(p)):
         if ".ipynb_checkpoints" in str(caminho):
             continue
         relativo = caminho.relative_to(RAIZ).as_posix()

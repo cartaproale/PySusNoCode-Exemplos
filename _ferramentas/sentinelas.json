@@ -1,9 +1,9 @@
 {
  "AtencaoPrimaria/producao-da-ubs-no-sisab-equipe-por-equipe.ipynb": {
-  "data": "01/09/2026",
+  "data": "07/09/2026",
   "periodos": [],
   "sanidade": [
-   "1. O SISAB devolveu o relatório — 307,840 linhas: confere",
+   "1. O SISAB devolveu o relatório — 307,960 linhas: confere",
    "2. A unidade pedida aparece no relatório — CNES 2673002, 15 linhas: confere",
    "3. Todas as competências pedidas vieram — 3 pedidas: confere",
    "4. Todo INE preenchido tem 10 dígitos — 12 de 15 linhas têm INE; tamanhos: [np.int64(10)]: confere",
@@ -11,7 +11,7 @@
   ]
  },
  "AtencaoPrimaria/painel-da-aps-programas-do-municipio.ipynb": {
-  "data": "01/09/2026",
+  "data": "07/09/2026",
   "periodos": [],
   "sanidade": [
    "1. O painel tem indicadores — 6 linhas: confere",
@@ -21,7 +21,7 @@
   ]
  },
  "AtencaoPrimaria/previne-brasil-indicadores-da-aps.ipynb": {
-  "data": "01/09/2026",
+  "data": "07/09/2026",
   "periodos": [],
   "sanidade": [
    "1. Vieram indicadores — 21,546 linhas: confere",
@@ -32,17 +32,17 @@
   ]
  },
  "AtencaoPrimaria/ubs-no-mapa-e-o-que-o-cadastro-esconde.ipynb": {
-  "data": "01/09/2026",
+  "data": "07/09/2026",
   "periodos": [],
   "sanidade": [
    "1. Há UBS no estado — 2,293 unidades: confere",
    "2. Todas as unidades do recorte são do estado pedido — código 41: confere",
    "3. As coordenadas do recorte caem dentro do Brasil: confere",
-   "4. As suspeitas são poucas diante do total nacional — 3 de 47,930 unidades no país: confere"
+   "4. As suspeitas são poucas diante do total nacional — 3 de 47,936 unidades no país: confere"
   ]
  },
  "CIHA/atendimentos-ciha.ipynb": {
-  "data": "01/09/2026",
+  "data": "07/09/2026",
   "periodos": [],
   "sanidade": [
    "1. Vieram atendimentos — 137,746 registros: confere",
@@ -52,7 +52,7 @@
   ]
  },
  "CIHA/o-que-o-ciha-acrescenta-ao-sih.ipynb": {
-  "data": "01/09/2026",
+  "data": "07/09/2026",
   "periodos": [],
   "sanidade": [
    "2. Permanência do CIHA entre 1 e 10 dias? 2.5 (sim)",
@@ -60,7 +60,7 @@
   ]
  },
  "CNES/leitos-por-municipio.ipynb": {
-  "data": "01/09/2026",
+  "data": "07/09/2026",
   "periodos": [],
   "sanidade": [
    "1. Vieram leitos — 3,261 registros: confere",
@@ -71,7 +71,7 @@
   ]
  },
  "CNES/profissionais-de-saude.ipynb": {
-  "data": "01/09/2026",
+  "data": "07/09/2026",
   "periodos": [],
   "sanidade": [
    "1. Vieram profissionais — 356,758 registros: confere",
@@ -81,7 +81,7 @@
   ]
  },
  "CNES/rede-assistencial-e-leitos-por-habitante.ipynb": {
-  "data": "01/09/2026",
+  "data": "07/09/2026",
   "periodos": [],
   "sanidade": [
    "1. Leitos por mil entre 1,5 e 4,0? 2.63 (sim)",
@@ -91,7 +91,7 @@
   ]
  },
  "IBGE/populacao-denominadores-e-piramides.ipynb": {
-  "data": "01/09/2026",
+  "data": "07/09/2026",
   "periodos": [],
   "sanidade": [
    "1. A pirâmide tem as faixas etárias — 19 faixas: confere",
@@ -101,7 +101,7 @@
   ]
  },
  "PNI/cobertura-vacinal-e-anos-incompletos.ipynb": {
-  "data": "01/09/2026",
+  "data": "07/09/2026",
   "periodos": [],
   "sanidade": [
    "1. Cobertura mediana entre 60% e 110%? 87.1% (sim)",
@@ -109,17 +109,19 @@
   ]
  },
  "PNI/cobertura-vacinal.ipynb": {
-  "data": "01/09/2026",
+  "data": "07/09/2026",
   "periodos": [],
   "sanidade": [
-   "1. Vieram registros de vacinação — 225,717 registros: confere",
-   "2. Há mais de uma vacina no recorte — 15 vacinas: confere",
-   "3. Há mais doses aplicadas do que linhas (a linha não é a dose) — 2,578,390 doses em 225,717 linhas: confere",
-   "4. Nenhuma cobertura absurda (acima de 200%) — máximo 75%: confere"
+   "1. Vieram registros de vacinação — 216,594 registros de doses: confere",
+   "2. As famílias DPNI e CPNI não foram misturadas — 12 colunas nas doses, 7 na cobertura: confere",
+   "3. Há mais de uma vacina no recorte — 15 vacinas: confere",
+   "4. Há mais doses aplicadas do que linhas (a linha não é a dose) — 2,439,636 doses em 216,594 linhas: confere",
+   "5. A conversão da cobertura não perdeu valores — 100.0% viraram número: confere",
+   "6. Nenhuma cobertura absurda (acima de 200%) — máximo 64%: confere"
   ]
  },
  "SIA/alta-complexidade-oncologia-e-dialise.ipynb": {
-  "data": "01/09/2026",
+  "data": "07/09/2026",
   "periodos": [],
   "sanidade": [
    "1. Alta complexidade acima de 40% do valor? 50.8% (sim)",
@@ -128,7 +130,7 @@
   ]
  },
  "SIA/dialise-o-caminho-do-paciente-renal.ipynb": {
-  "data": "01/09/2026",
+  "data": "07/09/2026",
   "periodos": [],
   "sanidade": [
    "1. Vieram registros de diálise: confere",
@@ -137,7 +139,7 @@
   ]
  },
  "SIA/producao-ambulatorial.ipynb": {
-  "data": "01/09/2026",
+  "data": "07/09/2026",
   "periodos": [],
   "sanidade": [
    "1. Veio produção — 3,246,596 registros: confere",
@@ -147,7 +149,7 @@
   ]
  },
  "SIH/internacoes-por-causa.ipynb": {
-  "data": "01/09/2026",
+  "data": "07/09/2026",
   "periodos": [],
   "sanidade": [
    "1. Vieram internações — 80,026 internações: confere",
@@ -157,7 +159,7 @@
   ]
  },
  "SIH/internacoes-sensiveis-a-atencao-primaria.ipynb": {
-  "data": "01/09/2026",
+  "data": "07/09/2026",
   "periodos": [
    "Vamos usar PR, 2025, os 12 meses do ano.",
    "Período analisado: 12 mês(es) de 2025"
@@ -169,7 +171,7 @@
   ]
  },
  "SIM/causas-de-obito.ipynb": {
-  "data": "01/09/2026",
+  "data": "07/09/2026",
   "periodos": [],
   "sanidade": [
    "1. Vieram óbitos — 83,465 óbitos: confere",
@@ -179,7 +181,7 @@
   ]
  },
  "SIM/mortalidade-prematura-por-dcnt.ipynb": {
-  "data": "01/09/2026",
+  "data": "07/09/2026",
   "periodos": [
    "Ano de referência: 2026",
    "Ano usado: 2024 (o mais recente com arquivo do estado)"
@@ -192,14 +194,14 @@
   ]
  },
  "SINAN/arboviroses-dengue-chikungunya-zika.ipynb": {
-  "data": "01/09/2026",
+  "data": "07/09/2026",
   "periodos": [],
   "sanidade": [
    "3. Pico entre as semanas 8 e 20? semana 12 (sim)"
   ]
  },
  "SINAN/decodificar-os-codigos-do-sinan.ipynb": {
-  "data": "01/09/2026",
+  "data": "07/09/2026",
   "periodos": [],
   "sanidade": [
    "1. O esquema rendeu dicionário: 34 colunas — confere",
@@ -210,7 +212,7 @@
   ]
  },
  "SINAN/dengue-por-estado-e-mes.ipynb": {
-  "data": "01/09/2026",
+  "data": "07/09/2026",
   "periodos": [],
   "sanidade": [
    "1. Vieram casos — 6,564,924 notificações: confere",
@@ -220,7 +222,7 @@
   ]
  },
  "SINAN/serie-historica-tuberculose.ipynb": {
-  "data": "01/09/2026",
+  "data": "07/09/2026",
   "periodos": [],
   "sanidade": [
    "1. A série tem mais de um ano — 5 anos: confere",
@@ -230,7 +232,7 @@
   ]
  },
  "SINASC/nascimentos-prematuridade-e-pre-natal.ipynb": {
-  "data": "01/09/2026",
+  "data": "07/09/2026",
   "periodos": [
    "Ano de referência: 2022",
    "Ano usado: 2022 (o mais recente com arquivo do estado)"
@@ -242,7 +244,7 @@
   ]
  },
  "SINASC/perfil-dos-nascimentos.ipynb": {
-  "data": "01/09/2026",
+  "data": "07/09/2026",
   "periodos": [],
   "sanidade": [
    "1. Vieram nascimentos — 140,637 nascidos vivos: confere",
@@ -251,7 +253,7 @@
   ]
  },
  "_comece-aqui/01-primeiros-passos.ipynb": {
-  "data": "01/09/2026",
+  "data": "07/09/2026",
   "periodos": [],
   "sanidade": [
    "1. O download trouxe leitos — 276 registros: confere",
@@ -261,7 +263,7 @@
   ]
  },
  "_comece-aqui/02-descobrir-dados-disponiveis.ipynb": {
-  "data": "01/09/2026",
+  "data": "07/09/2026",
   "periodos": [],
   "sanidade": [
    "1. O catálogo respondeu — 80 arquivos: confere",
@@ -271,18 +273,18 @@
   ]
  },
  "_comece-aqui/03-mapa-completo-das-bases.ipynb": {
-  "data": "01/09/2026",
+  "data": "07/09/2026",
   "periodos": [],
   "sanidade": [
    "1. Todas as 9 bases têm arquivo? confere",
    "2. As duas maiores bases são CNES e SIA? ['CNES', 'SIA'] — confere",
    "3. Bases com dado de 2025 ou depois: 8 de 8 — confere",
-   "4. Funções da origem 'Saúde' com resposta: 2 de 11 — confere (o número varia com a saúde do portal)",
+   "4. Funções da origem 'Saúde' com resposta: 10 de 11 — confere (o número varia com a saúde do portal)",
    "5. CNES/EP entrega equipes com INE: 571 identificadores — confere"
   ]
  },
  "avancado/arquivos-grandes-e-sql.ipynb": {
-  "data": "01/09/2026",
+  "data": "07/09/2026",
   "periodos": [],
   "sanidade": [
    "1. A consulta SQL devolveu resultado — 10 linhas: confere",
@@ -292,12 +294,12 @@
   ]
  },
  "avancado/arquivos-grandes-pelas-ferramentas-da-pysus.ipynb": {
-  "data": "01/09/2026",
+  "data": "07/09/2026",
   "periodos": [],
   "sanidade": []
  },
  "avancado/compartilhar-dados-sem-expor-identificadores.ipynb": {
-  "data": "01/09/2026",
+  "data": "07/09/2026",
   "periodos": [],
   "sanidade": [
    "1. O arquivo traz identificador real: 1,019 CNS distintos — confere",
@@ -308,17 +310,18 @@
   ]
  },
  "cruzamentos/frio-e-coracao-replicando-um-estudo.ipynb": {
-  "data": "01/09/2026",
+  "data": "07/09/2026",
   "periodos": [],
   "sanidade": [
    "Porto Alegre razão 0.80 (sim)",
-   "Curitiba razão 1.58 (sim)",
+   "Curitiba razão 1.67 (sim)",
    "Rio Grande do Sul (temperado): pico em jul (sim)",
-   "1.16 contra 1.15 (sim)"
+   "1.35 contra 1.02 — 1.33x (sim)",
+   "275.485 óbitos em 4 estados e 9 anos, de 540.000 do capítulo IX inteiro = 51% (sim)"
   ]
  },
  "cruzamentos/mortalidade-infantil-e-numeros-pequenos.ipynb": {
-  "data": "01/09/2026",
+  "data": "07/09/2026",
   "periodos": [
    "Ano de referência: 2022 | série: 2015 a 2022"
   ],
@@ -330,7 +333,7 @@
   ]
  },
  "cruzamentos/painel-do-municipio.ipynb": {
-  "data": "01/09/2026",
+  "data": "07/09/2026",
   "periodos": [
    "Nascimentos: ano 2022 (o mais recente com arquivo do estado)",
    "Ano do SINASC: 2022",
@@ -348,7 +351,7 @@
   ]
  },
  "indicadores/mortalidade-infantil.ipynb": {
-  "data": "01/09/2026",
+  "data": "07/09/2026",
   "periodos": [
    "Estado: PR — 2022"
   ],
@@ -360,9 +363,10 @@
   ]
  },
  "indicadores/populacao-e-taxas.ipynb": {
-  "data": "01/09/2026",
+  "data": "07/09/2026",
   "periodos": [],
   "sanidade": [
+   "0. A população do Brasil não veio dobrada — 212,583,750 habitantes: confere",
    "1. A tabela de taxas foi montada — 27 estados: confere",
    "2. Todo estado tem população maior que zero: confere",
    "3. O ranking por casos difere do ranking por taxa — é exatamente o que este notebook existe para mostrar: confere",

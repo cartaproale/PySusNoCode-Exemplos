@@ -45,6 +45,19 @@ if str(APP) not in sys.path:
 from pysusnocode.kernel import NotebookKernel  # noqa: E402
 
 RAIZ = Path(__file__).resolve().parents[1]
+
+
+def do_repositorio(caminho) -> bool:
+    """Notebook que faz parte do repositório de verdade.
+
+    Uma worktree do git (`.claude/worktrees/<nome>/`) e uma pasta de
+    checkpoints do Jupyter carregam CÓPIAS de todos os notebooks. Em
+    07/09/2026 uma rodada completa validou 72 arquivos em vez de 36, gastou o
+    dobro do tempo e relatou cada defeito duas vezes.
+    """
+    partes = set(Path(caminho).parts)
+    return not (partes & {".claude", ".ipynb_checkpoints", "_ferramentas"})
+
 RELATORIO = RAIZ / "VALIDACAO.md"
 TEMPO_LIMITE = 1800
 
@@ -66,6 +79,35 @@ def versao_pysus() -> str:
 
 CABECALHO_DE_EXCECAO = re.compile(r"^([A-Za-z_][\w.]*(?:Error|Exception|Warning|"
                                   r"Interrupt|Exit|[A-Z]\w*)): (.+)$")
+
+
+
+def selos_quebrados(doc) -> list[str]:
+    """Celulas cuja saida gravada veio de OUTRA versao do codigo.
+
+    O reexecutar.py sela a fonte junto da saida. Se a fonte mudou depois, o
+    selo nao bate: o notebook mostra no GitHub um numero que o codigo atual
+    ja nao produz. Celula sem selo nao acusa — o selo chega na proxima
+    reexecucao.
+    """
+    import hashlib
+
+    quebrados = []
+    numero = 0
+    for celula in doc.get("cells", []):
+        if celula.get("cell_type") != "code":
+            continue
+        fonte_celula = "".join(celula.get("source", ""))
+        if not fonte_celula.strip():
+            continue
+        numero += 1
+        selo = (celula.get("metadata") or {}).get("fonte_selada")
+        if not selo:
+            continue
+        atual = hashlib.sha1(fonte_celula.encode("utf-8")).hexdigest()[:12]
+        if selo != atual and celula.get("outputs"):
+            quebrados.append(f"célula {numero}")
+    return quebrados
 
 
 def diagnostico(resumo: str, largura: int = 200) -> str:
@@ -184,7 +226,8 @@ def semear() -> int:
     dizendo a verdade sobre o estado publicado.
     """
     memoria: dict = {}
-    for caminho in sorted(RAIZ.rglob("*.ipynb")):
+    for caminho in sorted(p for p in RAIZ.rglob("*.ipynb")
+                          if do_repositorio(p)):
         if ".ipynb_checkpoints" in str(caminho):
             continue
         nb = json.loads(caminho.read_text(encoding="utf-8"))
@@ -283,7 +326,7 @@ def main() -> int:
     filtro = sys.argv[1] if len(sys.argv) > 1 else ""
     notebooks = ordenar(sorted(
         p for p in RAIZ.rglob("*.ipynb")
-        if ".ipynb_checkpoints" not in str(p) and filtro in str(p.relative_to(RAIZ))
+        if do_repositorio(p) and filtro in str(p.relative_to(RAIZ))
     ))
     if not notebooks:
         print("Nenhum notebook encontrado.")
@@ -299,7 +342,17 @@ def main() -> int:
     resultados = []
     for caminho in notebooks:
         print(f"→ {caminho.relative_to(RAIZ)}")
+        # O selo casa a saida gravada com a fonte que a produziu. Quebrado,
+        # o notebook mostra no GitHub um numero que o codigo atual ja nao
+        # produz — foi o que aconteceu em 07/09/2026, e nada acusava.
+        quebrados = selos_quebrados(
+            json.loads(caminho.read_text(encoding="utf-8")))
         r = executar(caminho)
+        if quebrados:
+            r["alertas"].append(
+                "saída gravada não veio do código atual em "
+                + ", ".join(quebrados)
+                + " — reexecute antes de publicar")
         resultados.append(r)
         # Notebook que FALHOU nao entra na comparacao: a sanidade nem rodou,
         # e o retrato pela metade so geraria "sumiu tudo" — o erro ja conta.

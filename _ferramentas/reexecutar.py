@@ -52,6 +52,27 @@ from pysusnocode.kernel import NotebookKernel  # noqa: E402
 from montar_notebook import limpar_saidas  # noqa: E402
 
 RAIZ = Path(__file__).resolve().parents[1]
+
+
+def selo_da_fonte(texto: str) -> str:
+    "Identidade curta da fonte de uma celula, para casar saida com codigo."
+    import hashlib
+
+    return hashlib.sha1(texto.encode("utf-8")).hexdigest()[:12]
+
+
+
+def do_repositorio(caminho) -> bool:
+    """Notebook que faz parte do repositório de verdade.
+
+    Uma worktree do git (`.claude/worktrees/<nome>/`) e uma pasta de
+    checkpoints do Jupyter carregam CÓPIAS de todos os notebooks. Em
+    07/09/2026 uma rodada completa validou 72 arquivos em vez de 36, gastou o
+    dobro do tempo e relatou cada defeito duas vezes.
+    """
+    partes = set(Path(caminho).parts)
+    return not (partes & {".claude", ".ipynb_checkpoints", "_ferramentas"})
+
 TEMPO_LIMITE = 1800
 
 
@@ -87,6 +108,10 @@ def reexecutar(caminho: Path) -> tuple[bool, list[str]]:
                 except Exception:  # noqa: BLE001
                     pass
             celula["outputs"] = limpar_saidas(saidas)
+            # O selo diz de QUAL fonte esta saida veio. Quem editar o codigo
+            # depois e esquecer de reexecutar deixa o selo para tras, e o
+            # validar_todos acusa em vez de publicar numero velho.
+            celula.setdefault("metadata", {})["fonte_selada"] = selo_da_fonte(fonte)
             if not resultado.ok:
                 erros.append(
                     f"célula {contador}: "
@@ -104,7 +129,7 @@ def reexecutar(caminho: Path) -> tuple[bool, list[str]]:
 def alvos(argumentos: list[str]) -> list[Path]:
     if not argumentos:
         return sorted(p for p in RAIZ.rglob("*.ipynb")
-                      if "_ferramentas" not in str(p))
+                      if do_repositorio(p))
     # Um por um, e nao so o primeiro: a versao anterior lia sys.argv[1] e jogava
     # fora o resto CALADA. Pedir dois notebooks rodava um, dizia "1 de 1 sem
     # erro", e o segundo ficava por reexecutar sem ninguem saber.
@@ -125,7 +150,7 @@ def um_alvo(argumento: str) -> list[Path]:
         # silencio, porque a raiz nao tem .ipynb solto. Zero calado e o defeito
         # que este repositorio inteiro existe para ensinar a evitar.
         achados = sorted(caminho.rglob("*.ipynb"))
-        achados = [a for a in achados if "_ferramentas" not in str(a)]
+        achados = [a for a in achados if do_repositorio(a)]
         if not achados:
             raise SystemExit(f"nenhum notebook em {argumento}")
         return achados
