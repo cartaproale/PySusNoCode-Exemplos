@@ -18,7 +18,27 @@ import time
 from datetime import date
 from pathlib import Path
 
-APP = Path(__file__).resolve().parents[2] / "PySusNoCodeForWindows"
+# O relatorio tem setas e acentos; redirecionado para arquivo, o Windows
+# tenta gravar em cp1252 e estoura. Fixamos a saida em UTF-8.
+for _fluxo in (sys.stdout, sys.stderr):
+    if hasattr(_fluxo, "reconfigure"):
+        _fluxo.reconfigure(encoding="utf-8", errors="replace")
+
+def _achar_app() -> Path:
+    """O aplicativo fica ao lado do repositorio.
+
+    Sobe os diretorios em vez de contar niveis: assim tambem funciona quando
+    a ferramenta roda de dentro de uma worktree do git, onde o repositorio
+    esta tres niveis mais fundo.
+    """
+    for base in Path(__file__).resolve().parents:
+        candidato = base / "PySusNoCodeForWindows"
+        if (candidato / "pysusnocode").is_dir():
+            return candidato
+    return Path(__file__).resolve().parents[2] / "PySusNoCodeForWindows"
+
+
+APP = _achar_app()
 if str(APP) not in sys.path:
     sys.path.insert(0, str(APP))
 
