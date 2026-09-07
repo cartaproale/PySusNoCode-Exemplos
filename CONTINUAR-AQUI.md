@@ -96,14 +96,32 @@ Pendências que este commit **não** fecha:
   Consequência esperada: a próxima rodada completa vai acusar deriva aqui
   (`1.16 contra 1.15` virou `1.35 contra 1.02`, e o item 4 ganhou linha).
   É a correção aparecendo, não defeito novo.
-- o item 3 da mesma verificação ("sazonalidade maior no Sul que no Norte")
-  aprovou 1,16 contra 1,15 durante a contaminação. Comparação sem margem
-  nenhuma: continua frouxa, e vale apertar quando alguém voltar aqui.
-- a seção 2 imprime "180 meses de internações publicados entre 2010 e 2024, de
-  174 possíveis (103%)" e logo abaixo chama isso de lacuna. O catálogo do SIH
-  encheu desde que o texto foi escrito; a narrativa da seção 2 e a tabela da
-  seção "o que dá e o que não dá para replicar" envelheceram e precisam de uma
-  revisão de texto.
+## Fechado no mesmo dia — a seção 2, que estava errada e pesada
+
+Duas das pendências acima foram fechadas em seguida, e uma terceira coisa
+apareceu ao olhar de perto.
+
+- **A "lacuna do SIH" não existia.** A célula imprimia "180 meses publicados
+  de 174 possíveis (103%)" e a linha seguinte chamava isso de lacuna — a
+  contradição já estava na versão publicada. O texto foi escrito quando o
+  espelho era esburacado e nunca foi revisto. É o mesmo erro que a lição nº 2
+  do aplicativo já tinha corrigido em 30/08/2026: ensinar limitação que não
+  existe é pior que não ensinar. Corrigido em três lugares — a tabela de
+  abertura, a conclusão da célula e o "como adaptar".
+- **A seção 2 baixava 1,28 GB.** Medido: 360 arquivos RD de RS e PR entre 2010
+  e 2024. O notebook percorria todos os meses porque, quando foi escrito, eram
+  poucos; o espelho encheu e o laço engordou junto, em silêncio. Passou a
+  conferir uma amostra de três anos COMPLETOS (2012, 2018, 2023) — 72
+  arquivos, 264 MB. Anos inteiros, e não meses avulsos, para não enviesar por
+  estação. A execução caiu de 950s para 203s, e a conclusão não mudou: as duas
+  cidades continuam errando para lados opostos (Porto Alegre 0,80; Curitiba
+  1,67 contra os 1,58 de antes).
+- **A verificação 3 ganhou margem.** Ela aprovava "maior que" e por isso deixou
+  passar 1,16 contra 1,15 durante a contaminação. Agora exige 15% de diferença
+  e mostra a razão entre as duas. Hoje dá 1,35 contra 1,02 — 1,32x.
+
+Continua aberto: `VALIDACAO.md` e `sentinelas.json` só se atualizam na rodada
+completa dos 36.
 
 ## Aprendizados para o aplicativo
 
