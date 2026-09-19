@@ -164,6 +164,23 @@ PADROES_PERIODO = [
     re.compile(r"^Vamos usar .*\d{4}"),
     re.compile(r"\(o mais recente com arquivo"),
     re.compile(r"^Estado: .+ — \d{4}"),
+    # --- estado da FONTE WEB, acrescentado em 19/09/2026 -----------------
+    # Os quatro notebooks que leem SISAB, DEMAS e apidadosabertos tinham
+    # "periodos": [] — eles IMPRIMEM ate onde a fonte chegou, mas os padroes
+    # acima so reconheciam competencia no formato MM/AAAA, e essas linhas usam
+    # AAAAMM ou texto livre. Consequencia: no dia em que a fonte anda, o
+    # validador acusa DERIVA ("valor mudou sem o periodo mudar"), que e falso;
+    # e esconde o caso oposto, a fonte REPROCESSAR uma competencia antiga —
+    # que foi exatamente o que o SIAPS fez na versao 2.0.3.
+    #
+    # So entra linha PURA de periodo. Linha que traz periodo E contagem fica
+    # de fora de proposito ("Competencia 202412 — todos os 399 municipios"):
+    # classificada como periodo, uma mudanca de 399 para 400 passaria
+    # desculpada como "o periodo mudou".
+    re.compile(r"^Compet[êe]ncias?[^:]*:\s*\[[^\]]*\]$"),
+    re.compile(r"^Usaremos \d{6}"),
+    re.compile(r"dispon[íi]ve[li][^:]*:\s*\d{2}/\d{4}$"),
+    re.compile(r"^Extra[çc][ãa]o publicada em \d{2}/\d{2}/\d{4}"),
 ]
 # Uma linha de sanidade é uma linha NUMERADA que carrega um veredito. Os 36
 # notebooks falam dois dialetos — "...: confere", "...? 15.7% (sim)", e o mapa
